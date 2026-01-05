@@ -1,0 +1,785 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main editor layout */
+.app-container {
+  height: calc(100vh - 60px);
+  overflow: hidden;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Poppins:wght@300;400;600&family=Montserrat:wght@300;400;700&display=swap");
+
+/* hhhh */
+:root {
+  --primary-color: #ff0000;
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
+
+* {
+  box-sizing: border-box;
+  /* Crucial for preventing overlap */
+}
+
+/* Force global font inheritance */
+#resume-to-print * {
+  font-family: inherit;
+}
+
+.font-output {
+  font-family: "Poppins", sans-serif;
+}
+
+/* =======================================
+   1. Base & Global Utilities
+   ======================================= */
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background-color: #111827;
+  /* Dark Background */
+  color: #f3f4f6;
+  /* Light Text */
+}
+
+/* Equivalent to Tailwind's 'space-y-4' */
+.spacing-y-medium>*+* {
+  margin-top: 16px;
+}
+
+/* Icon Sizes */
+.icon-large {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-small {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-margin-right {
+  margin-right: 8px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.title-main {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.hover-underline:hover {
+  text-decoration: underline;
+}
+
+/* =======================================
+   2. Layout Structure (Flexbox/Grid)
+   ======================================= */
+.app-container {
+  display: flex;
+  min-height: 70vh;
+  overflow: hidden;
+}
+
+/* --- UPDATED PANEL WIDTHS (30% | 40% | 30%) --- */
+
+/* ----------------------------------------------- */
+
+/* Panel Common Styles */
+.panel {
+  padding: 24px;
+  height: 100vh;
+  overflow-y: auto;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  background-color: #1f2937;
+  /* Gray 800 */
+}
+
+.left-panel {
+  border-right: 1px solid #374151;
+  /* Gray 700 */
+}
+
+.right-panel {
+  border-left: 1px solid #374151;
+}
+
+.panel-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  /* keeps image inside */
+  background-color: #ffffff;
+  /* white background */
+  margin-bottom: 32px;
+  border-radius: 8px;
+  height: 80px;
+  /* adjust as needed */
+}
+
+/* Two-column grid for inputs */
+.grid-2-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* =======================================
+   3. Input and Form Elements
+   ======================================= */
+.input-group {
+  display: block;
+}
+
+.input-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #9ca3af;
+  /* Gray 400 */
+  margin-bottom: 4px;
+}
+
+.text-input,
+.text-area {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  background-color: #374151;
+  /* Gray 700 */
+  border: 1px solid #4b5563;
+  /* Gray 600 */
+  border-radius: 6px;
+  color: #f3f4f6;
+  box-sizing: border-box;
+}
+
+.text-area {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.add-field-button {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #818cf8;
+  /* Indigo 400 */
+  cursor: pointer;
+  margin-top: 16px;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Summary Section */
+.summary-section {
+  padding-top: 24px;
+  border-top: 1px solid #4b5563;
+  margin-top: 24px;
+}
+
+.summary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.section-title-small {
+  font-size: 1.125rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.toolbar {
+  background-color: #1f2937;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-around;
+  color: #9ca3af;
+  font-size: 0.875rem;
+  margin-top: 8px;
+}
+
+.toolbar-item {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.toolbar-item:hover {
+  color: white;
+}
+
+/* =======================================
+   4. Middle Panel (Resume Preview)
+   ======================================= */
+.middle-panel-wrapper {
+  /* The middle panel uses the .panel-four-tenths class for width */
+  flex-grow: 1;
+  display: grid;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+  background-color: #1f2937;
+}
+
+.resume-paper {
+  width: auto;
+  /* A4 width */
+  max-width: 100%;
+  height: auto;
+  /* A4 height */
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  border: 1px solid #ccc;
+  overflow: visible;
+  transform: none;
+}
+
+.resume-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-bottom: 20pxs;
+  padding: 40px;
+  color: #1f2937;
+  font-family: sans-serif;
+}
+
+.template-azurill {
+  border-left: 8px solid #4f46e5;
+}
+
+/* Highlight Color */
+
+/* Resume Header */
+.resume-header {
+  margin-bottom: 32px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 16px;
+}
+
+.header-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.full-name {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #4338ca;
+  margin-bottom: 4px;
+}
+
+.headline {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.profile-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-left: 16px;
+}
+
+.contact-info {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.875rem;
+  color: #6b7280;
+  gap: 16px;
+}
+
+.contact-info .separator {
+  color: #4f46e5;
+}
+
+/* Resume Sections */
+.section-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #cecdcd;
+  border-bottom: 1px solid #e0e7ff;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}
+
+.section-content {
+  margin-bottom: 32px;
+}
+
+.summary-text {
+  line-height: 1.6;
+}
+
+.job-title {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.875rem;
+}
+
+.company-info {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.bullet-list {
+  list-style-type: disc;
+  margin-left: 20px;
+  margin-top: 4px;
+  padding-left: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.bullet-list li {
+  margin-bottom: 4px;
+}
+
+/* Skills styling */
+.skill-category {
+  font-weight: 500;
+  color: #4f46e5;
+}
+
+.skill-category+.skill-category {
+  margin-left: 16px;
+}
+
+/* Bottom Control Bar */
+.control-bar {
+  position: absolute;
+  bottom: 16px;
+  background-color: #1f2937;
+  padding: 8px;
+  border-radius: 50px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  gap: 16px;
+  color: #9ca3af;
+}
+
+.control-bar button {
+  padding: 8px;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  transition: background-color 0.2s;
+}
+
+.control-bar button:hover {
+  background-color: #374151;
+}
+
+/* =======================================
+   5. Right Panel (Templates)
+   ======================================= */
+.template-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.template-card {
+  padding: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.template-card.selected {
+  box-shadow: 0 0 0 2px #4f46e5;
+  /* Ring */
+  outline: 2px solid #111827;
+  /* Ring offset */
+}
+
+.template-card:hover:not(.selected) {
+  box-shadow: 0 0 0 1px #6b7280;
+}
+
+.template-preview {
+  background-color: white;
+  font-size: 8px;
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 128px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.preview-text {
+  font-size: 8px;
+  line-height: 1.2;
+  margin-top: 4px;
+}
+
+.preview-header-text {
+  font-weight: 700;
+  color: #1f2937;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 1px;
+}
+
+.preview-content-flex {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.preview-col-1 {
+  width: 33%;
+  background-color: #f3f4f6;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.preview-col-2 {
+  width: 66%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.text-indigo-bold {
+  color: #4f46e5;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.preview-line-1 {
+  background-color: #d1d5db;
+  height: 4px;
+  width: 50%;
+}
+
+.preview-line-2 {
+  background-color: #e5e7eb;
+  height: 4px;
+  width: 100%;
+}
+
+.preview-name {
+  text-align: center;
+  font-weight: 600;
+  margin-top: 4px;
+  color: #1f2937;
+  font-size: 0.875rem;
+}
+
+/* =======================================
+   6. Mobile Header & Responsiveness
+   ======================================= */
+
+.mobile-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: #000;
+  color: #e5e7eb;
+  padding: 12px;
+  display: none;
+  /* Hide by default on desktop */
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.flex-items-center {
+  display: flex;
+  align-items: center;
+}
+
+.template-badge {
+  background-color: #4f46e5;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .mobile-header {
+    display: flex;
+  }
+
+  .app-container {
+    flex-direction: column;
+    padding-top: 60px;
+    /* Offset for fixed header */
+  }
+
+  .panel {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-left: none;
+  }
+
+  /* Mobile: Panels take full width */
+  .panel-three-tenths,
+  .panel-four-tenths {
+    width: 100%;
+  }
+
+  .middle-panel-wrapper {
+    width: 100%;
+    height: 90vh;
+    padding: 16px;
+  }
+
+  .resume-paper {
+    transform: scale(1);
+    /* No scaling on mobile */
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+  }
+
+  .control-bar {
+    position: relative;
+    margin-top: 16px;
+    bottom: auto;
+    align-self: center;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-header {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  .resume-paper {
+    transform: scale(0.8);
+  }
+
+  /* Tablet scaling */
+}
+
+@media (max-width: 768px) {
+
+  /* Stack panels vertically without touching desktop layout */
+  .left-panel,
+  .middle-panel,
+  .right-panel {
+    width: 100% !important;
+    max-width: 100%;
+    display: block;
+  }
+
+  /* If your parent container uses flex */
+  .panel-container,
+  .app,
+  .main-wrapper,
+  .root,
+  .App {
+    flex-direction: column !important;
+    height: auto !important;
+  }
+
+  /* Middle panel scroll on mobile */
+  .middle-panel {
+    overflow-y: auto;
+    max-height: auto;
+  }
+}
+
+.mini-btn .danger {
+  background-color: rgb(78, 78, 111);
+  color: white;
+  border: 1px solid rgb(78, 78, 111);
+}
+
+.mini-btn {
+  background-color: rgb(78, 78, 111);
+  color: white;
+  border: 1px solid rgb(78, 78, 111);
+}
+
+.app-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /* prevents any outside scrollbars */
+}
+
+.app-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.left-panel {
+  width: 25vw;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.right-panel {
+  width: 25vw;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.page-size-wrapper {
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  transform-origin: top center;
+}
+
+.page-a4 {
+  width: 210mm;
+  min-height: 297mm;
+}
+
+.page-letter {
+  width: 216mm;
+  min-height: 279mm;
+}
+
+.middle-panel {
+  height: auto !important;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .print-area,
+  .print-area * {
+    visibility: visible;
+  }
+
+  .print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+
+@media print {
+  #resume-to-print {
+    transform: none !important;
+    width: auto !important;
+    height: auto !important;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    /* changes dynamically */
+    margin: 0;
+  }
+}
+
+@media print {
+  .print-area {
+    zoom: 1 !important;
+    padding: 0;
+    margin: 0;
+  }
+
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+.active-avatar {
+  border: 2px solid #4f46e5;
+  background: #eef2ff;
+}

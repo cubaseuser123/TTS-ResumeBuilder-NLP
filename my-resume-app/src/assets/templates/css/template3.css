@@ -1,0 +1,101 @@
+/* MAIN LAYOUT */
+.t3-wrapper {
+  display: flex;
+  background: #ffffff;
+  min-height: 100%;
+  height: auto !important;
+  margin: 0 auto;
+  padding: 0;
+  overflow: visible;
+}
+
+/* LEFT COLUMN */
+.t3-left {
+  width: 32%;
+  background: #fafafa;
+  padding: 35px 30px;
+  border-right: 2px solid #e3e3e3;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* NAME + HEADLINE */
+/* HEADER (NAME + ROLE) */
+.t3-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.t3-name {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin: 0;
+  color: black;
+}
+.t3-role {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #555;
+  margin: 0;
+}
+.t3-contact div {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+/* LINE DIVIDER */
+.t3-divider {
+  height: 1px;
+  width: 100%;
+  background: #ccc;
+  margin: 10px 0;
+}
+
+/* SECTION TITLE */
+.t3-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* LISTS */
+.t3-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.t3-list li {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+/* RIGHT SIDE */
+.t3-right {
+  width: 68%;
+  padding: 40px 45px;
+  color: black;
+}
+.t3-wrapper {
+  line-height: var(--line-height, 1.6) !important;
+}
+
+.t3-side-title {
+  color: black;
+}
+.t3side-block {
+  color: black;
+}
+.stars {
+  font-size: 18px;
+  margin-left: 5px;
+  letter-spacing: 2px;
+}
+#resume-to-print * {
+  line-height: inherit !important;
+}

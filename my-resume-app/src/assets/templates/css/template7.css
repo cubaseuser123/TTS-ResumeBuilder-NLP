@@ -1,0 +1,104 @@
+/* WRAPPER */
+.t7-wrapper {
+  margin: auto;
+  padding: 40px;
+  background: #fff;
+  color: #333;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* HEADER */
+.t7-header h1 {
+  font-size: 36px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.t7-role {
+  font-size: 18px;
+  margin-top: 6px;
+  color: #555;
+}
+
+.t7-header-contact {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* SECTIONS */
+.t7-section {
+  margin-top: 30px;
+}
+
+.t7-section h2 {
+  font-size: 20px;
+  font-weight: 700;
+  background: #e9edf2;
+  padding: 6px 12px;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+/* EDUCATION BLOCK */
+.t7-edu-item {
+  margin-top: 14px;
+}
+
+.t7-edu-item strong {
+  font-size: 16px;
+}
+
+.t7-edu-item span {
+  float: right;
+  font-size: 14px;
+  color: #444;
+}
+
+/* SKILLS */
+.t7-skill-list {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 8px;
+  font-size: 14px;
+}
+
+/* EXPERIENCE */
+.t7-exp-item {
+  margin-top: 18px;
+  border-left: 4px solid #d0d4da;
+  padding-left: 16px;
+}
+
+.t7-exp-item strong {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.t7-year {
+  font-size: 13px;
+  color: #777;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.t7-section-title {
+  background: #e9edf2;
+  display: inline-block;
+}
+
+.stars {
+  font-size: 18px;
+  margin-left: 5px;
+  letter-spacing: 2px;
+}
+
+#resume-to-print * {
+  line-height: inherit !important;
+}

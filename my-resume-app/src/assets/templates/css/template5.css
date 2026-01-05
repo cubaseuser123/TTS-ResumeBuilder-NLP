@@ -1,0 +1,201 @@
+/* container */
+.t5-wrapper {
+  display: flex;
+  gap: 28px;
+  padding: 22px;
+  background: white;
+  color: #222;
+}
+
+/* LEFT BLUE SIDEBAR */
+.t5-sidebar {
+  width: 28%;
+  background: #0f4aa3;
+  /* blue */
+  color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ensure each inserted section block has some spacing inside sidebar */
+.t5-side-block {
+  background: transparent;
+  border-radius: 6px;
+  padding: 6px 0;
+}
+
+/* photo in sidebar */
+.t5-photo-wrap,
+.t5-profile-pic {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.t5-photo-wrap img,
+.t5-profile-pic img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.18);
+}
+
+/* headings inside sidebar */
+.t5-side-heading {
+  margin: 0 0 6px 0;
+  font-weight: 700;
+  font-size: 14px;
+  color: #fff;
+}
+
+/* list styling (sidebar) */
+.t5-side-list {
+  padding-left: 18px;
+  margin: 6px 0;
+  color: #f2f7ff;
+}
+
+.t5-side-list li {
+  margin-bottom: 6px;
+}
+
+/* small text inside sidebar */
+.t5-profile-item p,
+.t5-side-block p {
+  margin: 4px 0;
+  color: #eef4ff;
+  font-size: 13px;
+}
+
+/* stars in sidebar */
+.t5-skill-stars {
+  color: gold;
+  margin-left: 6px;
+}
+
+/* -------------------------
+   RIGHT MAIN CONTENT
+-------------------------- */
+.t5-main {
+  width: 72%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* header for main content */
+.t5-header {
+  text-align: left;
+  margin-bottom: 6px;
+}
+
+.t5-name {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.t5-role {
+  margin: 4px 0 10px 0;
+  color: #444;
+}
+
+/* section title and blocks in main */
+.t5-section-title {
+  margin: 14px 0 8px 0;
+  font-weight: 700;
+  font-size: 16px;
+  color: #222;
+  border-bottom: 1px solid #e6e6e6;
+  padding-bottom: 6px;
+}
+
+/* main content blocks */
+.t5-main-block {
+  background: transparent;
+  padding: 6px 0;
+}
+
+/* Experience / education styling in main */
+.t5-exp {
+  margin-bottom: 12px;
+}
+
+.t5-exp-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.t5-exp-head strong {
+  font-size: 15px;
+}
+
+.t5-exp-date {
+  font-size: 13px;
+  color: #666;
+}
+
+.t5-exp-company,
+.t5-edu-degree {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.t5-exp-desc {
+  font-size: 14px;
+  color: #333;
+  opacity: 0.95;
+  margin-bottom: 10px;
+}
+
+/* education */
+.t5-edu {
+  margin-bottom: 10px;
+}
+
+.t5-edu-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.t5-edu-head strong {
+  font-weight: 600;
+}
+
+/* projects, awards, certificates styling */
+.t5-proj,
+.t5-edu,
+.t5-exp,
+.t5-proj {
+  margin-bottom: 10px;
+}
+
+/* small utility rules */
+.t5-main-content>div {
+  border-bottom: 0px solid transparent;
+}
+
+/* responsive fallback */
+@media (max-width: 900px) {
+  .t5-wrapper {
+    flex-direction: column;
+  }
+
+  .t5-sidebar,
+  .t5-main {
+    width: 100%;
+  }
+}
+
+#resume-to-print * {
+  line-height: inherit !important;
+}

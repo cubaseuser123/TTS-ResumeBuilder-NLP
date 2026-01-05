@@ -1,0 +1,138 @@
+/* ===========================================
+   1) MOBILE PHONES (Below 768px)
+   =========================================== */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column !important;
+    height: auto !important;
+  }
+
+  .w-30,
+  .w-40 {
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  .panel {
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .middle-panel-wrapper {
+    padding: 10px !important;
+    height: auto !important;
+  }
+
+  .resume-paper {
+    width: 100% !important;
+    height: auto !important;
+    transform: scale(1) !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .t1-wrapper {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+}
+
+/* ===========================================
+   2) iPAD MINI (768px — 834px) 
+   Fix cut bottom content in Right Panel
+   =========================================== */
+@media (min-width: 769px) and (max-width: 834px) {
+  .app-container {
+    flex-direction: column !important;
+  }
+
+  .w-30 {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .w-40 {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .panel {
+    height: auto !important;
+    overflow-y: visible !important;
+  }
+
+  .right-panel {
+    padding-bottom: 80px !important; /* Prevent last content from hiding */
+  }
+
+  .resume-paper {
+    transform: scale(0.85) !important;
+    transform-origin: top center;
+  }
+}
+
+/* ===========================================
+   3) iPAD PRO (1024px — 1366px)
+   Fix tiny left/right panels
+   =========================================== */
+@media (min-width: 835px) and (max-width: 1366px) {
+  .w-30 {
+    flex: 0 0 25% !important; /* Wider panels */
+    max-width: 25% !important;
+  }
+
+  .w-40 {
+    flex: 0 0 50% !important; /* Middle panel more space */
+    max-width: 50% !important;
+  }
+
+  .panel {
+    height: 100vh !important;
+    overflow-y: auto !important;
+  }
+
+  .resume-paper {
+    transform: scale(0.9) !important;
+    transform-origin: top center !important;
+  }
+}
+
+/* ===========================================
+   4) SMALL LAPTOPS (1367px — 1600px)
+   Keep layout balanced
+   =========================================== */
+@media (min-width: 1367px) and (max-width: 1600px) {
+  .w-30 {
+    flex: 0 0 28% !important;
+    max-width: 28% !important;
+  }
+
+  .w-40 {
+    flex: 0 0 44% !important;
+    max-width: 44% !important;
+  }
+
+  .resume-paper {
+    transform: scale(0.92) !important;
+  }
+}
+
+
+
+
+/* ===========================================
+   5) Universal fallback for templates
+   =========================================== */
+@media (max-width: 900px) {
+  .t1-wrapper {
+    width: 100% !important;
+    display: block !important;
+  }
+
+  .t1-sidebar,
+  .t1-main {
+    width: 100% !important;
+  }
+}
+

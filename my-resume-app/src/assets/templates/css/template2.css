@@ -1,0 +1,114 @@
+/* MAIN WRAPPER */
+.t2-wrapper {
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+  background: white;
+  width: 100% !important;
+  height: auto !important;
+  margin: 0 auto;
+  padding: 0;
+  overflow: visible;
+}
+
+/* SIDEBAR */
+.t2-sidebar {
+  width: 30%;
+  background: #f4f4f4;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  border-right: 2px solid #ddd;
+}
+
+/* PHOTO */
+.t2-photo-wrapper img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #fff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+/* SIDEBAR TITLES */
+.t2-side-title {
+  font-size: 18px;
+  font-weight: 600;
+  background: #222;
+  color: white;
+  padding: 6px 12px;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+/*profile*/
+.t2-profile-item {
+  color: black;
+}
+/* SIDE CONTENT TEXT */
+.t2-side-block p {
+  margin: 6px 0;
+  color: black;
+}
+
+/* EDU SECTION */
+.t2-edu-item {
+  margin-bottom: 10px;
+}
+
+.t2-edu-degree {
+  font-weight: bold;
+  color: black;
+}
+.t2-edu-inst {
+  font-size: 14px;
+  color: black;
+}
+.t2-edu-year {
+  font-size: 13px;
+  color: black;
+}
+
+/* SKILLS + LANGUAGES */
+.t2-skill-list {
+  margin-left: 20px;
+  list-style: disc;
+  color: black;
+}
+
+/* MAIN CONTENT */
+.t2-main {
+  width: 70%;
+  padding: 40px;
+  color: black;
+}
+
+/* NAME HEADER */
+.t2-name {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.t2-headline {
+  font-size: 20px;
+  color: #444;
+  margin-bottom: 25px;
+}
+.t2-wrapper {
+  line-height: var(--line-height, 1.6) !important;
+}
+
+.t2-wrapper * {
+  line-height: var(--line-height, 1.6) !important;
+}
+
+.stars {
+  font-size: 18px;
+  margin-left: 5px;
+  letter-spacing: 2px;
+}
+#resume-to-print * {
+  line-height: inherit !important;
+}

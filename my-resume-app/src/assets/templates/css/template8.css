@@ -1,0 +1,206 @@
+/* === Wrapper Layout === */
+.t8-wrapper {
+  display: flex;
+  color: #333;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* === LEFT PANEL === */
+.t8-left {
+  width: 32%;
+  background: #eef3fa;
+  padding-top: 20px;
+  padding-left: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Blue angled header */
+.t8-header-bg {
+  width: 100%;
+  height: 260px;
+  background: linear-gradient(135deg, #4f74aa, #6d8fc2);
+  clip-path: polygon(0 0, 100% 0, 100% 30%, 0 100%);
+}
+
+/* === PROFILE PHOTO === */
+.t8-photo-wrapper {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid white;
+  margin: 20px auto 20px auto;
+  position: relative;
+  z-index: 2;
+}
+
+.t8-photo-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* === Name Block === */
+.t8-name-block {
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.t8-name-block h1 {
+  font-size: 26px;
+  font-weight: bold;
+  margin: 0;
+  color: #2a2a2a;
+}
+
+.t8-name-block h2 {
+  font-size: 16px;
+  font-weight: normal;
+  margin: 5px 0 0 0;
+  color: #5c7eb5;
+}
+
+/* === LEFT SECTIONS (Contact, About, Skills) === */
+.t8-section {
+  margin-bottom: 30px;
+}
+
+.t8-section h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #d0d6e2;
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+
+.t8-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.t8-section ul li {
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+.t8-section p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* === RIGHT PANEL === */
+.t8-right {
+  width: 68%;
+  padding: 40px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+/* Section Blocks */
+.t8-block {
+  margin-bottom: 40px;
+}
+
+.t8-block h3 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e3e7ef;
+  padding-bottom: 5px;
+  color: #3a3a3a;
+}
+
+/* Item inside each section */
+.t8-item {
+  margin-bottom: 20px;
+}
+
+.t8-item h4 {
+  font-size: 17px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.t8-muted {
+  font-size: 14px;
+  color: #6a6a6a;
+  display: block;
+}
+
+.t8-year {
+  font-size: 13px;
+  color: #5c7eb5;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.t8-item p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* === References === */
+.t8-ref {
+  margin-bottom: 20px;
+}
+
+.t8-ref h4 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.t8-ref p {
+  font-size: 14px;
+}
+
+/* === Responsive === */
+@media (max-width: 900px) {
+  .t8-wrapper {
+    flex-direction: column;
+  }
+
+  .t8-left,
+  .t8-right {
+    width: 100%;
+  }
+
+  .t8-right {
+    padding: 20px;
+  }
+}
+
+@media print {
+  .t8-wrapper {
+    overflow: visible !important;
+  }
+
+  .t8-photo-wrapper {
+    margin-top: 20px !important;
+  }
+}
+
+/* Contact list in one line (right panel only) */
+.t8-right .t8-section ul {
+  display: flex;
+  flex-wrap: wrap;
+  /* wraps if screen is small */
+  gap: 20px;
+  /* space between items */
+  padding: 0;
+  margin: 5px 0 15px 0;
+}
+
+.t8-right .t8-section ul li {
+  list-style: none;
+  font-size: 13px;
+  white-space: nowrap;
+  /* prevents breaking into multiple lines */
+}
+
+#resume-to-print * {
+  line-height: inherit !important;
+}

@@ -1,0 +1,396 @@
+/* PAGE WRAPPER */
+.t1-page {
+  margin: 0 auto;
+  padding: 0;
+  overflow: visible;
+}
+
+.t1-wrapper {
+  display: flex;
+  background: white;
+  font-size: var(--resume-font-size, 14px);
+  color: white;
+  min-height: auto;
+}
+
+/* PREVENT TEXT OVERFLOW IN SIDEBAR */
+.t1-sidebar {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.t1-sidebar p,
+.t1-sidebar div,
+.t1-sidebar span {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+/* LEFT SIDEBAR */
+
+.t1-sidebar {
+  width: 30%;
+  background: #2c3440;
+  /* Sidebar dark color */
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: white;
+}
+
+/* FORCE WHITE TEXT IN SIDEBAR */
+.t1-sidebar,
+.t1-sidebar * {
+  color: white !important;
+}
+
+/* PROFILE IMAGE */
+.t1-photo-wrapper {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid white;
+  margin: 0 auto 10px auto;
+}
+
+.t1-photo-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* SIDEBAR TITLES */
+.t1-side-title {
+  font-size: calc(var(--resume-font-size)*11.2857);
+  font-weight: 700;
+  margin-bottom: 12px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 4px;
+  color: white;
+}
+
+/* SIDE BLOCK */
+.t1-side-block p,
+.t1-profile-item p,
+.t1-edu-item p {
+  margin: 6px 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.t1-edu-item {
+  margin-bottom: 15px;
+}
+
+/* SKILL LIST */
+.t1-skill-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 10px;
+}
+
+.t1-skill-item {
+  margin-bottom: 10px;
+}
+
+.t1-skill-name {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.t1-language-item {
+  margin-bottom: 10px;
+}
+
+.stars {
+  color: #ffd700 !important;
+  margin-left: 5px;
+}
+
+/* LANGUAGE LIST */
+.t1-interest-list,
+.t1-skill-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+/* RIGHT SECTION */
+
+main {
+  width: 70%;
+  padding: 50px 60px;
+  color: #222;
+}
+
+/* HEADER NAME */
+.t1-name {
+  font-size: calc(var(--resume-font-size)*2.4286);
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+/* HEADLINE */
+.t1-headline {
+  font-size: calc(var(--resume-font-size)*1.2857);
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* SECTION TITLE */
+.t1-section-title {
+  font-size: calc(var(--resume-font-size)*1.4286);
+  font-weight: 700;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 3px;
+}
+
+/* SUMMARY */
+main p {
+  font-size: calc(var(-resume-font-siz)*1);
+  line-height: 1.6;
+  color: #444;
+}
+
+/* EXPERIENCE BLOCK */
+.t1-exp-item {
+  margin-bottom: 25px;
+}
+
+/* PROJECTS / CERTIFICATES / PUBLICATIONS etc. */
+.t1-exp-company,
+.t1-exp-pos,
+.t1-exp-desc {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* RESPONSIVe */
+
+@media (max-width: 900px) {
+  .t1-wrapper {
+    flex-direction: column;
+  }
+
+  .t1-sidebar,
+  main {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+  }
+
+  main {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .t1-ref-row {
+    flex-direction: column;
+  }
+
+  .t1-ref {
+    width: 100%;
+  }
+}
+
+@media print {
+  body {
+    margin: 0;
+  }
+
+  .t1-page {
+    box-shadow: none;
+    margin: 0;
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+}
+
+@media print {
+
+  .t1-wrapper,
+  .t1-sidebar,
+  main {
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+  }
+}
+
+@media print {
+  /* CRITICAL: allow page flow */
+  /* ...existing code... */
+  @media print {
+
+    /* Ensure templates print as two columns, not stacked */
+    #resume-to-print [class$="-wrapper"] {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: flex-start !important;
+      width: 100% !important;
+      max-width: none !important;
+    }
+
+    /* Sidebar and main widths for print */
+    #resume-to-print aside {
+      width: 30% !important;
+      page-break-after: avoid;
+      box-sizing: border-box !important;
+    }
+
+    #resume-to-print main {
+      width: 70% !important;
+      box-sizing: border-box !important;
+      overflow: visible !important;
+    }
+
+    /* Allow sections to break across pages */
+    #resume-to-print .t1-exp-item,
+    #resume-to-print .t1-edu-item,
+    #resume-to-print .t1-project-item,
+    #resume-to-print .t1-section {
+      break-inside: auto;
+      page-break-inside: auto;
+    }
+  }
+
+  /* ...existing code... */
+  /* ...existing code... */
+  @media print {
+
+    /* Ensure templates print as two columns, not stacked */
+    #resume-to-print [class$="-wrapper"] {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: flex-start !important;
+      width: 100% !important;
+      max-width: none !important;
+    }
+
+    /* Sidebar and main widths for print */
+    #resume-to-print aside {
+      width: 30% !important;
+      page-break-after: avoid;
+      box-sizing: border-box !important;
+    }
+
+    #resume-to-print main {
+      width: 70% !important;
+      box-sizing: border-box !important;
+      overflow: visible !important;
+    }
+
+    /* Allow sections to break across pages */
+    #resume-to-print .t1-exp-item,
+    #resume-to-print .t1-edu-item,
+    #resume-to-print .t1-project-item,
+    #resume-to-print .t1-section {
+      break-inside: auto;
+      page-break-inside: auto;
+    }
+  }
+
+  /* ...existing code... */
+  /* ...existing code... */
+  @media print {
+
+    /* Ensure templates print as two columns, not stacked */
+    #resume-to-print [class$="-wrapper"] {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: flex-start !important;
+      width: 100% !important;
+      max-width: none !important;
+    }
+
+    /* Sidebar and main widths for print */
+    #resume-to-print aside {
+      width: 30% !important;
+      page-break-after: avoid;
+      box-sizing: border-box !important;
+    }
+
+    #resume-to-print main {
+      width: 70% !important;
+      box-sizing: border-box !important;
+      overflow: visible !important;
+    }
+
+    /* Allow sections to break across pages */
+    #resume-to-print .t1-exp-item,
+    #resume-to-print .t1-edu-item,
+    #resume-to-print .t1-project-item,
+    #resume-to-print .t1-section {
+      break-inside: auto;
+      page-break-inside: auto;
+    }
+  }
+
+  /* ...existing code... */
+  /* ...existing code... */
+  @media print {
+
+    /* Ensure templates print as two columns, not stacked */
+    #resume-to-print [class$="-wrapper"] {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: flex-start !important;
+      width: 100% !important;
+      max-width: none !important;
+    }
+
+    /* Sidebar and main widths for print */
+    #resume-to-print aside {
+      width: 30% !important;
+      page-break-after: avoid;
+      box-sizing: border-box !important;
+    }
+
+    #resume-to-print main {
+      width: 70% !important;
+      box-sizing: border-box !important;
+      overflow: visible !important;
+    }
+
+    /* Allow sections to break across pages */
+    #resume-to-print .t1-exp-item,
+    #resume-to-print .t1-edu-item,
+    #resume-to-print .t1-project-item,
+    #resume-to-print .t1-section {
+      break-inside: auto;
+      page-break-inside: auto;
+    }
+  }
+
+  /* ...existing code... */
+  .t1-wrapper {
+    display: block !important;
+  }
+
+  /* Sidebar should appear on first page only */
+  .t1-sidebar {
+    width: 100% !important;
+    page-break-after: avoid;
+  }
+
+  /* Main content flows to next pages */
+  main {
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  /* Allow breaking inside sections */
+  .t1-exp-item,
+  .t1-edu-item,
+  .t1-project-item,
+  .t1-section {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+}
