@@ -1,0 +1,1 @@
+Extracts and validates structured resume data for user input

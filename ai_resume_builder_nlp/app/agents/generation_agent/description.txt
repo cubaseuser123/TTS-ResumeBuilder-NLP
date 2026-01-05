@@ -1,0 +1,1 @@
+Generates a structured resume draft from validated data
