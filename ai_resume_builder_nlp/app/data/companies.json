@@ -2,73 +2,133 @@
   "tech_giants": [
     {
       "name": "Google",
-      "aliases": ["Alphabet", "Google LLC"],
+      "aliases": [
+        "Alphabet",
+        "Google LLC"
+      ],
       "industry": "Technology",
       "size": "Large",
-      "known_for": ["Search", "Cloud", "AI", "Android"]
+      "known_for": [
+        "Search",
+        "Cloud",
+        "AI",
+        "Android"
+      ]
     },
     {
       "name": "Microsoft",
-      "aliases": ["MSFT"],
+      "aliases": [
+        "MSFT"
+      ],
       "industry": "Technology",
       "size": "Large",
-      "known_for": ["Windows", "Azure", "Office", "LinkedIn"]
+      "known_for": [
+        "Windows",
+        "Azure",
+        "Office",
+        "LinkedIn"
+      ]
     },
     {
       "name": "Amazon",
-      "aliases": ["Amazon.com", "AWS"],
+      "aliases": [
+        "Amazon.com",
+        "AWS"
+      ],
       "industry": "Technology/E-commerce",
       "size": "Large",
-      "known_for": ["E-commerce", "AWS", "Cloud Services"]
+      "known_for": [
+        "E-commerce",
+        "AWS",
+        "Cloud Services"
+      ]
     },
     {
       "name": "Apple",
-      "aliases": ["Apple Inc."],
+      "aliases": [
+        "Apple Inc."
+      ],
       "industry": "Technology",
       "size": "Large",
-      "known_for": ["iPhone", "Mac", "iOS", "Hardware"]
+      "known_for": [
+        "iPhone",
+        "Mac",
+        "iOS",
+        "Hardware"
+      ]
     },
     {
       "name": "Meta",
-      "aliases": ["Facebook", "Meta Platforms"],
+      "aliases": [
+        "Facebook",
+        "Meta Platforms"
+      ],
       "industry": "Technology/Social Media",
       "size": "Large",
-      "known_for": ["Facebook", "Instagram", "WhatsApp", "VR"]
+      "known_for": [
+        "Facebook",
+        "Instagram",
+        "WhatsApp",
+        "VR"
+      ]
     },
     {
       "name": "Netflix",
       "aliases": [],
       "industry": "Technology/Entertainment",
       "size": "Large",
-      "known_for": ["Streaming", "Content"]
+      "known_for": [
+        "Streaming",
+        "Content"
+      ]
     },
     {
       "name": "Tesla",
-      "aliases": ["Tesla Motors"],
+      "aliases": [
+        "Tesla Motors"
+      ],
       "industry": "Technology/Automotive",
       "size": "Large",
-      "known_for": ["Electric Vehicles", "Autonomous Driving"]
+      "known_for": [
+        "Electric Vehicles",
+        "Autonomous Driving"
+      ]
     },
     {
       "name": "NVIDIA",
       "aliases": [],
       "industry": "Technology/Hardware",
       "size": "Large",
-      "known_for": ["GPUs", "AI Hardware", "Gaming"]
+      "known_for": [
+        "GPUs",
+        "AI Hardware",
+        "Gaming"
+      ]
     },
     {
       "name": "Intel",
-      "aliases": ["Intel Corporation"],
+      "aliases": [
+        "Intel Corporation"
+      ],
       "industry": "Technology/Hardware",
       "size": "Large",
-      "known_for": ["Processors", "Chips"]
+      "known_for": [
+        "Processors",
+        "Chips"
+      ]
     },
     {
       "name": "Adobe",
-      "aliases": ["Adobe Systems"],
+      "aliases": [
+        "Adobe Systems"
+      ],
       "industry": "Technology/Software",
       "size": "Large",
-      "known_for": ["Creative Cloud", "Photoshop", "Design Tools"]
+      "known_for": [
+        "Creative Cloud",
+        "Photoshop",
+        "Design Tools"
+      ]
     }
   ],
   "startups_unicorns": [
@@ -76,61 +136,88 @@
       "name": "Stripe",
       "industry": "Fintech",
       "size": "Medium",
-      "known_for": ["Payments", "API", "Infrastructure"]
+      "known_for": [
+        "Payments",
+        "API",
+        "Infrastructure"
+      ]
     },
     {
       "name": "Airbnb",
       "industry": "Technology/Travel",
       "size": "Large",
-      "known_for": ["Hospitality", "Marketplace"]
+      "known_for": [
+        "Hospitality",
+        "Marketplace"
+      ]
     },
     {
       "name": "Uber",
       "industry": "Technology/Transportation",
       "size": "Large",
-      "known_for": ["Ride-sharing", "Delivery"]
+      "known_for": [
+        "Ride-sharing",
+        "Delivery"
+      ]
     },
     {
       "name": "Lyft",
       "industry": "Technology/Transportation",
       "size": "Medium",
-      "known_for": ["Ride-sharing"]
+      "known_for": [
+        "Ride-sharing"
+      ]
     },
     {
       "name": "DoorDash",
       "industry": "Technology/Delivery",
       "size": "Large",
-      "known_for": ["Food Delivery"]
+      "known_for": [
+        "Food Delivery"
+      ]
     },
     {
       "name": "Coinbase",
       "industry": "Fintech/Crypto",
       "size": "Medium",
-      "known_for": ["Cryptocurrency Exchange"]
+      "known_for": [
+        "Cryptocurrency Exchange"
+      ]
     },
     {
       "name": "Robinhood",
       "industry": "Fintech",
       "size": "Medium",
-      "known_for": ["Trading Platform", "Stocks"]
+      "known_for": [
+        "Trading Platform",
+        "Stocks"
+      ]
     },
     {
       "name": "Databricks",
       "industry": "Technology/Data",
       "size": "Medium",
-      "known_for": ["Data Analytics", "Lakehouse"]
+      "known_for": [
+        "Data Analytics",
+        "Lakehouse"
+      ]
     },
     {
       "name": "Snowflake",
       "industry": "Technology/Data",
       "size": "Large",
-      "known_for": ["Data Warehouse", "Cloud"]
+      "known_for": [
+        "Data Warehouse",
+        "Cloud"
+      ]
     },
     {
       "name": "Zoom",
       "industry": "Technology/Communication",
       "size": "Large",
-      "known_for": ["Video Conferencing"]
+      "known_for": [
+        "Video Conferencing"
+      ]
     }
   ],
   "established_tech": [
@@ -138,49 +225,74 @@
       "name": "IBM",
       "industry": "Technology",
       "size": "Large",
-      "known_for": ["Enterprise Software", "Cloud", "AI"]
+      "known_for": [
+        "Enterprise Software",
+        "Cloud",
+        "AI"
+      ]
     },
     {
       "name": "Oracle",
       "industry": "Technology",
       "size": "Large",
-      "known_for": ["Database", "Enterprise Software"]
+      "known_for": [
+        "Database",
+        "Enterprise Software"
+      ]
     },
     {
       "name": "Salesforce",
       "industry": "Technology/SaaS",
       "size": "Large",
-      "known_for": ["CRM", "Cloud"]
+      "known_for": [
+        "CRM",
+        "Cloud"
+      ]
     },
     {
       "name": "SAP",
       "industry": "Technology/Enterprise",
       "size": "Large",
-      "known_for": ["ERP", "Business Software"]
+      "known_for": [
+        "ERP",
+        "Business Software"
+      ]
     },
     {
       "name": "Cisco",
       "industry": "Technology/Networking",
       "size": "Large",
-      "known_for": ["Networking", "Hardware"]
+      "known_for": [
+        "Networking",
+        "Hardware"
+      ]
     },
     {
       "name": "VMware",
       "industry": "Technology/Cloud",
       "size": "Large",
-      "known_for": ["Virtualization", "Cloud"]
+      "known_for": [
+        "Virtualization",
+        "Cloud"
+      ]
     },
     {
       "name": "PayPal",
       "industry": "Fintech",
       "size": "Large",
-      "known_for": ["Payments", "Digital Wallet"]
+      "known_for": [
+        "Payments",
+        "Digital Wallet"
+      ]
     },
     {
       "name": "eBay",
       "industry": "E-commerce",
       "size": "Large",
-      "known_for": ["Marketplace", "Auctions"]
+      "known_for": [
+        "Marketplace",
+        "Auctions"
+      ]
     }
   ],
   "financial": [
@@ -188,67 +300,1418 @@
       "name": "Goldman Sachs",
       "industry": "Finance",
       "size": "Large",
-      "known_for": ["Investment Banking"]
+      "known_for": [
+        "Investment Banking"
+      ]
     },
     {
       "name": "JPMorgan Chase",
-      "aliases": ["JP Morgan", "Chase"],
+      "aliases": [
+        "JP Morgan",
+        "Chase"
+      ],
       "industry": "Finance",
       "size": "Large",
-      "known_for": ["Banking", "Financial Services"]
+      "known_for": [
+        "Banking",
+        "Financial Services"
+      ]
     },
     {
       "name": "Morgan Stanley",
       "industry": "Finance",
       "size": "Large",
-      "known_for": ["Investment Banking"]
+      "known_for": [
+        "Investment Banking"
+      ]
     },
     {
       "name": "Visa",
       "industry": "Finance/Payments",
       "size": "Large",
-      "known_for": ["Payment Processing"]
+      "known_for": [
+        "Payment Processing"
+      ]
     },
     {
       "name": "Mastercard",
       "industry": "Finance/Payments",
       "size": "Large",
-      "known_for": ["Payment Processing"]
+      "known_for": [
+        "Payment Processing"
+      ]
     }
   ],
   "consulting": [
     {
       "name": "McKinsey & Company",
-      "aliases": ["McKinsey"],
+      "aliases": [
+        "McKinsey"
+      ],
       "industry": "Consulting",
       "size": "Large",
-      "known_for": ["Management Consulting"]
+      "known_for": [
+        "Management Consulting"
+      ]
     },
     {
       "name": "Boston Consulting Group",
-      "aliases": ["BCG"],
+      "aliases": [
+        "BCG"
+      ],
       "industry": "Consulting",
       "size": "Large",
-      "known_for": ["Strategy Consulting"]
+      "known_for": [
+        "Strategy Consulting"
+      ]
     },
     {
       "name": "Bain & Company",
-      "aliases": ["Bain"],
+      "aliases": [
+        "Bain"
+      ],
       "industry": "Consulting",
       "size": "Large",
-      "known_for": ["Management Consulting"]
+      "known_for": [
+        "Management Consulting"
+      ]
     },
     {
       "name": "Deloitte",
       "industry": "Consulting/Professional Services",
       "size": "Large",
-      "known_for": ["Audit", "Consulting", "Technology"]
+      "known_for": [
+        "Audit",
+        "Consulting",
+        "Technology"
+      ]
     },
     {
       "name": "Accenture",
       "industry": "Consulting/Technology",
       "size": "Large",
-      "known_for": ["IT Consulting", "Digital Transformation"]
+      "known_for": [
+        "IT Consulting",
+        "Digital Transformation"
+      ]
+    }
+  ],
+  "indian_tech_startups": [
+    {
+      "name": "Zoho Corporation",
+      "industry": "Technology/SaaS",
+      "size": "Medium",
+      "location": "Chennai",
+      "known_for": [
+        "Business Software",
+        "CRM",
+        "Office Suite"
+      ]
+    },
+    {
+      "name": "Freshworks",
+      "industry": "Technology/SaaS",
+      "size": "Medium",
+      "location": "Chennai",
+      "known_for": [
+        "Customer Engagement",
+        "Support Software"
+      ]
+    },
+    {
+      "name": "Chargebee",
+      "industry": "Technology/SaaS",
+      "size": "Small",
+      "location": "Chennai",
+      "known_for": [
+        "Subscription Billing",
+        "Revenue Management"
+      ]
+    },
+    {
+      "name": "Postman",
+      "industry": "Technology/Developer Tools",
+      "size": "Medium",
+      "location": "Bangalore",
+      "known_for": [
+        "API Development",
+        "Testing"
+      ]
+    },
+    {
+      "name": "BrowserStack",
+      "industry": "Technology/Testing",
+      "size": "Small",
+      "location": "Mumbai",
+      "known_for": [
+        "Cross-browser Testing",
+        "Developer Tools"
+      ]
+    },
+    {
+      "name": "Razorpay",
+      "industry": "Fintech",
+      "size": "Medium",
+      "location": "Bangalore",
+      "known_for": [
+        "Payment Gateway",
+        "Banking Solutions"
+      ]
+    },
+    {
+      "name": "Paytm",
+      "aliases": [
+        "One97 Communications"
+      ],
+      "industry": "Fintech",
+      "size": "Large",
+      "location": "Noida",
+      "known_for": [
+        "Digital Payments",
+        "E-commerce"
+      ]
+    },
+    {
+      "name": "PhonePe",
+      "industry": "Fintech",
+      "size": "Medium",
+      "location": "Bangalore",
+      "known_for": [
+        "UPI Payments",
+        "Digital Wallet"
+      ]
+    },
+    {
+      "name": "CRED",
+      "industry": "Fintech",
+      "size": "Small",
+      "location": "Bangalore",
+      "known_for": [
+        "Credit Card Payments",
+        "Rewards"
+      ]
+    },
+    {
+      "name": "Zerodha",
+      "industry": "Fintech/Trading",
+      "size": "Medium",
+      "location": "Bangalore",
+      "known_for": [
+        "Stock Trading",
+        "Discount Brokerage"
+      ]
+    },
+    {
+      "name": "Groww",
+      "industry": "Fintech/Investment",
+      "size": "Small",
+      "location": "Bangalore",
+      "known_for": [
+        "Mutual Funds",
+        "Stock Trading"
+      ]
+    },
+    {
+      "name": "Upstox",
+      "industry": "Fintech/Trading",
+      "size": "Small",
+      "location": "Mumbai",
+      "known_for": [
+        "Stock Trading",
+        "Investment Platform"
+      ]
+    },
+    {
+      "name": "Meesho",
+      "industry": "E-commerce",
+      "size": "Medium",
+      "location": "Bangalore",
+      "known_for": [
+        "Social Commerce",
+        "Reselling"
+      ]
+    },
+    {
+      "name": "Udaan",
+      "industry": "E-commerce/B2B",
+      "size": "Medium",
+      "location": "Bangalore",
+      "known_for": [
+        "B2B Marketplace",
+        "Trade"
+      ]
+    },
+    {
+      "name": "Swiggy",
+      "industry": "Food Delivery",
+      "size": "Large",
+      "location": "Bangalore",
+      "known_for": [
+        "Food Delivery",
+        "Quick Commerce"
+      ]
+    },
+    {
+      "name": "Zomato",
+      "industry": "Food Delivery",
+      "size": "Large",
+      "location": "Gurgaon",
+      "known_for": [
+        "Food Delivery",
+        "Restaurant Discovery"
+      ]
+    },
+    {
+      "name": "Dunzo",
+      "industry": "Delivery/Logistics",
+      "size": "Small",
+      "location": "Bangalore",
+      "known_for": [
+        "Hyperlocal Delivery",
+        "Quick Commerce"
+      ]
+    },
+    {
+      "name": "Delhivery",
+      "industry": "Logistics",
+      "size": "Medium",
+      "location": "Gurgaon",
+      "known_for": [
+        "E-commerce Logistics",
+        "Supply Chain"
+      ]
+    },
+    {
+      "name": "Ola",
+      "aliases": [
+        "Ola Cabs"
+      ],
+      "industry": "Transportation",
+      "size": "Large",
+      "location": "Bangalore",
+      "known_for": [
+        "Ride-sharing",
+        "Electric Vehicles"
+      ]
+    },
+    {
+      "name": "Rapido",
+      "industry": "Transportation",
+      "size": "Small",
+      "location": "Bangalore",
+      "known_for": [
+        "Bike Taxi",
+        "Auto Rickshaw"
+      ]
+    }
+  ],
+  "indian_edtech": [
+    {
+      "name": "BYJU'S",
+      "industry": "EdTech",
+      "size": "Large",
+      "location": "Bangalore",
+      "known_for": [
+        "Online Learning",
+        "K-12 Education"
+      ]
+    },
+    {
+      "name": "Unacademy",
+      "industry": "EdTech",
+      "size": "Medium",
+      "location": "Bangalore",
+      "known_for": [
+        "Test Preparation",
+        "Online Classes"
+      ]
+    },
+    {
+      "name": "upGrad",
+      "industry": "EdTech",
+      "size": "Medium",
+      "location": "Mumbai",
+      "known_for": [
+        "Higher Education",
+        "Professional Courses"
+      ]
+    },
+    {
+      "name": "Vedantu",
+      "industry": "EdTech",
+      "size": "Small",
+      "location": "Bangalore",
+      "known_for": [
+        "Live Tutoring",
+        "K-12"
+      ]
+    },
+    {
+      "name": "Toppr",
+      "industry": "EdTech",
+      "size": "Small",
+      "location": "Mumbai",
+      "known_for": [
+        "Personalized Learning",
+        "Test Prep"
+      ]
+    },
+    {
+      "name": "PhysicsWallah",
+      "aliases": [
+        "PW"
+      ],
+      "industry": "EdTech",
+      "size": "Small",
+      "location": "Noida",
+      "known_for": [
+        "Affordable Learning",
+        "JEE/NEET Prep"
+      ]
+    }
+  ],
+  "indian_healthcare": [
+    {
+      "name": "Practo",
+      "industry": "HealthTech",
+      "size": "Small",
+      "location": "Bangalore",
+      "known_for": [
+        "Doctor Appointments",
+        "Health Records"
+      ]
+    },
+    {
+      "name": "PharmEasy",
+      "industry": "HealthTech/Pharma",
+      "size": "Medium",
+      "location": "Mumbai",
+      "known_for": [
+        "Online Pharmacy",
+        "Medicine Delivery"
+      ]
+    },
+    {
+      "name": "1mg",
+      "aliases": [
+        "Tata 1mg"
+      ],
+      "industry": "HealthTech/Pharma",
+      "size": "Small",
+      "location": "Gurgaon",
+      "known_for": [
+        "Online Pharmacy",
+        "Health Products"
+      ]
+    },
+    {
+      "name": "Netmeds",
+      "industry": "HealthTech/Pharma",
+      "size": "Small",
+      "location": "Chennai",
+      "known_for": [
+        "Online Pharmacy",
+        "Medicine Delivery"
+      ]
+    },
+    {
+      "name": "HealthifyMe",
+      "industry": "HealthTech/Fitness",
+      "size": "Small",
+      "location": "Bangalore",
+      "known_for": [
+        "Fitness Tracking",
+        "Nutrition"
+      ]
+    },
+    {
+      "name": "Cure.fit",
+      "aliases": [
+        "Cultfit",
+        "Cult.fit"
+      ],
+      "industry": "HealthTech/Fitness",
+      "size": "Small",
+      "location": "Bangalore",
+      "known_for": [
+        "Fitness",
+        "Wellness"
+      ]
+    }
+  ],
+  "indian_traditional_businesses": [
+    {
+      "name": "Haldiram's",
+      "industry": "Food & Beverages",
+      "size": "Large",
+      "location": "Delhi",
+      "known_for": [
+        "Snacks",
+        "Sweets",
+        "Restaurant Chain"
+      ]
+    },
+    {
+      "name": "Bikanervala",
+      "industry": "Food & Beverages",
+      "size": "Medium",
+      "location": "Delhi",
+      "known_for": [
+        "Sweets",
+        "Snacks",
+        "Restaurant"
+      ]
+    },
+    {
+      "name": "Gits Food Products",
+      "industry": "Food & Beverages",
+      "size": "Small",
+      "location": "Mumbai",
+      "known_for": [
+        "Ready-to-eat",
+        "Indian Food Mixes"
+      ]
+    },
+    {
+      "name": "MTR Foods",
+      "industry": "Food & Beverages",
+      "size": "Medium",
+      "location": "Bangalore",
+      "known_for": [
+        "Ready-to-eat",
+        "Food Products"
+      ]
+    },
+    {
+      "name": "Lijjat Papad",
+      "aliases": [
+        "Shri Mahila Griha Udyog Lijjat Papad"
+      ],
+      "industry": "Food & Beverages",
+      "size": "Medium",
+      "location": "Mumbai",
+      "known_for": [
+        "Papad",
+        "Women's Cooperative"
+      ]
+    },
+    {
+      "name": "Amul",
+      "aliases": [
+        "Gujarat Cooperative Milk Marketing Federation"
+      ],
+      "industry": "Dairy",
+      "size": "Large",
+      "location": "Anand, Gujarat",
+      "known_for": [
+        "Milk",
+        "Dairy Products",
+        "Cooperative"
+      ]
+    },
+    {
+      "name": "Mother Dairy",
+      "industry": "Dairy",
+      "size": "Large",
+      "location": "Delhi",
+      "known_for": [
+        "Milk",
+        "Dairy Products"
+      ]
+    },
+    {
+      "name": "Patanjali Ayurved",
+      "industry": "FMCG/Ayurveda",
+      "size": "Large",
+      "location": "Haridwar",
+      "known_for": [
+        "Ayurvedic Products",
+        "FMCG"
+      ]
+    },
+    {
+      "name": "Fabindia",
+      "industry": "Retail/Textiles",
+      "size": "Medium",
+      "location": "Delhi",
+      "known_for": [
+        "Ethnic Wear",
+        "Handloom",
+        "Handicrafts"
+      ]
+    },
+    {
+      "name": "Tanishq",
+      "aliases": [
+        "Titan Tanishq"
+      ],
+      "industry": "Jewelry",
+      "size": "Large",
+      "location": "Bangalore",
+      "known_for": [
+        "Jewelry",
+        "Gold",
+        "Diamonds"
+      ]
+    }
+  ],
+  "indian_manufacturing": [
+    {
+      "name": "Bharat Forge",
+      "industry": "Manufacturing/Auto",
+      "size": "Large",
+      "location": "Pune",
+      "known_for": [
+        "Forging",
+        "Automotive Components"
+      ]
+    },
+    {
+      "name": "Motherson Sumi",
+      "aliases": [
+        "Samvardhana Motherson"
+      ],
+      "industry": "Manufacturing/Auto",
+      "size": "Large",
+      "location": "Noida",
+      "known_for": [
+        "Auto Components",
+        "Wiring Harness"
+      ]
+    },
+    {
+      "name": "Dixon Technologies",
+      "industry": "Electronics Manufacturing",
+      "size": "Medium",
+      "location": "Noida",
+      "known_for": [
+        "LED TVs",
+        "Electronics",
+        "Contract Manufacturing"
+      ]
+    },
+    {
+      "name": "Amber Enterprises",
+      "industry": "Manufacturing/Electronics",
+      "size": "Small",
+      "location": "Gurgaon",
+      "known_for": [
+        "Air Conditioners",
+        "Components"
+      ]
+    },
+    {
+      "name": "Voltas",
+      "aliases": [
+        "Tata Voltas"
+      ],
+      "industry": "Manufacturing/Electronics",
+      "size": "Large",
+      "location": "Mumbai",
+      "known_for": [
+        "Air Conditioners",
+        "Cooling Solutions"
+      ]
+    }
+  ],
+  "nashik_based_companies": [
+    {
+      "name": "Sula Vineyards",
+      "industry": "Beverages/Wine",
+      "size": "Medium",
+      "location": "Nashik",
+      "known_for": [
+        "Wine Production",
+        "Vineyard",
+        "Wine Tourism"
+      ]
+    },
+    {
+      "name": "York Winery",
+      "industry": "Beverages/Wine",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Wine Production",
+        "Premium Wines"
+      ]
+    },
+    {
+      "name": "Grover Zampa Vineyards",
+      "industry": "Beverages/Wine",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Wine Production",
+        "Wineries"
+      ]
+    },
+    {
+      "name": "Fratelli Wines",
+      "industry": "Beverages/Wine",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Premium Wines",
+        "Wine Tourism"
+      ]
+    },
+    {
+      "name": "Soma Vineyards",
+      "industry": "Beverages/Wine",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Wine Production",
+        "Boutique Winery"
+      ]
+    },
+    {
+      "name": "Hindustan Antibiotics Limited",
+      "aliases": [
+        "HAL"
+      ],
+      "industry": "Pharmaceuticals",
+      "size": "Medium",
+      "location": "Nashik (Pimpri)",
+      "known_for": [
+        "Antibiotics",
+        "Pharmaceutical Manufacturing"
+      ]
+    },
+    {
+      "name": "Mafatlal Industries",
+      "industry": "Textiles",
+      "size": "Medium",
+      "location": "Nashik",
+      "known_for": [
+        "Textiles",
+        "Manufacturing"
+      ]
+    },
+    {
+      "name": "Perfect Circle",
+      "industry": "Auto Components",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Piston Rings",
+        "Auto Parts"
+      ]
+    },
+    {
+      "name": "Endurance Technologies",
+      "industry": "Auto Components",
+      "size": "Large",
+      "location": "Nashik",
+      "known_for": [
+        "Automotive Components",
+        "Manufacturing"
+      ]
+    },
+    {
+      "name": "Gabriel India",
+      "industry": "Auto Components",
+      "size": "Medium",
+      "location": "Nashik",
+      "known_for": [
+        "Shock Absorbers",
+        "Automotive Parts"
+      ]
+    },
+    {
+      "name": "Mahindra & Mahindra",
+      "aliases": [
+        "M&M Nashik Plant"
+      ],
+      "industry": "Automotive",
+      "size": "Large",
+      "location": "Nashik",
+      "known_for": [
+        "Vehicle Manufacturing",
+        "Tractors",
+        "SUVs"
+      ]
+    },
+    {
+      "name": "Greaves Cotton",
+      "industry": "Engineering/Auto",
+      "size": "Medium",
+      "location": "Nashik",
+      "known_for": [
+        "Engines",
+        "Automotive Components"
+      ]
+    },
+    {
+      "name": "Graphite India",
+      "industry": "Manufacturing",
+      "size": "Medium",
+      "location": "Nashik",
+      "known_for": [
+        "Graphite Electrodes",
+        "Carbon Products"
+      ]
+    },
+    {
+      "name": "Kirloskar Oil Engines",
+      "industry": "Engineering",
+      "size": "Medium",
+      "location": "Nashik",
+      "known_for": [
+        "Engines",
+        "Power Generation"
+      ]
+    },
+    {
+      "name": "Hindustan Coca-Cola Beverages",
+      "aliases": [
+        "HCCB Nashik"
+      ],
+      "industry": "Beverages",
+      "size": "Large",
+      "location": "Nashik",
+      "known_for": [
+        "Bottling",
+        "Soft Drinks"
+      ]
+    }
+  ],
+  "nashik_sme_local": [
+    {
+      "name": "Nashik Thermal Power Station",
+      "aliases": [
+        "NTPS"
+      ],
+      "industry": "Power/Energy",
+      "size": "Large",
+      "location": "Nashik",
+      "known_for": [
+        "Power Generation",
+        "Thermal Power"
+      ]
+    },
+    {
+      "name": "Spark Minda",
+      "industry": "Auto Components",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Automotive Electronics",
+        "Components"
+      ]
+    },
+    {
+      "name": "Suyog Gurbaxani Funicular Ropeways",
+      "industry": "Infrastructure/Tourism",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Ropeway Systems",
+        "Cable Cars"
+      ]
+    },
+    {
+      "name": "Nashik Municipal Corporation Transport",
+      "aliases": [
+        "NMCT"
+      ],
+      "industry": "Transportation",
+      "size": "Medium",
+      "location": "Nashik",
+      "known_for": [
+        "Public Transport",
+        "City Buses"
+      ]
+    },
+    {
+      "name": "Food Corporation of India",
+      "aliases": [
+        "FCI Nashik"
+      ],
+      "industry": "Agriculture/Food",
+      "size": "Large",
+      "location": "Nashik",
+      "known_for": [
+        "Food Storage",
+        "Grain Distribution"
+      ]
+    },
+    {
+      "name": "APMC Nashik",
+      "aliases": [
+        "Agricultural Produce Market Committee"
+      ],
+      "industry": "Agriculture/Trading",
+      "size": "Large",
+      "location": "Nashik",
+      "known_for": [
+        "Agricultural Trading",
+        "Onion Market",
+        "Grape Market"
+      ]
+    },
+    {
+      "name": "Nashik Engineering Cluster",
+      "industry": "Engineering/Manufacturing",
+      "size": "Medium",
+      "location": "Nashik",
+      "known_for": [
+        "Industrial Cluster",
+        "SME Manufacturing"
+      ]
+    },
+    {
+      "name": "Satpur Industrial Estate Companies",
+      "industry": "Various Manufacturing",
+      "size": "Small",
+      "location": "Nashik (Satpur)",
+      "known_for": [
+        "Industrial Zone",
+        "Manufacturing"
+      ]
+    },
+    {
+      "name": "Ambad Industrial Estate Companies",
+      "industry": "Various Manufacturing",
+      "size": "Small",
+      "location": "Nashik (Ambad)",
+      "known_for": [
+        "Industrial Zone",
+        "Engineering"
+      ]
+    },
+    {
+      "name": "Nashik Grape Exporters Association",
+      "aliases": [
+        "NGEA"
+      ],
+      "industry": "Agriculture/Export",
+      "size": "Medium",
+      "location": "Nashik",
+      "known_for": [
+        "Grape Export",
+        "Agricultural Trade"
+      ]
+    }
+  ],
+  "indian_tech_services": [
+    {
+      "name": "Infosys",
+      "industry": "IT Services",
+      "size": "Large",
+      "location": "Bangalore",
+      "known_for": [
+        "Consulting",
+        "Software Development",
+        "IT Services"
+      ]
+    },
+    {
+      "name": "Wipro",
+      "industry": "IT Services",
+      "size": "Large",
+      "location": "Bangalore",
+      "known_for": [
+        "IT Services",
+        "Consulting",
+        "BPO"
+      ]
+    },
+    {
+      "name": "TCS",
+      "aliases": [
+        "Tata Consultancy Services"
+      ],
+      "industry": "IT Services",
+      "size": "Large",
+      "location": "Mumbai",
+      "known_for": [
+        "IT Services",
+        "Consulting",
+        "Digital Solutions"
+      ]
+    },
+    {
+      "name": "HCL Technologies",
+      "aliases": [
+        "HCL Tech"
+      ],
+      "industry": "IT Services",
+      "size": "Large",
+      "location": "Noida",
+      "known_for": [
+        "IT Services",
+        "Engineering",
+        "Software"
+      ]
+    },
+    {
+      "name": "Tech Mahindra",
+      "industry": "IT Services",
+      "size": "Large",
+      "location": "Pune",
+      "known_for": [
+        "IT Services",
+        "Telecom",
+        "Digital Solutions"
+      ]
+    },
+    {
+      "name": "Mphasis",
+      "industry": "IT Services",
+      "size": "Medium",
+      "location": "Bangalore",
+      "known_for": [
+        "IT Services",
+        "Application Development"
+      ]
+    },
+    {
+      "name": "Mindtree",
+      "aliases": [
+        "LTIMindtree"
+      ],
+      "industry": "IT Services",
+      "size": "Large",
+      "location": "Bangalore",
+      "known_for": [
+        "Digital Transformation",
+        "IT Services"
+      ]
+    },
+    {
+      "name": "Persistent Systems",
+      "industry": "IT Services/Software",
+      "size": "Medium",
+      "location": "Pune",
+      "known_for": [
+        "Software Development",
+        "Product Engineering"
+      ]
+    },
+    {
+      "name": "Cyient",
+      "industry": "Engineering/IT Services",
+      "size": "Medium",
+      "location": "Hyderabad",
+      "known_for": [
+        "Engineering Services",
+        "Digital Solutions"
+      ]
+    },
+    {
+      "name": "L&T Infotech",
+      "aliases": [
+        "LTI",
+        "LTIMindtree"
+      ],
+      "industry": "IT Services",
+      "size": "Large",
+      "location": "Mumbai",
+      "known_for": [
+        "IT Services",
+        "Digital Solutions"
+      ]
+    }
+  ],
+  "indian_product_companies": [
+    {
+      "name": "InMobi",
+      "industry": "AdTech",
+      "size": "Medium",
+      "location": "Bangalore",
+      "known_for": [
+        "Mobile Advertising",
+        "Marketing Platform"
+      ]
+    },
+    {
+      "name": "Druva",
+      "industry": "Cloud/Data Protection",
+      "size": "Small",
+      "location": "Pune",
+      "known_for": [
+        "Cloud Backup",
+        "Data Protection"
+      ]
+    },
+    {
+      "name": "Icertis",
+      "industry": "Enterprise Software",
+      "size": "Small",
+      "location": "Pune",
+      "known_for": [
+        "Contract Management",
+        "CLM Software"
+      ]
+    },
+    {
+      "name": "MoEngage",
+      "industry": "MarTech",
+      "size": "Small",
+      "location": "Bangalore",
+      "known_for": [
+        "Customer Engagement",
+        "Marketing Automation"
+      ]
+    },
+    {
+      "name": "CleverTap",
+      "industry": "MarTech",
+      "size": "Small",
+      "location": "Mumbai",
+      "known_for": [
+        "Customer Engagement",
+        "Analytics"
+      ]
+    },
+    {
+      "name": "Darwinbox",
+      "industry": "HR Tech",
+      "size": "Small",
+      "location": "Hyderabad",
+      "known_for": [
+        "HR Management",
+        "Employee Engagement"
+      ]
+    },
+    {
+      "name": "Innovaccer",
+      "industry": "HealthTech/Data",
+      "size": "Small",
+      "location": "Noida",
+      "known_for": [
+        "Healthcare Data Platform",
+        "Analytics"
+      ]
+    },
+    {
+      "name": "Locus",
+      "industry": "Logistics Tech",
+      "size": "Small",
+      "location": "Bangalore",
+      "known_for": [
+        "Route Optimization",
+        "Supply Chain"
+      ]
+    }
+  ],
+  "nashik_tech_companies": [
+    {
+      "name": "Tech Mahindra Nashik",
+      "industry": "IT Services",
+      "size": "Large",
+      "location": "Nashik",
+      "known_for": [
+        "IT Services",
+        "Software Development",
+        "BPO"
+      ]
+    },
+    {
+      "name": "Persistent Systems Nashik",
+      "industry": "IT Services/Software",
+      "size": "Medium",
+      "location": "Nashik",
+      "known_for": [
+        "Software Development",
+        "Product Engineering"
+      ]
+    },
+    {
+      "name": "Cybage Software",
+      "industry": "IT Services",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Software Development",
+        "Technology Services"
+      ]
+    },
+    {
+      "name": "Softdel Systems",
+      "industry": "Software Development",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Product Engineering",
+        "Embedded Systems"
+      ]
+    },
+    {
+      "name": "Mastek Nashik",
+      "industry": "IT Services",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Enterprise Solutions",
+        "Digital Transformation"
+      ]
+    },
+    {
+      "name": "Trigent Software",
+      "industry": "Software Development",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Custom Software",
+        "Product Development"
+      ]
+    },
+    {
+      "name": "Emtec Inc Nashik",
+      "industry": "IT Consulting",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "IT Consulting",
+        "Digital Services"
+      ]
+    },
+    {
+      "name": "L&T Technology Services Nashik",
+      "aliases": [
+        "LTTS Nashik"
+      ],
+      "industry": "Engineering/IT",
+      "size": "Medium",
+      "location": "Nashik",
+      "known_for": [
+        "Engineering Services",
+        "Digital Engineering"
+      ]
+    },
+    {
+      "name": "NashikTech Solutions",
+      "industry": "Web Development",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Web Development",
+        "Digital Marketing"
+      ]
+    },
+    {
+      "name": "WebNIC Solutions",
+      "industry": "Web/Mobile Development",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Web Apps",
+        "Mobile Apps",
+        "E-commerce"
+      ]
+    },
+    {
+      "name": "Codiant Software Technologies",
+      "industry": "Mobile Development",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Mobile Apps",
+        "Blockchain",
+        "IoT"
+      ]
+    },
+    {
+      "name": "Techno Softwares",
+      "industry": "Software Development",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "ERP Solutions",
+        "Custom Software"
+      ]
+    },
+    {
+      "name": "Nexus Infotech",
+      "industry": "IT Services",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "IT Support",
+        "Networking",
+        "Cloud Solutions"
+      ]
+    },
+    {
+      "name": "Digital Dreams Technology",
+      "industry": "Digital Services",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Web Design",
+        "SEO",
+        "Digital Marketing"
+      ]
+    },
+    {
+      "name": "Nashik Software Park",
+      "industry": "IT/Tech Hub",
+      "size": "Medium",
+      "location": "Nashik",
+      "known_for": [
+        "Tech Incubator",
+        "Co-working",
+        "IT Companies"
+      ]
+    },
+    {
+      "name": "Shreeji Technologies",
+      "industry": "IT Services",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Software Development",
+        "IT Consulting"
+      ]
+    },
+    {
+      "name": "Innovate IT Solutions",
+      "industry": "Software/IT",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Custom Software",
+        "Business Solutions"
+      ]
+    },
+    {
+      "name": "SmartWeb Technologies",
+      "industry": "Web Development",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Web Development",
+        "E-commerce",
+        "CMS"
+      ]
+    },
+    {
+      "name": "TechVista Systems",
+      "industry": "IT Services",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "IT Infrastructure",
+        "Cloud Services"
+      ]
+    },
+    {
+      "name": "DataBridge Solutions",
+      "industry": "Data/Analytics",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Data Analytics",
+        "Business Intelligence"
+      ]
+    },
+    {
+      "name": "MobileFirst Apps Nashik",
+      "industry": "Mobile Development",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "iOS Apps",
+        "Android Apps",
+        "Cross-platform"
+      ]
+    },
+    {
+      "name": "CloudNine Technologies",
+      "industry": "Cloud Services",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Cloud Migration",
+        "DevOps",
+        "AWS Solutions"
+      ]
+    },
+    {
+      "name": "AgriTech Innovations Nashik",
+      "industry": "AgriTech",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Farm Management Software",
+        "IoT for Agriculture"
+      ]
+    },
+    {
+      "name": "Wine Tech Solutions",
+      "industry": "WineTech/Software",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Vineyard Management Software",
+        "Wine Industry Tech"
+      ]
+    },
+    {
+      "name": "EduSmart Systems Nashik",
+      "industry": "EdTech",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Educational Software",
+        "Learning Management"
+      ]
+    },
+    {
+      "name": "Nashik IoT Hub",
+      "industry": "IoT/Hardware",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "IoT Solutions",
+        "Smart Devices",
+        "Industrial IoT"
+      ]
+    },
+    {
+      "name": "AutoTech Solutions Nashik",
+      "industry": "Automotive Tech",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Automotive Software",
+        "Connected Vehicles"
+      ]
+    },
+    {
+      "name": "FinTech Nashik Startups",
+      "industry": "FinTech",
+      "size": "Small",
+      "location": "Nashik",
+      "known_for": [
+        "Payment Solutions",
+        "Financial Software"
+      ]
+    }
+  ],
+  "indian_ai_ml_companies": [
+    {
+      "name": "Haptik",
+      "industry": "AI/Conversational AI",
+      "size": "Small",
+      "location": "Mumbai",
+      "known_for": [
+        "Chatbots",
+        "Virtual Assistants"
+      ]
+    },
+    {
+      "name": "Mad Street Den",
+      "industry": "AI/Computer Vision",
+      "size": "Small",
+      "location": "Chennai",
+      "known_for": [
+        "AI for Retail",
+        "Visual Recognition"
+      ]
     }
   ]
 }

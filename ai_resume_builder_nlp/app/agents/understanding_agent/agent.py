@@ -14,11 +14,11 @@ from utils.json_utils import safe_json
 
 understanding_agent = Agent(
     name='understanding_agent',
-    description=load_instructions_file("agents/understanding_agent/desciptions.txt"),
+    description=load_instructions_file("agents/understanding_agent/descriptions.txt"),
     instructions=load_instructions_file("agents/understanding_agent/instructions.txt"),
-    tools=[
-        extract_entities,
-        validate_data
-        check_completeness
-    ]
+    # tools=[
+    #     extract_entities,
+    #     validate_data,
+    #     check_completeness
+    # ]
 )

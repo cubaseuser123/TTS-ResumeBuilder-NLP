@@ -16,3 +16,5 @@ def load_instructions_file(filename: str, default: str = "") -> str:
         print(f"[ERROR] Failed to load {filename}: {e}")
 
     return default
+
+load_description_file = load_instructions_file

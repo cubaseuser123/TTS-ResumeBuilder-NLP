@@ -1,4 +1,3 @@
-from jedi.inference.arguments import TreeArguments
 import sys
 from os.path import dirname, join, abspath
 sys.path.append(abspath(join(dirname(__file__), "..", "..")))
@@ -25,7 +24,7 @@ def clarification_questions(missing_feilds : list) -> dict:
         if feild in questions_map:
             questions.append({
                 "feild":feild,
-                "question":questions_map[field]
+                "question":questions_map[feild]
             })
     return{
         "needs more information" : True,
@@ -35,8 +34,8 @@ def clarification_questions(missing_feilds : list) -> dict:
 clarification_agent = Agent(
     name="clarification_agent",
     description=load_instructions_file("agents/clarification_agent/descriptions.txt"),
-    instruction=load_instructions_file("agents/clarification_agent/instructions.txt"),
-    tools=[
-        [clarification_questions]
-    ]
+    instructions=load_instructions_file("agents/clarification_agent/instructions.txt"),
+    # tools=[
+    #     clarification_questions
+    # ]
 )

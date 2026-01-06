@@ -1,0 +1,1 @@
+Formats the final resume draft into a frontend-safe schema without modifying content.
