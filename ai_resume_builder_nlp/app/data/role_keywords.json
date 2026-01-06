@@ -1,0 +1,175 @@
+{
+  "software_engineer": {
+    "keywords": [
+      "coding",
+      "programming",
+      "software development",
+      "full-stack",
+      "backend",
+      "frontend",
+      "APIs",
+      "microservices",
+      "algorithms",
+      "data structures",
+      "code review",
+      "version control",
+      "debugging",
+      "testing",
+      "CI/CD"
+    ],
+    "action_verbs": ["Developed", "Engineered", "Built", "Implemented", "Designed"],
+    "metrics": ["% performance improvement", "lines of code", "bugs fixed", "features delivered", "uptime %"]
+  },
+  "data_scientist": {
+    "keywords": [
+      "machine learning",
+      "statistical analysis",
+      "data analysis",
+      "predictive modeling",
+      "data visualization",
+      "Python",
+      "R",
+      "SQL",
+      "deep learning",
+      "NLP",
+      "computer vision",
+      "A/B testing",
+      "experimentation"
+    ],
+    "action_verbs": ["Analyzed", "Modeled", "Predicted", "Optimized", "Discovered"],
+    "metrics": ["% accuracy improvement", "model performance", "data processed", "insights delivered", "ROI"]
+  },
+  "product_manager": {
+    "keywords": [
+      "product strategy",
+      "roadmap",
+      "stakeholder management",
+      "user research",
+      "requirements gathering",
+      "agile",
+      "scrum",
+      "sprint planning",
+      "product launch",
+      "user stories",
+      "prioritization",
+      "metrics",
+      "KPIs"
+    ],
+    "action_verbs": ["Led", "Managed", "Launched", "Prioritized", "Defined"],
+    "metrics": ["products launched", "user growth %", "revenue generated", "adoption rate", "NPS score"]
+  },
+  "devops_engineer": {
+    "keywords": [
+      "CI/CD",
+      "automation",
+      "infrastructure",
+      "cloud",
+      "Docker",
+      "Kubernetes",
+      "monitoring",
+      "deployment",
+      "scripting",
+      "configuration management",
+      "containerization",
+      "orchestration"
+    ],
+    "action_verbs": ["Automated", "Deployed", "Configured", "Monitored", "Optimized"],
+    "metrics": ["deployment frequency", "% downtime reduction", "automation coverage", "infrastructure cost savings"]
+  },
+  "frontend_engineer": {
+    "keywords": [
+      "React",
+      "UI/UX",
+      "responsive design",
+      "JavaScript",
+      "TypeScript",
+      "CSS",
+      "HTML",
+      "user interface",
+      "web applications",
+      "accessibility",
+      "performance optimization",
+      "cross-browser"
+    ],
+    "action_verbs": ["Designed", "Built", "Implemented", "Optimized", "Enhanced"],
+    "metrics": ["page load time", "user engagement", "conversion rate", "accessibility score"]
+  },
+  "backend_engineer": {
+    "keywords": [
+      "server-side",
+      "APIs",
+      "databases",
+      "scalability",
+      "microservices",
+      "architecture",
+      "performance",
+      "security",
+      "data modeling",
+      "RESTful",
+      "GraphQL"
+    ],
+    "action_verbs": ["Architected", "Developed", "Scaled", "Optimized", "Integrated"],
+    "metrics": ["API latency", "throughput", "uptime", "database performance", "concurrent users"]
+  },
+  "data_engineer": {
+    "keywords": [
+      "data pipeline",
+      "ETL",
+      "data warehouse",
+      "big data",
+      "Spark",
+      "Hadoop",
+      "data modeling",
+      "SQL",
+      "data integration",
+      "stream processing"
+    ],
+    "action_verbs": ["Built", "Designed", "Implemented", "Optimized", "Processed"],
+    "metrics": ["data volume processed", "pipeline efficiency", "data quality", "processing time"]
+  },
+  "ml_engineer": {
+    "keywords": [
+      "machine learning",
+      "model deployment",
+      "MLOps",
+      "model training",
+      "feature engineering",
+      "model optimization",
+      "production ML",
+      "ML pipeline",
+      "inference"
+    ],
+    "action_verbs": ["Trained", "Deployed", "Optimized", "Implemented", "Engineered"],
+    "metrics": ["model accuracy", "inference latency", "training time", "model performance"]
+  },
+  "security_engineer": {
+    "keywords": [
+      "security",
+      "cybersecurity",
+      "vulnerability assessment",
+      "penetration testing",
+      "threat detection",
+      "incident response",
+      "compliance",
+      "encryption",
+      "authentication"
+    ],
+    "action_verbs": ["Secured", "Protected", "Assessed", "Implemented", "Monitored"],
+    "metrics": ["vulnerabilities fixed", "security score", "incident response time", "compliance %"]
+  },
+  "qa_engineer": {
+    "keywords": [
+      "quality assurance",
+      "testing",
+      "test automation",
+      "test cases",
+      "bug tracking",
+      "regression testing",
+      "performance testing",
+      "selenium",
+      "test coverage"
+    ],
+    "action_verbs": ["Tested", "Automated", "Validated", "Identified", "Improved"],
+    "metrics": ["test coverage %", "bugs found", "automation rate", "testing efficiency"]
+  }
+}

@@ -1,0 +1,254 @@
+{
+  "tech_giants": [
+    {
+      "name": "Google",
+      "aliases": ["Alphabet", "Google LLC"],
+      "industry": "Technology",
+      "size": "Large",
+      "known_for": ["Search", "Cloud", "AI", "Android"]
+    },
+    {
+      "name": "Microsoft",
+      "aliases": ["MSFT"],
+      "industry": "Technology",
+      "size": "Large",
+      "known_for": ["Windows", "Azure", "Office", "LinkedIn"]
+    },
+    {
+      "name": "Amazon",
+      "aliases": ["Amazon.com", "AWS"],
+      "industry": "Technology/E-commerce",
+      "size": "Large",
+      "known_for": ["E-commerce", "AWS", "Cloud Services"]
+    },
+    {
+      "name": "Apple",
+      "aliases": ["Apple Inc."],
+      "industry": "Technology",
+      "size": "Large",
+      "known_for": ["iPhone", "Mac", "iOS", "Hardware"]
+    },
+    {
+      "name": "Meta",
+      "aliases": ["Facebook", "Meta Platforms"],
+      "industry": "Technology/Social Media",
+      "size": "Large",
+      "known_for": ["Facebook", "Instagram", "WhatsApp", "VR"]
+    },
+    {
+      "name": "Netflix",
+      "aliases": [],
+      "industry": "Technology/Entertainment",
+      "size": "Large",
+      "known_for": ["Streaming", "Content"]
+    },
+    {
+      "name": "Tesla",
+      "aliases": ["Tesla Motors"],
+      "industry": "Technology/Automotive",
+      "size": "Large",
+      "known_for": ["Electric Vehicles", "Autonomous Driving"]
+    },
+    {
+      "name": "NVIDIA",
+      "aliases": [],
+      "industry": "Technology/Hardware",
+      "size": "Large",
+      "known_for": ["GPUs", "AI Hardware", "Gaming"]
+    },
+    {
+      "name": "Intel",
+      "aliases": ["Intel Corporation"],
+      "industry": "Technology/Hardware",
+      "size": "Large",
+      "known_for": ["Processors", "Chips"]
+    },
+    {
+      "name": "Adobe",
+      "aliases": ["Adobe Systems"],
+      "industry": "Technology/Software",
+      "size": "Large",
+      "known_for": ["Creative Cloud", "Photoshop", "Design Tools"]
+    }
+  ],
+  "startups_unicorns": [
+    {
+      "name": "Stripe",
+      "industry": "Fintech",
+      "size": "Medium",
+      "known_for": ["Payments", "API", "Infrastructure"]
+    },
+    {
+      "name": "Airbnb",
+      "industry": "Technology/Travel",
+      "size": "Large",
+      "known_for": ["Hospitality", "Marketplace"]
+    },
+    {
+      "name": "Uber",
+      "industry": "Technology/Transportation",
+      "size": "Large",
+      "known_for": ["Ride-sharing", "Delivery"]
+    },
+    {
+      "name": "Lyft",
+      "industry": "Technology/Transportation",
+      "size": "Medium",
+      "known_for": ["Ride-sharing"]
+    },
+    {
+      "name": "DoorDash",
+      "industry": "Technology/Delivery",
+      "size": "Large",
+      "known_for": ["Food Delivery"]
+    },
+    {
+      "name": "Coinbase",
+      "industry": "Fintech/Crypto",
+      "size": "Medium",
+      "known_for": ["Cryptocurrency Exchange"]
+    },
+    {
+      "name": "Robinhood",
+      "industry": "Fintech",
+      "size": "Medium",
+      "known_for": ["Trading Platform", "Stocks"]
+    },
+    {
+      "name": "Databricks",
+      "industry": "Technology/Data",
+      "size": "Medium",
+      "known_for": ["Data Analytics", "Lakehouse"]
+    },
+    {
+      "name": "Snowflake",
+      "industry": "Technology/Data",
+      "size": "Large",
+      "known_for": ["Data Warehouse", "Cloud"]
+    },
+    {
+      "name": "Zoom",
+      "industry": "Technology/Communication",
+      "size": "Large",
+      "known_for": ["Video Conferencing"]
+    }
+  ],
+  "established_tech": [
+    {
+      "name": "IBM",
+      "industry": "Technology",
+      "size": "Large",
+      "known_for": ["Enterprise Software", "Cloud", "AI"]
+    },
+    {
+      "name": "Oracle",
+      "industry": "Technology",
+      "size": "Large",
+      "known_for": ["Database", "Enterprise Software"]
+    },
+    {
+      "name": "Salesforce",
+      "industry": "Technology/SaaS",
+      "size": "Large",
+      "known_for": ["CRM", "Cloud"]
+    },
+    {
+      "name": "SAP",
+      "industry": "Technology/Enterprise",
+      "size": "Large",
+      "known_for": ["ERP", "Business Software"]
+    },
+    {
+      "name": "Cisco",
+      "industry": "Technology/Networking",
+      "size": "Large",
+      "known_for": ["Networking", "Hardware"]
+    },
+    {
+      "name": "VMware",
+      "industry": "Technology/Cloud",
+      "size": "Large",
+      "known_for": ["Virtualization", "Cloud"]
+    },
+    {
+      "name": "PayPal",
+      "industry": "Fintech",
+      "size": "Large",
+      "known_for": ["Payments", "Digital Wallet"]
+    },
+    {
+      "name": "eBay",
+      "industry": "E-commerce",
+      "size": "Large",
+      "known_for": ["Marketplace", "Auctions"]
+    }
+  ],
+  "financial": [
+    {
+      "name": "Goldman Sachs",
+      "industry": "Finance",
+      "size": "Large",
+      "known_for": ["Investment Banking"]
+    },
+    {
+      "name": "JPMorgan Chase",
+      "aliases": ["JP Morgan", "Chase"],
+      "industry": "Finance",
+      "size": "Large",
+      "known_for": ["Banking", "Financial Services"]
+    },
+    {
+      "name": "Morgan Stanley",
+      "industry": "Finance",
+      "size": "Large",
+      "known_for": ["Investment Banking"]
+    },
+    {
+      "name": "Visa",
+      "industry": "Finance/Payments",
+      "size": "Large",
+      "known_for": ["Payment Processing"]
+    },
+    {
+      "name": "Mastercard",
+      "industry": "Finance/Payments",
+      "size": "Large",
+      "known_for": ["Payment Processing"]
+    }
+  ],
+  "consulting": [
+    {
+      "name": "McKinsey & Company",
+      "aliases": ["McKinsey"],
+      "industry": "Consulting",
+      "size": "Large",
+      "known_for": ["Management Consulting"]
+    },
+    {
+      "name": "Boston Consulting Group",
+      "aliases": ["BCG"],
+      "industry": "Consulting",
+      "size": "Large",
+      "known_for": ["Strategy Consulting"]
+    },
+    {
+      "name": "Bain & Company",
+      "aliases": ["Bain"],
+      "industry": "Consulting",
+      "size": "Large",
+      "known_for": ["Management Consulting"]
+    },
+    {
+      "name": "Deloitte",
+      "industry": "Consulting/Professional Services",
+      "size": "Large",
+      "known_for": ["Audit", "Consulting", "Technology"]
+    },
+    {
+      "name": "Accenture",
+      "industry": "Consulting/Technology",
+      "size": "Large",
+      "known_for": ["IT Consulting", "Digital Transformation"]
+    }
+  ]
+}
