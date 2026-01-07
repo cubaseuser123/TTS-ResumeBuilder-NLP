@@ -15,7 +15,6 @@ def formatting_passthrough(resume_draft: dict) -> dict:
 formatting_agent = Agent(
     name="formatting_agent",
     description=load_instructions_file("agents/formatting_agent/descriptions.txt"),
-    instructions=load_instructions_file("agents/formatting_agent/instructions.txt"),
     # tools=[
     #     formatting_passthrough
     # ]

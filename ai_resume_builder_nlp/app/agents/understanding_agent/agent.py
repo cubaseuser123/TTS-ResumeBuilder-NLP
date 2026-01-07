@@ -4,14 +4,22 @@ sys.path.append(abspath(join(dirname(__file__),"..","..")))
 from utils.file_loader import load_instructions_file
 from google.adk.agents import Agent
 from app.nlp.extractors.entity_extractor import extract_entities
-    
-from utils.logger import log_event
-from utils.state_utils import update_state
-from utils.json_utils import safe_json
+from app.nlp.extractors.skill_matcher import extract_material
+from app.nlp.extractors.pattern_matcher import extract_metrics
+from app.nlp.validators.completeness_checker import check_completeness
+
+def understand_text(text: str) -> dict:
+    entities = extract_entities(text)
+    return {
+        "raw_text": text,
+        "entities": entities,
+        "skills": extract_material(text),
+        "metrics": extract_metrics(text),
+        "missing_fields": check_completeness(entities)
+    }
 
 understanding_agent = Agent(
     name='understanding_agent',
     description=load_instructions_file("agents/understanding_agent/descriptions.txt"),
-    instructions=load_instructions_file("agents/understanding_agent/instructions.txt"),
-    tools=[extract_entities]
+    tools=[understand_text]
 )

@@ -20,7 +20,6 @@ def qa_passthrough(resume_draft: dict) -> dict:
 
 qna_agent = Agent(
     name="qna_agent",
-    description=load_instructions_file("agents/qna_agent/description.txt"),
-    instructions=load_instructions_file("agents/qna_agent/instructions.txt"),
+    description=load_instructions_file("agents/qa_agent/description.txt"),
     # tools=[qa_passthrough]
 )

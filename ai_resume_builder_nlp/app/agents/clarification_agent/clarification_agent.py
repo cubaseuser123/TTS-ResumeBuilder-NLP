@@ -4,7 +4,7 @@ sys.path.append(abspath(join(dirname(__file__), "..", "..")))
 from utils.file_loader import load_instructions_file
 from google.adk.agents import Agent
 
-def clarification_questions(missing_feilds : list) -> dict:
+def clarification_questions(state : dict) -> dict:
     questions_map = {
         "education": "What is your educational background? (degree, major, institution)",
         
@@ -18,7 +18,7 @@ def clarification_questions(missing_feilds : list) -> dict:
         
         "contact": "What contact details should be included?"
     }
-
+    missing_feilds = state.get("missing_feilds",[])
     questions = []
     for feild in missing_feilds:
         if feild in questions_map:
@@ -27,15 +27,12 @@ def clarification_questions(missing_feilds : list) -> dict:
                 "question":questions_map[feild]
             })
     return{
-        "needs more information" : True,
+        "needs more information" : bool(questions),
         "questions" : questions
     }
 
 clarification_agent = Agent(
     name="clarification_agent",
     description=load_instructions_file("agents/clarification_agent/descriptions.txt"),
-    instructions=load_instructions_file("agents/clarification_agent/instructions.txt"),
-    # tools=[
-    #     clarification_questions
-    # ]
+    tools=[clarification_questions]
 )
