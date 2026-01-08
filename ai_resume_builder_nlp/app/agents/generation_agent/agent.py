@@ -6,8 +6,11 @@ from google.adk.agents import Agent
 from nlp.generators.content_generator import generate_resume_structure
 from utils.file_loader import load_instructions_file
 
+def generate_resume(state: dict) -> dict:
+    return generate_resume_structure(state)
+
 generation_agent = Agent(
     name='generation_agent',
     description=load_instructions_file("agents/generation_agent/description.txt"),
-    # tools=[generate_resume_structure],
+    tools=[generate_resume],
 )

@@ -4,7 +4,7 @@ sys.path.append(abspath(join(dirname(__file__),"..","..")))
 from utils.file_loader import load_instructions_file
 from google.adk.agents import Agent
 from app.nlp.extractors.entity_extractor import extract_entities
-from app.nlp.extractors.skill_matcher import extract_material
+from app.nlp.extractors.skill_matcher import extract_skills
 from app.nlp.extractors.pattern_matcher import extract_metrics
 from app.nlp.validators.completeness_checker import check_completeness
 
@@ -13,7 +13,7 @@ def understand_text(text: str) -> dict:
     return {
         "raw_text": text,
         "entities": entities,
-        "skills": extract_material(text),
+        "skills": extract_skills(text),
         "metrics": extract_metrics(text),
         "missing_fields": check_completeness(entities)
     }

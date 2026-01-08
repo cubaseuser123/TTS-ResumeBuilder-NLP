@@ -7,7 +7,7 @@ with open(SKILLS_PATH, "r", encoding="utf-8") as f:
     SKILLS_DATA = json.load(f)
 
 
-def extract_material(text:str) -> list:
+def extract_skills(text:str) -> list:
     text_lower = text.lower()
     found_skills = set()
 

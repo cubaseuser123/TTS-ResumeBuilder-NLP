@@ -91,7 +91,7 @@ def extract_company(text : str):
 def extract_entities(text: str) -> dict:
     return {
         "email": extract_email(text),
-        "years_experience": extract_years_of_experience(text),
+        "years": extract_years_of_experience(text),
         "role": extract_role(text),
         "company": extract_company(text),
     }

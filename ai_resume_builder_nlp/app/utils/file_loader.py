@@ -1,11 +1,15 @@
 
 import os
+from pathlib import Path
+
+# Base directory is the 'app' folder (parent of utils)
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 def load_instructions_file(filename: str, default: str = "") -> str:
     try:
-        # Attempt to open the file in read mode with UTF-8 encoding.
-        # This ensures support for non-ASCII characters in prompt files.
-        with open(filename, "r", encoding="utf-8") as f:
+        # Resolve path relative to app directory
+        filepath = BASE_DIR / filename
+        with open(filepath, "r", encoding="utf-8") as f:
             return f.read()
 
     except FileNotFoundError:

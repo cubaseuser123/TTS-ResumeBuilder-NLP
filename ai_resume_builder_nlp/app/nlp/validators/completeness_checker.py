@@ -1,13 +1,13 @@
-REQUIRED_FEILDS = {
+REQUIRED_FIELDS = {
     "role" : "Job Role",
     "company": "Company",
-    "years_of_experience": "Years Of Experience"
+    "years": "Years Of Experience"
 }
 
 def check_completeness(entities: dict) -> list:
     missing=[] 
 
-    for key, label in REQUIRED_FEILDS.items():
+    for key, label in REQUIRED_FIELDS.items():
         if not entities.get(key):
             missing.append(label)
     return missing
