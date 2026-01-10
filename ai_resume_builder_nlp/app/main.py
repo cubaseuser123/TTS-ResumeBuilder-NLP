@@ -5,6 +5,31 @@ from pydantic import BaseModel, Field
 from typing import Dict, Any, Optional
 from datetime import datetime
 import logging
+import json
+from app.agents.root_coordinator.agent import root_coordinator_agent
+from app.pipeline_runner import pipeline
+
+
+# ------------------------------------------------------------------
+# HELPER FUNCTIONS
+# ------------------------------------------------------------------
+def sanitize_result(data: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Convert result dict to JSON-safe format by filtering non-serializable values.
+    """
+    try:
+        # Try direct JSON round-trip for simple cases
+        return json.loads(json.dumps(data, default=str))
+    except (TypeError, ValueError):
+        # Fallback: manually filter non-serializable items
+        clean = {}
+        for key, value in data.items():
+            try:
+                json.dumps(value, default=str)
+                clean[key] = value if not isinstance(value, (bytes, type)) else str(value)
+            except (TypeError, ValueError):
+                clean[key] = str(value)
+        return clean
 
 # ------------------------------------------------------------------
 # LOGGING
@@ -16,7 +41,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # ------------------------------------------------------------------
-# FASTAPI APP (MUST BE TOP-LEVEL)
+# FASTAPI APP
 # ------------------------------------------------------------------
 app = FastAPI(
     title="AI Resume Engine API",
@@ -46,8 +71,9 @@ app.add_middleware(
 # SCHEMAS
 # ------------------------------------------------------------------
 class ResumeRequest(BaseModel):
-    prompt: str = Field(..., min_length=10)
+    prompt: str = Field(...,) #min_length=10
     answers: Optional[Dict[str, Any]] = None
+    test_mode : Optional[bool] = False
 
 
 class ResumeResponse(BaseModel):
@@ -87,21 +113,64 @@ async def health():
 
 
 # ------------------------------------------------------------------
-# MAIN API (LOGIC WILL BE ADDED LATER)
+# MAIN API - RESUME GENERATION
 # ------------------------------------------------------------------
-@app.post("/api/generate-resume", response_model=ResumeResponse)
-async def generate_resume(request: ResumeRequest):
-    """
-    Main resume generation endpoint.
-    NLP / Agents will be plugged in later (lazy imports).
-    """
-    logger.info("Received resume generation request")
 
-    # Placeholder response (safe)
-    return ResumeResponse(
-        success=True,
-        data={
-            "message": "Resume generation pipeline connected successfully",
-            "prompt": request.prompt,
-        },
-    )
+@app.post("/api/generate-resume")
+async def generate_resume(request: ResumeRequest):
+    try:
+        # 1️⃣ Build initial state
+        state = {
+            "raw_text": request.prompt,
+            "test_mode": request.test_mode
+        }
+
+        if getattr(request, "test_mode", False):
+            state["test_mode"] = True
+
+        # 2️⃣ Merge answers BEFORE pipeline runs (CRITICAL)
+        if request.answers:
+            for key, value in request.answers.items():
+                state[key] = value
+
+        result = await pipeline.run_async(state)
+
+        # 4️⃣ Clarification stop
+        if result.get("needs_more_information"):
+            return {
+                "success": True,
+                "status": "needs_clarification",
+                "data": {
+                    "questions": result.get("questions", [])
+                },
+                "error": None
+            }
+
+        # 5️⃣ QA failure
+        if result.get("qa_passed") is False:
+            return {
+                "success": False,
+                "status": "qa_failed",
+                "data": {
+                    "issues": result.get("issues", [])
+                },
+                "error": "quality_assurance failed"
+            }
+
+        # 6️⃣ Success
+        return {
+            "success": True,
+            "status": "success",
+            "data": result,
+            "error": None
+        }
+
+    except Exception as e:
+        return {
+            "success": False,
+            "status": "error",
+            "data": None,
+            "error": str(e)
+        }
+
+    

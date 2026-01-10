@@ -13,10 +13,11 @@ def understand_text(text: str) -> dict:
     return {
         "raw_text": text,
         "entities": entities,
-        "skills": extract_skills(text),
-        "metrics": extract_metrics(text),
+        "extracted_skills": extract_skills(text),
+        "extracted_metrics": extract_metrics(text),
         "missing_fields": check_completeness(entities)
     }
+
 
 understanding_agent = Agent(
     name='understanding_agent',

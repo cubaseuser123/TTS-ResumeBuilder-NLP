@@ -7,7 +7,19 @@ from nlp.generators.content_generator import generate_resume_structure
 from utils.file_loader import load_instructions_file
 
 def generate_resume(state: dict) -> dict:
-    return generate_resume_structure(state)
+    print("Debug generation state keys:" , state.keys())
+    print("Debug skills in test:", state.get("skills"))
+    resume = generate_resume_structure(state)
+    for feild in [
+        "profile", "summary", "experience", "education",
+    "skills", "projects", "certificates",
+    "publications", "interests", "volunteering", "references"
+    ]:
+        if feild in state and state[feild]:
+            resume[feild] = state[feild]
+    return{"final_resume": resume}
+    
+    
 
 generation_agent = Agent(
     name='generation_agent',

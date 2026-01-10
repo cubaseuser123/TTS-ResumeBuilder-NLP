@@ -1,4 +1,5 @@
 import re 
+import copy
 
 WEAK_TO_STRONG_VERBS = {
     "worked on": "Developed",
@@ -24,8 +25,10 @@ def enhance_bullet(text : str) -> str:
 
 
 def enhance_resume_content(resume_draft : dict) -> dict:
-    experience = resume_draft.get("experience", [])
+    # Create a deep copy to avoid circular references
+    enhanced = copy.deepcopy(resume_draft)
+    experience = enhanced.get("experience", [])
     for job in experience:
-        bullets=job.get("bullets",[])
-        job["bullets"]=[enhance_bullet(b) for b in bullets]
-    return resume_draft
+        bullets = job.get("bullets", [])
+        job["bullets"] = [enhance_bullet(b) for b in bullets]
+    return enhanced

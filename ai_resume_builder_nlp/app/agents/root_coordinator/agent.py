@@ -10,7 +10,7 @@ from agents.understanding_agent.agent import understanding_agent
 from agents.clarification_agent.clarification_agent import clarification_agent
 from agents.generation_agent.agent import generation_agent
 from agents.enhancer_agent.agent import enhancement_agent
-from agents.qa_agent.agent import qna_agent
+from agents.qa_agent.agent import qa_agent
 from agents.formatting_agent.agent import formatting_agent
 
 root_coordinator_agent = SequentialAgent(
@@ -20,7 +20,7 @@ root_coordinator_agent = SequentialAgent(
         clarification_agent,
         generation_agent,
         enhancement_agent,
-        qna_agent,
+        qa_agent,
         formatting_agent
     ],
     description=load_instructions_file("agents/root_coordinator/descriptions.txt")

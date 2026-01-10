@@ -5,29 +5,68 @@ from utils.file_loader import load_instructions_file
 from google.adk.agents import Agent
 
 def clarification_questions(state : dict) -> dict:
+    if state.get("test_mode"):
+        return {
+            "needs_more_information": False,
+            "questions": []
+        }
+    REQUIRED_SECTIONS = [
+        "profile",
+        "summary",
+        "experience",
+        "education",
+        "skills",
+        "projects",
+        "certificates",
+        "publications",
+        "interests",
+        "volunteering",
+        "references",
+    ]
+
     questions_map = {
+        "profile": "Please provide your basic profile information.",
+        "summary": "Please provide a professional summary.",
+        "experience": "Please describe your work experience (roles, companies, duration, achievements).",
         "education": "What is your educational background? (degree, major, institution)",
-        
-        "experience": "Can you describe your work experience? (role, company, duration)",
-        
         "skills": "What skills would you like to include?",
-        
         "projects": "Have you worked on any projects you'd like to mention?",
-        
-        "certifications": "Do you have any certifications?",
-        
-        "contact": "What contact details should be included?"
+        "certificates": "Do you have any certifications?",
+        "publications": "Do you have any publications to include?",
+        "interests": "Would you like to include any interests?",
+        "volunteering": "Have you done any volunteering work?",
+        "references": "Would you like to add references?",
     }
-    missing_feilds = state.get("missing_feilds",[])
+    
+    missing_fields = state.get("missing_fields", [])
+    if not isinstance(missing_fields, list):
+        missing_fields = list(missing_fields)
+        
+    for field in REQUIRED_SECTIONS:
+        value = state.get(field)
+        
+        is_missing = False
+        if value is None:
+            is_missing = True
+        elif isinstance(value, str) and not value.strip():
+            is_missing = True
+        elif isinstance(value, list) and len(value) == 0:
+            is_missing = True
+        elif isinstance(value, dict) and len(value) == 0:
+            is_missing = True
+            
+        if is_missing and field not in missing_fields:
+            missing_fields.append(field)
+    
     questions = []
-    for feild in missing_feilds:
-        if feild in questions_map:
+    for field in missing_fields:
+        if field in questions_map:
             questions.append({
-                "feild":feild,
-                "question":questions_map[feild]
+                "field": field,
+                "question": questions_map[field]
             })
     return{
-        "needs more information" : bool(questions),
+        "needs_more_information": bool(questions),
         "questions" : questions
     }
 
