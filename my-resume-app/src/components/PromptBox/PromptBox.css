@@ -1,0 +1,59 @@
+/* PromptBox.css - Matches existing input styling */
+
+.prompt-box-container {
+  margin-top: 5px;
+  padding-top: 24px;
+  border-top: 1px solid #4b5563;
+}
+
+/* Label inherits from section-title via h3 wrapper */
+.prompt-box-container .section-title label {
+  cursor: text;
+}
+
+.prompt-box-textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 4px;
+  background-color: #374151;
+  border: 1px solid #4b5563;
+  border-radius: 6px;
+  color: #f3f4f6;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  resize: none;
+  overflow-y: auto;
+  min-height: 150px;
+  max-height: 400px;
+}
+
+.prompt-box-textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.prompt-box-textarea::placeholder {
+  color: #6b7280;
+}
+
+.prompt-box-helper-text {
+  display: block;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+/* Reserved space for error message - prevents layout shift */
+.prompt-box-error-slot {
+  min-height: 20px;
+  margin-top: 4px;
+}
+
+.prompt-box-error-text {
+  font-size: 0.75rem;
+  color: #ef4444;
+  line-height: 1.4;
+}

@@ -12,6 +12,7 @@ const ResumeEditor = () => {
   const [showPrintPopup, setShowPrintPopup] = useState(false);
   const [errors, setErrors] = useState({});
   const [primaryColor, setPrimaryColor] = useState("#000000");
+  const [promptValue, setPromptValue] = useState("");
 
   const [visibleSections, setVisibleSections] = useState({
     Photo: true,
@@ -404,6 +405,8 @@ const ResumeEditor = () => {
             setProfilePhoto={setProfilePhoto}
             sectionTitles={sectionTitles}
             setSectionTitles={setSectionTitles}
+            promptValue={promptValue}
+            onPromptChange={setPromptValue}
           />
         </div>
 

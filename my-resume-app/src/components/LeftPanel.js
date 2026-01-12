@@ -1,6 +1,7 @@
 import WebFont from "webfontloader";
 import ttsImage from "../fonts/tts.png";
 import React, { useState } from "react";
+import PromptBox from "./PromptBox/PromptBox";
 
 const EditableTitle = ({ value, onChange }) => {
   const [editing, setEditing] = useState(false);
@@ -50,6 +51,11 @@ const LeftPanel = ({
   setProfilePhoto,
   sectionTitles,
   setSectionTitles,
+  // PromptBox props
+  promptValue,
+  onPromptChange,
+  showPromptHelperText,
+  promptErrorMessage,
 }) => {
   return (
     <div className="left-panel panel">
@@ -1470,6 +1476,14 @@ const LeftPanel = ({
             </button>
           </div>
         ))}
+
+        {/* AI PROMPT BOX */}
+        <PromptBox
+          value={promptValue}
+          onChange={onPromptChange}
+          showHelperText={showPromptHelperText}
+          errorMessage={promptErrorMessage}
+        />
       </div>
     </div>
   );

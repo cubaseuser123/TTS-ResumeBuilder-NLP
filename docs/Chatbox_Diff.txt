@@ -1,0 +1,186 @@
+PROJECT CONTEXT — AI RESUME BUILDER (UI PHASE)
+
+GOAL
+Build a production-grade AI resume builder that:
+
+* starts from natural language input
+* extracts facts deterministically
+* asks users for missing information
+* generates a complete resume schema
+* enhances wording using Gemini
+* enforces quality gates
+* outputs frontend-ready JSON
+* supports multiple resume templates on the frontend
+
+BACKEND STATUS
+Backend is DONE, DEBUGGED, and PROVEN CORRECT.
+All previous issues were state-mutation and wiring bugs and are now fixed.
+Frontend work can begin safely.
+
+NOTE: Backend, pipeline, and API logic are OUT OF SCOPE for this task.
+
+---
+
+TASK SCOPE (CRITICAL — READ FIRST)
+
+Your task is ONLY to design and render the **Prompt Box UI** in the React frontend.
+
+DO NOT:
+
+* call any API
+* trigger the pipeline
+* implement submission logic
+* add validation
+* add streaming
+* add smart behavior
+* infer backend logic
+* touch the FastAPI or NLP folder
+
+This is a UI-only task.
+Stop once the UI is complete.
+
+---
+
+FRONTEND CONTEXT
+
+Frontend lives in:
+my-resume-app/src
+
+The UI layout has three panes:
+
+* Left pane: manual input fields + preferences
+* Center pane: resume preview
+* Right pane: template selector
+
+---
+
+PROMPT BOX PURPOSE
+
+The prompt box allows users to describe their resume in natural language.
+It does NOT replace manual fields.
+It does NOT trigger anything by itself.
+It is simply an input surface.
+
+---
+
+PLACEMENT REQUIREMENTS
+
+* The prompt box must be rendered:
+
+  * inside the LEFT pane
+  * as the VERY LAST element
+  * directly BELOW the Preferences section
+* The left pane is scrollable
+* The prompt box scrolls with the left pane
+* The prompt box must NOT be sticky or fixed
+
+---
+
+COMPONENT STRUCTURE
+
+* Create a reusable component, for example:
+  src/components/PromptBox/PromptBox.js
+* Styling may be colocated or reuse existing global styles
+* Do NOT introduce a new design system
+
+---
+
+VISUAL DESIGN
+
+* The prompt box must visually match existing input boxes
+* Same spacing, borders, fonts, and colors
+* Subtle emphasis is allowed (label or small icon)
+* No flashy or experimental UI
+
+---
+
+INPUT SPECIFICATION
+
+* Use a MULTILINE textarea
+* Auto-grow vertically up to a reasonable maximum height
+* Manual resize must be disabled
+* No character counter
+
+---
+
+LABEL AND HELPER TEXT
+
+Label (always visible):
+AI Prompt
+
+Helper / placeholder text:
+“All fields shown in the center preview must be provided.”
+
+Rules:
+
+* Helper text is conditionally visible
+* Controlled via a boolean prop (e.g. showHelperText)
+* Prompt box does not decide when this appears
+
+---
+
+ERROR DISPLAY SLOT (RESERVE SPACE)
+
+* Reserve space DIRECTLY BELOW the prompt box
+* This space is for error text (future use)
+* Error text styling:
+
+  * red
+  * inline
+* Layout must NOT jump when error appears
+* Error content is controlled via a prop
+* No error logic is implemented in this task
+
+---
+
+COMPONENT API (UI ONLY)
+
+The component should accept props similar to:
+
+* value
+* onChange
+* showHelperText
+* errorMessage
+
+The component must NOT:
+
+* manage business logic
+* decide when to submit
+* decide when errors appear
+
+---
+
+ACCESSIBILITY
+
+* Label must be programmatically associated with the textarea
+* Placeholder must not be the only instruction
+* Keyboard focus order must respect pane order
+
+---
+
+EXPLICIT NON-GOALS (DO NOT IMPLEMENT)
+
+* No API calls
+* No pipeline execution
+* No submit buttons
+* No streaming
+* No validation
+* No auto-fill
+* No inference
+* No smart behavior
+
+---
+
+STOP CONDITION
+
+Once the Prompt Box:
+
+* renders correctly
+* appears at the bottom of the left pane
+* visually matches existing inputs
+* reserves space for helper text and errors
+
+STOP.
+Do not continue further.
+
+
