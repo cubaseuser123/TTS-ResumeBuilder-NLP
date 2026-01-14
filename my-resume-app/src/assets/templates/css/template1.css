@@ -137,6 +137,8 @@ main {
   width: 70%;
   padding: 50px 60px;
   color: #222;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 /* HEADER NAME */
@@ -183,32 +185,14 @@ main p {
 
 /* RESPONSIVe */
 
-@media (max-width: 900px) {
-  .t1-wrapper {
-    flex-direction: column;
-  }
-
-  .t1-sidebar,
-  main {
-    width: 100%;
-    height: auto;
-    min-height: auto;
-  }
-
-  main {
-    padding: 30px;
-  }
-}
-
-@media (max-width: 600px) {
-  .t1-ref-row {
-    flex-direction: column;
-  }
-
-  .t1-ref {
-    width: 100%;
-  }
-}
+/* RESPONSIVENESS DISABLED FOR WYSIWYG
+   We want the resume to always look like an A4 page (side-by-side), 
+   even on small screens. The MiddlePanel handles scaling.
+*/
+/*
+@media (max-width: 900px) { ... }
+@media (max-width: 600px) { ... }
+*/
 
 @media print {
   body {
@@ -237,15 +221,14 @@ main p {
     flex-direction: row !important;
     align-items: stretch !important;
     width: 100% !important;
-    max-width: none !important;
+    max-width: 100% !important;
     background: white !important;
     color: black !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
-    margin-bottom: 0 !important;
+    margin: 0 !important;
     min-height: auto !important;
-    /* Ensure content is not cut off too tight */
-    padding-bottom: 20px !important;
+    padding: 0 !important;
   }
 
   /* Sidebar (30%) */
@@ -253,6 +236,7 @@ main p {
   .t1-sidebar {
     width: 30% !important;
     max-width: 30% !important;
+    flex-basis: 30% !important;
     background: #2c3440 !important;
     /* Ensure background prints */
     color: white !important;
@@ -266,11 +250,13 @@ main p {
   main {
     width: 70% !important;
     max-width: 70% !important;
-    padding: 30px !important;
+    padding: 20px !important;
     box-sizing: border-box !important;
     color: #222 !important;
     margin: 0 !important;
     margin-bottom: 0 !important;
+    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   /* Allow Breaks Inside Sections */

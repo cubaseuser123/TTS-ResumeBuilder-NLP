@@ -727,58 +727,75 @@ body,
 
 @media print {
 
-  /* 1. Reset Body & Hide Non-Print Elements */
+  /* 1. Reset Body */
+  html,
   body {
     margin: 0 !important;
     padding: 0 !important;
     background-color: white !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-  }
-
-  body * {
-    visibility: hidden;
-  }
-
-  /* 2. Show Only The Print Area */
-  .print-area,
-  .print-area * {
-    visibility: visible !important;
-  }
-
-  /* 3. Position and Size the Print Area */
-  .print-area {
-    position: fixed !important;
-    left: 0 !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: auto !important;
-    width: 100% !important;
     height: auto !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    /* Critical: Override flexbox centering which can cut off content */
-    display: block !important;
-
-    z-index: 9999;
-    background-color: white !important;
     overflow: visible !important;
   }
 
-  /* 4. Reset the Inner Resume Container */
-  #resume-to-print {
-    width: auto !important;
-    /* Let the inline style (210mm) dictate width */
-    min-width: 210mm !important;
-    /* Force A4 width minimum to prevent reflow */
-    max-width: none !important;
-    transform: none !important;
-    box-shadow: none !important;
-    border: none !important;
+  @page {
+    margin: 0;
+  }
+
+  /* 2. Hide Interface Elements (Collapse space) */
+  .left-panel,
+  .right-panel,
+  .mobile-header,
+  .App-header,
+  .control-bar,
+  .toolbar,
+  .add-field-button,
+  .summary-section,
+  .control-bar,
+  .toolbar,
+  .add-field-button,
+  .summary-section,
+  .mini-btn,
+  .active-avatar,
+  .pp-overlay {
+    display: none !important;
+  }
+
+  /* 3. Reset Layout Wrappers to allow flow */
+  .app-container,
+  .middle-panel,
+  .middle-panel-wrapper,
+  #root,
+  .App {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
     margin: 0 !important;
     padding: 0 !important;
+    overflow: visible !important;
+    position: static !important;
+  }
+
+  /* 4. Ensure Resume is Visible and Positioned */
+  .resume-paper {
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    transform: none !important;
+    display: block !important;
+  }
+
+  #resume-to-print {
+    width: 100% !important;
+    min-width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
   }
 
   /* 5. Hide Scrollbars */

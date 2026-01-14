@@ -36,7 +36,7 @@ const MiddlePanel = ({
   }, [data, template]);
 
   const pageStyle = {
-    width: "100%", //pageType === "A4" ? "210mm" : "8.5in",
+    width: pageType === "A4" ? "210mm" : "8.5in",
     maxWidth: pageType === "A4" ? "210mm" : "8.5in",
     height: 'auto', //pageType === "A4" ? "297mm" : "11in",
     margin: "0 auto",
