@@ -10,7 +10,21 @@
   background: white;
   font-size: var(--resume-font-size, 14px);
   color: white;
-  min-height: auto;
+  /* Moved from inline JS for better print control */
+  width: 100%;
+  min-height: var(--page-min-height, 297mm);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@media print {
+  .t1-wrapper {
+    min-height: auto !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
 }
 
 /* PREVENT TEXT OVERFLOW IN SIDEBAR */
@@ -199,20 +213,13 @@ main p {
 @media print {
   body {
     margin: 0;
+    padding: 0;
   }
 
   .t1-page {
     box-shadow: none;
     margin: 0;
   }
-
-  @page {
-    size: A4;
-    margin: 0;
-  }
-}
-
-@media print {
 
   .t1-wrapper,
   .t1-sidebar,
@@ -221,171 +228,52 @@ main p {
     min-height: auto !important;
     overflow: visible !important;
   }
-}
 
-@media print {
   /* CRITICAL: allow page flow */
-  /* ...existing code... */
-  @media print {
-
-    /* Ensure templates print as two columns, not stacked */
-    #resume-to-print [class$="-wrapper"] {
-      display: flex !important;
-      flex-direction: row !important;
-      align-items: flex-start !important;
-      width: 100% !important;
-      max-width: none !important;
-    }
-
-    /* Sidebar and main widths for print */
-    #resume-to-print aside {
-      width: 30% !important;
-      page-break-after: avoid;
-      box-sizing: border-box !important;
-    }
-
-    #resume-to-print main {
-      width: 70% !important;
-      box-sizing: border-box !important;
-      overflow: visible !important;
-    }
-
-    /* Allow sections to break across pages */
-    #resume-to-print .t1-exp-item,
-    #resume-to-print .t1-edu-item,
-    #resume-to-print .t1-project-item,
-    #resume-to-print .t1-section {
-      break-inside: auto;
-      page-break-inside: auto;
-    }
-  }
-
-  /* ...existing code... */
-  /* ...existing code... */
-  @media print {
-
-    /* Ensure templates print as two columns, not stacked */
-    #resume-to-print [class$="-wrapper"] {
-      display: flex !important;
-      flex-direction: row !important;
-      align-items: flex-start !important;
-      width: 100% !important;
-      max-width: none !important;
-    }
-
-    /* Sidebar and main widths for print */
-    #resume-to-print aside {
-      width: 30% !important;
-      page-break-after: avoid;
-      box-sizing: border-box !important;
-    }
-
-    #resume-to-print main {
-      width: 70% !important;
-      box-sizing: border-box !important;
-      overflow: visible !important;
-    }
-
-    /* Allow sections to break across pages */
-    #resume-to-print .t1-exp-item,
-    #resume-to-print .t1-edu-item,
-    #resume-to-print .t1-project-item,
-    #resume-to-print .t1-section {
-      break-inside: auto;
-      page-break-inside: auto;
-    }
-  }
-
-  /* ...existing code... */
-  /* ...existing code... */
-  @media print {
-
-    /* Ensure templates print as two columns, not stacked */
-    #resume-to-print [class$="-wrapper"] {
-      display: flex !important;
-      flex-direction: row !important;
-      align-items: flex-start !important;
-      width: 100% !important;
-      max-width: none !important;
-    }
-
-    /* Sidebar and main widths for print */
-    #resume-to-print aside {
-      width: 30% !important;
-      page-break-after: avoid;
-      box-sizing: border-box !important;
-    }
-
-    #resume-to-print main {
-      width: 70% !important;
-      box-sizing: border-box !important;
-      overflow: visible !important;
-    }
-
-    /* Allow sections to break across pages */
-    #resume-to-print .t1-exp-item,
-    #resume-to-print .t1-edu-item,
-    #resume-to-print .t1-project-item,
-    #resume-to-print .t1-section {
-      break-inside: auto;
-      page-break-inside: auto;
-    }
-  }
-
-  /* ...existing code... */
-  /* ...existing code... */
-  @media print {
-
-    /* Ensure templates print as two columns, not stacked */
-    #resume-to-print [class$="-wrapper"] {
-      display: flex !important;
-      flex-direction: row !important;
-      align-items: flex-start !important;
-      width: 100% !important;
-      max-width: none !important;
-    }
-
-    /* Sidebar and main widths for print */
-    #resume-to-print aside {
-      width: 30% !important;
-      page-break-after: avoid;
-      box-sizing: border-box !important;
-    }
-
-    #resume-to-print main {
-      width: 70% !important;
-      box-sizing: border-box !important;
-      overflow: visible !important;
-    }
-
-    /* Allow sections to break across pages */
-    #resume-to-print .t1-exp-item,
-    #resume-to-print .t1-edu-item,
-    #resume-to-print .t1-project-item,
-    #resume-to-print .t1-section {
-      break-inside: auto;
-      page-break-inside: auto;
-    }
-  }
-
-  /* ...existing code... */
+  /* Ensure templates print as two columns, not stacked */
+  #resume-to-print [class$="-wrapper"],
   .t1-wrapper {
-    display: block !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: none !important;
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    margin-bottom: 0 !important;
+    min-height: auto !important;
+    /* Ensure content is not cut off too tight */
+    padding-bottom: 20px !important;
   }
 
-  /* Sidebar should appear on first page only */
+  /* Sidebar (30%) */
+  #resume-to-print aside,
   .t1-sidebar {
-    width: 100% !important;
+    width: 30% !important;
+    max-width: 30% !important;
+    background: #2c3440 !important;
+    /* Ensure background prints */
+    color: white !important;
+    padding: 30px 20px !important;
+    box-sizing: border-box !important;
     page-break-after: avoid;
   }
 
-  /* Main content flows to next pages */
+  /* Main Content (70%) */
+  #resume-to-print main,
   main {
-    width: 100% !important;
-    overflow: visible !important;
+    width: 70% !important;
+    max-width: 70% !important;
+    padding: 30px !important;
+    box-sizing: border-box !important;
+    color: #222 !important;
+    margin: 0 !important;
+    margin-bottom: 0 !important;
   }
 
-  /* Allow breaking inside sections */
+  /* Allow Breaks Inside Sections */
   .t1-exp-item,
   .t1-edu-item,
   .t1-project-item,
@@ -393,4 +281,9 @@ main p {
     break-inside: auto;
     page-break-inside: auto;
   }
+}
+
+@page {
+  size: A4;
+  margin: 0;
 }

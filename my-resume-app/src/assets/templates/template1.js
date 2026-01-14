@@ -245,7 +245,7 @@ const Template1 = ({
   profilePhoto,
   supportsImage,
   sectionTitles = {},
-  }) => {
+}) => {
   const getProfileImage = () => {
     if (profileImageType === "photo" && profilePhoto) return profilePhoto;
     if (profileImageType === "male") return maleAvatar;
@@ -256,13 +256,8 @@ const Template1 = ({
   const pageStyle = {
     width:
       pageType === "A4" ? "210mm" : pageType === "letter" ? "8.5in" : "8.5in",
-    minHeight:
+    "--page-min-height":
       pageType === "A4" ? "297mm" : pageType === "letter" ? "11in" : "14in",
-    background: "white",
-    boxShadow: "0 0 5px rgba(0,0,0,0.15)",
-    margin: "auto",
-    boxSizing: "border-box",
-    overflow: "visible",
   };
 
   return (

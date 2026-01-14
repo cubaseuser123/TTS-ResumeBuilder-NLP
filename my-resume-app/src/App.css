@@ -726,56 +726,64 @@ body,
 }
 
 @media print {
+
+  /* 1. Reset Body & Hide Non-Print Elements */
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: white !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
   body * {
     visibility: hidden;
   }
 
+  /* 2. Show Only The Print Area */
   .print-area,
   .print-area * {
-    visibility: visible;
+    visibility: visible !important;
   }
 
+  /* 3. Position and Size the Print Area */
   .print-area {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-  }
-}
-
-@media print {
-  #resume-to-print {
-    transform: none !important;
-    width: auto !important;
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    width: 100% !important;
     height: auto !important;
-  }
-}
 
-@media print {
-  @page {
-    size: A4;
-    /* changes dynamically */
-    margin: 0;
-  }
-}
+    margin: 0 !important;
+    padding: 0 !important;
 
-@media print {
-  .print-area {
-    zoom: 1 !important;
-    padding: 0;
-    margin: 0;
+    /* Critical: Override flexbox centering which can cut off content */
+    display: block !important;
+
+    z-index: 9999;
+    background-color: white !important;
+    overflow: visible !important;
   }
 
-  body {
+  /* 4. Reset the Inner Resume Container */
+  #resume-to-print {
+    width: auto !important;
+    /* Let the inline style (210mm) dictate width */
+    min-width: 210mm !important;
+    /* Force A4 width minimum to prevent reflow */
+    max-width: none !important;
+    transform: none !important;
+    box-shadow: none !important;
+    border: none !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-}
 
-@media print {
-  body {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+  /* 5. Hide Scrollbars */
+  ::-webkit-scrollbar {
+    display: none;
   }
 }
 
