@@ -141,7 +141,12 @@ async def generate_resume(request: ResumeRequest):
                 "success": True,
                 "status": "needs_clarification",
                 "data": {
-                    "questions": result.get("questions", [])
+                    "questions": result.get("questions", []),
+                    "extractedData": {
+                        "entities": result.get("entities", {}),
+                        "extracted_skills": result.get("extracted_skills", []),
+                        "extracted_metrics": result.get("extracted_metrics", []),
+                    }
                 },
                 "error": None
             }

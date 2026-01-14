@@ -2,6 +2,7 @@ import LeftPanel from "../components/LeftPanel";
 import MiddlePanel from "../components/MiddlePanel";
 import RightPanel from "../components/RightPanel";
 import PrintPreviewPanel from "../components/PrintPreviewPanel";
+import { generateResume } from "../services/api";
 import "../App.css";
 import "../fonts/fonts.css";
 import "../responsive.css";
@@ -13,6 +14,15 @@ const ResumeEditor = () => {
   const [errors, setErrors] = useState({});
   const [primaryColor, setPrimaryColor] = useState("#000000");
   const [promptValue, setPromptValue] = useState("");
+
+  // Pipeline states: idle | submitting | generating | needs_clarification | done | error
+  const [pipelineState, setPipelineState] = useState("idle");
+  const [pipelineError, setPipelineError] = useState("");
+  const [clarificationQuestions, setClarificationQuestions] = useState([]);
+  const [clarificationAnswers, setClarificationAnswers] = useState({});
+  const [accumulatedAnswers, setAccumulatedAnswers] = useState({});
+  const [extractedData, setExtractedData] = useState({});  // Store extracted data for merging
+  const [finalResumeSnapshot, setFinalResumeSnapshot] = useState(null);
 
   const [visibleSections, setVisibleSections] = useState({
     Photo: true,
@@ -34,7 +44,7 @@ const ResumeEditor = () => {
 
   const [resumeData, setResumeData] = useState({
     pictureUrl: "",
-    profileImageType: "photo", // "photo" | "male" | "female" | "none"
+    profileImageType: "photo",
     fullName: "",
     headline: "",
     email: "",
@@ -141,8 +151,8 @@ const ResumeEditor = () => {
     reader.onload = () => {
       setResumeData((prev) => ({
         ...prev,
-        pictureUrl: reader.result, // store uploaded image
-        profileImageType: "photo", // switch to photo automatically
+        pictureUrl: reader.result,
+        profileImageType: "photo",
       }));
     };
     if (file) reader.readAsDataURL(file);
@@ -151,7 +161,7 @@ const ResumeEditor = () => {
   const handleChange = (e, section = null, index = 0) => {
     const { name, value } = e.target;
 
-    // 1️⃣ VALIDATION (this will NOT affect your output)
+
     const newError = validateField(section, name, value);
 
     setErrors((prev) => ({
@@ -159,18 +169,15 @@ const ResumeEditor = () => {
       [`${section || "basic"}-${index}-${name}`]: newError,
     }));
 
-    // UPDATE DATA (your old working code kept exactly same)
     setResumeData((prev) => {
       if (!section) return { ...prev, [name]: value };
 
-      // special handling for profile (your original code)
       if (section === "profile") {
         const updated = [...prev.profile];
         updated[index] = { ...updated[index], [name]: value };
         return { ...prev, profile: updated };
       }
 
-      // default for array sections
       const updated = Array.isArray(prev[section]) ? [...prev[section]] : [];
       updated[index] = { ...updated[index], [name]: value };
       return { ...prev, [section]: updated };
@@ -318,6 +325,156 @@ const ResumeEditor = () => {
   const [applyStyleTrigger, setApplyStyleTrigger] = useState(0);
   const triggerApply = () => setApplyStyleTrigger((prev) => prev + 1);
 
+  // =====================================================
+  // PIPELINE SUBMISSION HANDLER
+  // =====================================================
+  const handlePromptSubmit = async () => {
+    // Don't submit if already in progress
+    if (pipelineState === "submitting" || pipelineState === "generating") {
+      return;
+    }
+
+    // Clear previous errors and STALE ANSWERS (Start Fresh)
+    setPipelineError("");
+    setClarificationAnswers({});
+    setAccumulatedAnswers({}); // <--- FIX: Clear stale answers
+    setPipelineState("submitting");
+
+    try {
+      setPipelineState("generating");
+
+      // Call API with prompt and EMPTY answers for a fresh start
+      const response = await generateResume(promptValue, {});
+
+      // DEBUG: Log the response
+      console.log("=== API Response ===", response);
+      console.log("response.success:", response.success);
+      console.log("response.status:", response.status);
+      console.log("response.data:", response.data);
+
+      // Handle response based on status
+      if (!response.success) {
+        // Error case
+        console.log("Setting state to ERROR");
+        setPipelineState("error");
+        setPipelineError(response.error || "An error occurred");
+        return;
+      }
+
+      if (response.status === "needs_clarification") {
+        // Case A: Clarification required
+        console.log("Setting state to NEEDS_CLARIFICATION");
+        console.log("Questions:", response.data?.questions);
+        setClarificationQuestions(response.data?.questions || []);
+        setClarificationAnswers({});
+        // Store extracted data for merging on second pass
+        if (response.data?.extractedData) {
+          setExtractedData(response.data.extractedData);
+        }
+        setPipelineState("needs_clarification");
+        return;
+      }
+
+      if (response.status === "success") {
+        // Case B: Final resume returned
+        console.log("Setting state to DONE");
+        setFinalResumeSnapshot(response.data);
+        setPipelineState("done");
+        return;
+      }
+
+      // QA failed or other status
+      if (response.status === "qa_failed") {
+        console.log("Setting state to ERROR (QA failed)");
+        setPipelineState("error");
+        setPipelineError("Quality check failed: " + (response.data?.issues?.join(", ") || "Unknown issues"));
+        return;
+      }
+
+      // Unhandled status - log it
+      console.log("UNHANDLED STATUS:", response.status);
+
+    } catch (err) {
+      console.error("API Error:", err);
+      setPipelineState("error");
+      setPipelineError(err.message || "Network error occurred");
+    }
+  };
+
+  // Handle clarification answer changes
+  const handleClarificationAnswerChange = (key, value) => {
+    setClarificationAnswers((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
+  // Handle clarification submission
+  const handleClarificationSubmit = async () => {
+    // Merge extracted data + accumulated answers + new clarification answers
+    const mergedAnswers = {
+      ...extractedData,  // Previously extracted data from first pass
+      ...accumulatedAnswers,
+      ...clarificationAnswers,
+    };
+    setAccumulatedAnswers(mergedAnswers);
+
+    // Clear previous errors and resubmit
+    setPipelineError("");
+    setPipelineState("submitting");
+
+    try {
+      setPipelineState("generating");
+
+      const response = await generateResume(promptValue, mergedAnswers);
+
+      if (!response.success) {
+        setPipelineState("error");
+        setPipelineError(response.error || "An error occurred");
+        return;
+      }
+
+      console.log("=== Clarification Submit Response ===", response);
+
+      if (response.status === "needs_clarification") {
+        console.log("Status is needs_clarification, showing panel again.");
+        setClarificationQuestions(response.data?.questions || []);
+        setClarificationAnswers({});
+        setPipelineState("needs_clarification");
+        return;
+      }
+
+      if (response.status === "success") {
+        console.log("Status is SUCCESS, updating snapshot and setting done.");
+        // FIX: Ensure we are sending an object, even if data is missing (defensive)
+        setFinalResumeSnapshot(response.data || {});
+        setPipelineState("done");
+        return;
+      }
+
+      if (response.status === "qa_failed") {
+        setPipelineState("error");
+        setPipelineError("Quality check failed: " + (response.data?.issues?.join(", ") || "Unknown issues"));
+        return;
+      }
+
+    } catch (err) {
+      setPipelineState("error");
+      setPipelineError(err.message || "Network error occurred");
+    }
+  };
+
+  // Clear error when prompt changes
+  const handlePromptChange = (newValue) => {
+    setPromptValue(newValue);
+    if (pipelineError) {
+      setPipelineError("");
+      if (pipelineState === "error") {
+        setPipelineState("idle");
+      }
+    }
+  };
+
   const validateField = (section, field, value) => {
     // BASIC REGEX
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -326,7 +483,6 @@ const ResumeEditor = () => {
     // ERROR HOLDER
     let error = "";
 
-    // -------- BASICS VALIDATION ----------
     if (!section) {
       if (field === "fullName" && !value.trim())
         error = "Full name is required.";
@@ -406,7 +562,14 @@ const ResumeEditor = () => {
             sectionTitles={sectionTitles}
             setSectionTitles={setSectionTitles}
             promptValue={promptValue}
-            onPromptChange={setPromptValue}
+            onPromptChange={handlePromptChange}
+            onPromptSubmit={handlePromptSubmit}
+            pipelineState={pipelineState}
+            pipelineError={pipelineError}
+            clarificationQuestions={clarificationQuestions}
+            clarificationAnswers={clarificationAnswers}
+            onClarificationAnswerChange={handleClarificationAnswerChange}
+            onClarificationSubmit={handleClarificationSubmit}
           />
         </div>
 
@@ -428,6 +591,7 @@ const ResumeEditor = () => {
             setProfilePhoto={setProfilePhoto}
             primaryColor={primaryColor}
             sectionTitles={sectionTitles}
+            pipelineState={pipelineState}
           />
         </main>
 

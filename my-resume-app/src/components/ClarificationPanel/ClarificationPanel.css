@@ -1,0 +1,22 @@
+/* ClarificationPanel.css */
+
+.clarification-panel {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #4b5563;
+}
+
+.clarification-description {
+    color: #9ca3af;
+    font-size: 0.875rem;
+    margin-bottom: 16px;
+}
+
+.clarification-question {
+    margin-bottom: 16px;
+}
+
+.clarification-input {
+    min-height: 60px;
+    resize: vertical;
+}

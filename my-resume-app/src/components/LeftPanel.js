@@ -2,6 +2,7 @@ import WebFont from "webfontloader";
 import ttsImage from "../fonts/tts.png";
 import React, { useState } from "react";
 import PromptBox from "./PromptBox/PromptBox";
+import ClarificationPanel from "./ClarificationPanel/ClarificationPanel";
 
 const EditableTitle = ({ value, onChange }) => {
   const [editing, setEditing] = useState(false);
@@ -54,8 +55,14 @@ const LeftPanel = ({
   // PromptBox props
   promptValue,
   onPromptChange,
-  showPromptHelperText,
-  promptErrorMessage,
+  onPromptSubmit,
+  pipelineState,
+  pipelineError,
+  // ClarificationPanel props
+  clarificationQuestions,
+  clarificationAnswers,
+  onClarificationAnswerChange,
+  onClarificationSubmit,
 }) => {
   return (
     <div className="left-panel panel">
@@ -1481,9 +1488,21 @@ const LeftPanel = ({
         <PromptBox
           value={promptValue}
           onChange={onPromptChange}
-          showHelperText={showPromptHelperText}
-          errorMessage={promptErrorMessage}
+          onSubmit={onPromptSubmit}
+          errorMessage={pipelineError}
+          disabled={pipelineState === "submitting" || pipelineState === "generating"}
         />
+
+        {/* Clarification Panel - shown when backend needs more info */}
+        {pipelineState === "needs_clarification" && (
+          <ClarificationPanel
+            questions={clarificationQuestions}
+            answers={clarificationAnswers}
+            onAnswerChange={onClarificationAnswerChange}
+            onSubmit={onClarificationSubmit}
+            disabled={pipelineState === "submitting" || pipelineState === "generating"}
+          />
+        )}
       </div>
     </div>
   );

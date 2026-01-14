@@ -26,6 +26,7 @@ const MiddlePanel = ({
   primaryColor,
   textColor,
   sectionTitles,
+  pipelineState,
 }) => {
   const containerRef = useRef(null);
   const [snapshotHtml, setSnapshotHtml] = useState(null);
@@ -175,6 +176,9 @@ const MiddlePanel = ({
     return () => observer.disconnect();
   }, [primaryColor, template, snapshotHtml]);
 
+  // Check if pipeline is running (show loading)
+  const isLoading = pipelineState === "submitting" || pipelineState === "generating";
+
   return (
     <div
       ref={wrapperRef}
@@ -186,8 +190,49 @@ const MiddlePanel = ({
         height: "100%",
         overflowY: "auto",
         overflowX: "hidden",
+        position: "relative",
       }}
     >
+      {/* Loading Overlay */}
+      {isLoading && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(31, 41, 55, 0.85)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 100,
+          }}
+        >
+          <div
+            style={{
+              width: "50px",
+              height: "50px",
+              border: "4px solid #4b5563",
+              borderTop: "4px solid #6366f1",
+              borderRadius: "50%",
+              animation: "spin 1s linear infinite",
+            }}
+          />
+          <p style={{ color: "#f3f4f6", marginTop: "16px", fontSize: "1rem" }}>
+            Generating your resume...
+          </p>
+          <style>
+            {`
+              @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+              }
+            `}
+          </style>
+        </div>
+      )}
       {renderedContent}
     </div>
   );

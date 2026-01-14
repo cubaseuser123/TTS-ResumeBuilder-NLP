@@ -28,7 +28,17 @@ def enhance_resume_content(resume_draft : dict) -> dict:
     # Create a deep copy to avoid circular references
     enhanced = copy.deepcopy(resume_draft)
     experience = enhanced.get("experience", [])
-    for job in experience:
+    
+    # Handle case where experience might not be a list
+    if not isinstance(experience, list):
+        return enhanced
+    
+    for i, job in enumerate(experience):
+        # Skip if job is not a dictionary (might be a string)
+        if not isinstance(job, dict):
+            continue
         bullets = job.get("bullets", [])
-        job["bullets"] = [enhance_bullet(b) for b in bullets]
+        if isinstance(bullets, list):
+            job["bullets"] = [enhance_bullet(b) for b in bullets if isinstance(b, str)]
     return enhanced
+

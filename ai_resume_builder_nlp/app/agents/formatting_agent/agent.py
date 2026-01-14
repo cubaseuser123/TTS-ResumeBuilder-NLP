@@ -8,9 +8,26 @@ from utils.schema_normalizer import normalize_resume_schema
 def formatting_passthrough(state: dict) -> dict:
     """Final formatting before sending to frontend - ensures all fields match frontend schema"""
     resume = state.get("resume", {}) or state 
+    
+    # First normalize all list fields to ensure they are actually lists
+    normalized = normalize_resume_schema(resume)
+    
+    # Extract and format profile separately - handle if profile is a string
     profile = resume.get("profile", {})
-    return {
-        "profile": {
+    if isinstance(profile, str):
+        # If profile is a string, create a dict with the string as name
+        normalized["profile"] = {
+            "name": profile,
+            "role": "",
+            "email": "",
+            "phone": "",
+            "location": "",
+            "linkedin": "",
+            "github": "",
+            "years": "",
+        }
+    elif isinstance(profile, dict):
+        normalized["profile"] = {
             "name": profile.get("name", ""),
             "role": profile.get("role", ""),
             "email": profile.get("email", ""),
@@ -19,18 +36,20 @@ def formatting_passthrough(state: dict) -> dict:
             "linkedin": profile.get("linkedin", ""),
             "github": profile.get("github", ""),
             "years": profile.get("years") or profile.get("years_experience"),
-        },
-        "summary": resume.get("summary", ""),
-        "experience": resume.get("experience", []),
-        "education": resume.get("education", []),
-        "skills": resume.get("skills", []),
-        "projects": resume.get("projects", []),
-        "certificates": resume.get("certificates", []),
-        "publications": resume.get("publications", []),
-        "interests": resume.get("interests", []),
-        "volunteering": resume.get("volunteering", []),
-        "references": resume.get("references", []),
-    }
+        }
+    else:
+        normalized["profile"] = {
+            "name": "",
+            "role": "",
+            "email": "",
+            "phone": "",
+            "location": "",
+            "linkedin": "",
+            "github": "",
+            "years": "",
+        }
+    
+    return normalized
 
 formatting_agent = Agent(
     name="formatting_agent",
