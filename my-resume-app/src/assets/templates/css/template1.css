@@ -221,8 +221,17 @@ main p {
     margin: 0;
   }
 
-  .t1-wrapper,
-  .t1-sidebar,
+  .t1-wrapper {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    overflow: visible !important;
+  }
+
+  .t1-sidebar {
+    height: 100% !important;
+    min-height: 100vh !important;
+  }
+
   main {
     height: auto !important;
     min-height: auto !important;
@@ -243,9 +252,9 @@ main p {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
     margin-bottom: 0 !important;
-    min-height: auto !important;
-    /* Ensure content is not cut off too tight */
-    padding-bottom: 20px !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    padding-bottom: 0 !important;
   }
 
   /* Sidebar (30%) */
@@ -259,6 +268,7 @@ main p {
     padding: 30px 20px !important;
     box-sizing: border-box !important;
     page-break-after: avoid;
+    min-height: 100vh !important;
   }
 
   /* Main Content (70%) */
