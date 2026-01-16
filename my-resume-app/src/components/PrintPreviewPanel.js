@@ -9,7 +9,10 @@ const PrintPreviewPanel = ({
   onClose,
   onPrint,
   children,
+  visible,
 }) => {
+  if (!visible) return null;
+
   return (
     <div className="print-overlay">
       {/* LEFT PRINT BAR */}

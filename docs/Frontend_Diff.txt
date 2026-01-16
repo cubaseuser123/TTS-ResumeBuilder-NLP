@@ -1,0 +1,163 @@
+SCOPE (CRITICAL)
+This task is FRONTEND-ONLY.
+Do NOT touch backend, pipeline, agents, QA logic, or API contracts.
+
+You are implementing loading UX + visual streaming AFTER data is ready.
+
+CONTEXT
+
+Items 1, 2, and 3 are complete:
+
+Prompt box UI
+
+Prompt submission & pipeline wiring
+
+Clarification UI
+
+Backend pipeline is strict, complete, and frozen
+
+Backend returns either:
+
+clarification questions
+
+OR a fully formatted, QA-passed final_resume
+
+There is NO backend streaming.
+
+OBJECTIVE
+Define and implement the UI behavior for:
+
+While the pipeline is running
+
+Immediately after the final resume JSON is received
+
+Visually revealing resume content in the center pane
+
+LOADING PHASE (PIPELINE RUNNING)
+
+When a pipeline request is in-flight:
+
+Center pane must show:
+
+a loading animation OR
+
+a skeleton resume layout (section headers only)
+
+No resume content is rendered
+
+No partial or stale data is shown
+
+UI RULES:
+
+Left pane inputs remain visible
+
+Prompt box is disabled
+
+Clicking anywhere does NOT affect the pipeline
+
+No cancel / pause / resume logic
+
+POST-GENERATION HANDLING (IMPORTANT)
+
+Once the backend responds with final_resume:
+
+Store the resume as an immutable snapshot
+
+Do NOT mutate resume data during rendering
+
+Do NOT re-call the backend
+
+At this point, the pipeline is considered COMPLETE.
+
+VISUAL STREAMING (FRONTEND-ONLY)
+
+After final_resume is available:
+
+Apply visual-only streaming (typewriter or reveal animation)
+
+Streaming is purely presentational
+
+Data source is already complete and final
+
+Allowed:
+
+Section-by-section reveal
+
+Text typewriter effect
+
+Small delay between sections
+
+Not allowed:
+
+Backend calls
+
+Resume mutation
+
+Streaming before data exists
+
+Streaming implying “generation in progress”
+
+Think:
+Animation ≠ generation
+
+STREAMING CONTROLS
+
+Streaming must be:
+
+fast
+
+TEMPLATE INTERACTION
+
+Template switching is allowed ONLY after:
+
+resume exists
+
+streaming has finished OR been skipped
+
+Switching templates:
+
+re-renders the same resume data
+
+does NOT restart streaming
+
+does NOT call backend
+
+ERROR HANDLING (REMINDER)
+
+If pipeline fails before resume is returned:
+
+No streaming occurs
+
+Center pane stays in loading / empty state
+
+Error is shown below the prompt box (already implemented elsewhere)
+
+EXPLICIT NON-GOALS (DO NOT IMPLEMENT)
+
+No backend streaming
+
+No pause / resume
+
+No partial resume rendering
+
+No inline editing
+
+No template logic beyond re-render
+
+No new API calls
+
+DONE CRITERIA
+
+This task is complete when:
+
+Center pane shows loading while pipeline runs
+
+Final resume appears only after backend completion
+
+Visual streaming happens AFTER data is ready
+
+Streaming is skippable
+
+Resume data remains unchanged throughout
+
+STOP once this behavior is implemented.

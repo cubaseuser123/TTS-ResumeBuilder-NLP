@@ -9,8 +9,9 @@ from utils.schema_normalizer import normalize_resume_schema
 
 def generate_resume(state: dict) -> dict:
     resume = generate_resume_structure(state)
+    # NOTE: "profile" is intentionally excluded - content_generator builds it from entities
     for feild in [
-        "profile", "summary", "experience", "education",
+        "summary", "experience", "education",
     "skills", "projects", "certificates",
     "publications", "interests", "volunteering", "references"
     ]:

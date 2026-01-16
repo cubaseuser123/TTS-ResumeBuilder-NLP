@@ -27,6 +27,11 @@ const MiddlePanel = ({
   textColor,
   sectionTitles,
   pipelineState,
+  isStreaming = false,
+  streamProgress = 0,
+  onSkipStreaming,
+  customId = "resume-to-print",
+  enablePrint = true,
 }) => {
   const containerRef = useRef(null);
   const [snapshotHtml, setSnapshotHtml] = useState(null);
@@ -88,13 +93,13 @@ const MiddlePanel = ({
 
   const renderedContent = snapshotHtml ? (
     <div
-      id="resume-to-print"
+      id={customId}
       ref={containerRef}
       style={pageStyle}
       dangerouslySetInnerHTML={{ __html: snapshotHtml }}
     />
   ) : (
-    <div id="resume-to-print" ref={containerRef} style={pageStyle}>
+    <div id={customId} ref={containerRef} style={pageStyle}>
       <SelectedTemplate
         data={data}
         pageType={pageType}
@@ -150,7 +155,7 @@ const MiddlePanel = ({
   useEffect(() => {
     if (!primaryColor) return;
 
-    const container = document.getElementById("resume-to-print");
+    const container = document.getElementById(customId);
     if (!container) return;
 
     const applyColor = () => {
@@ -178,11 +183,12 @@ const MiddlePanel = ({
 
   // Check if pipeline is running (show loading)
   const isLoading = pipelineState === "submitting" || pipelineState === "generating";
+  const showSkipButton = isStreaming && onSkipStreaming;
 
   return (
     <div
       ref={wrapperRef}
-      className="resume-print-area print-area"
+      className={`resume-print-area ${enablePrint ? "print-area" : ""}`}
       style={{
         display: "flex",
         justifyContent: "center",
@@ -231,6 +237,44 @@ const MiddlePanel = ({
               }
             `}
           </style>
+        </div>
+      )}
+
+      {/* Streaming Skip Button */}
+      {showSkipButton && (
+        <div
+          style={{
+            position: "absolute",
+            top: "20px",
+            right: "20px",
+            zIndex: 101,
+          }}
+        >
+          <button
+            onClick={onSkipStreaming}
+            style={{
+              padding: "10px 20px",
+              backgroundColor: "#6366f1",
+              color: "white",
+              border: "none",
+              borderRadius: "6px",
+              fontSize: "14px",
+              fontWeight: "500",
+              cursor: "pointer",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              transition: "all 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = "#4f46e5";
+              e.target.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = "#6366f1";
+              e.target.style.transform = "translateY(0)";
+            }}
+          >
+            Skip Animation ⏩
+          </button>
         </div>
       )}
       {renderedContent}
