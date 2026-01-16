@@ -12,7 +12,7 @@ def generate_resume(state: dict) -> dict:
     # NOTE: "profile" is intentionally excluded - content_generator builds it from entities
     for feild in [
         "summary", "experience", "education",
-    "skills", "projects", "certificates",
+    "skills", "languages", "projects", "certificates",
     "publications", "interests", "volunteering", "references"
     ]:
         if feild in state and state[feild]:

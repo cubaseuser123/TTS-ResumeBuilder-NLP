@@ -29,12 +29,15 @@ const renderSection = (
       );
 
     case "Profile":
+      // Only show Profile section if there are valid social links
+      const validProfiles = data.profile?.filter(p => p.profileNetwork || p.profileUsername || p.profileWebsite);
+      if (!validProfiles || validProfiles.length === 0) return null;
       return (
         <>
           <h3 className="t1-section-title" data-section-title>
             {sectionTitles.Profile || "Profile"}
           </h3>
-          {data.profile?.map((p, i) => (
+          {validProfiles.map((p, i) => (
             <div key={i}>
               <p>{p.profileNetwork}</p>
               <p>{p.profileUsername}</p>

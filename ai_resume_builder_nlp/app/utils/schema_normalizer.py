@@ -186,6 +186,8 @@ def normalize_resume_schema(resume_draft: dict) -> dict:
         "summary": resume_draft.get("summary", ""),
         # skills: split comma-separated strings into list
         "skills": normalize_to_list(resume_draft.get("skills", []), split_by_comma=True),
+        # languages: split comma-separated strings into list
+        "languages": normalize_to_list(resume_draft.get("languages", []), split_by_comma=True),
         # experience: normalize each entry to have role, company, achievements
         "experience": normalize_experience_list(resume_draft.get("experience", [])),
         # other list fields: wrap string in single-item list if needed

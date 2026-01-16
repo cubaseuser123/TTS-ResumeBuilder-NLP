@@ -590,31 +590,17 @@ const ResumeEditor = () => {
   };
 
   // =====================================================
-  // VISUAL STREAMING: Section-by-section reveal
+  // VISUAL LOADING: Show loading for minimum time
   // =====================================================
-  const startVisualStreaming = (mappedData) => {
-    setIsStreaming(true);
-    setStreamProgress(0);
-
-    // Instantly populate all data (no backend delays)
-    setResumeData(mappedData);
-
-    // Visual-only progress animation
-    let progress = 0;
-    const interval = setInterval(() => {
-      progress += 10;
-      setStreamProgress(progress);
-
-      if (progress >= 100) {
-        clearInterval(interval);
-        setIsStreaming(false);
-      }
-    }, 150); // 150ms * 10 = 1.5 seconds total
-  };
-
-  const skipStreaming = () => {
-    setIsStreaming(false);
-    setStreamProgress(100);
+  const showDataWithDelay = async (mappedData) => {
+    // Add a minimum loading time of 2.5 seconds for better UX
+    await new Promise(resolve => setTimeout(resolve, 2500));
+    console.log("Setting resumeData to:", mappedData);
+    console.log("fullName:", mappedData.fullName);
+    console.log("email:", mappedData.email);
+    // Use functional update to ensure React re-renders
+    setResumeData(prev => ({ ...prev, ...mappedData }));
+    setPipelineState("done");
   };
 
 
@@ -677,15 +663,17 @@ const ResumeEditor = () => {
         setFinalResumeSnapshot(response.data);
 
         // Map backend data to frontend format
-        const mappedData = mapBackendToFrontend(response.data);
+        // Use final_resume which contains the structured resume data
+        const resumeToMap = response.data.final_resume || response.data;
+        const mappedData = mapBackendToFrontend(resumeToMap);
         console.log("Mapped data:", mappedData);
 
         if (mappedData) {
-          // Start visual streaming animation
-          startVisualStreaming(mappedData);
+          // Show data after minimum loading time for better UX
+          showDataWithDelay(mappedData);
+        } else {
+          setPipelineState("done");
         }
-
-        setPipelineState("done");
         return;
       }
 
@@ -757,14 +745,16 @@ const ResumeEditor = () => {
         setFinalResumeSnapshot(response.data || {});
 
         // Map backend data to frontend format
-        const mappedData = mapBackendToFrontend(response.data || {});
+        // Use final_resume which contains the structured resume data
+        const resumeToMap = (response.data || {}).final_resume || response.data || {};
+        const mappedData = mapBackendToFrontend(resumeToMap);
 
         if (mappedData) {
-          // Start visual streaming animation
-          startVisualStreaming(mappedData);
+          // Show data after minimum loading time for better UX
+          showDataWithDelay(mappedData);
+        } else {
+          setPipelineState("done");
         }
-
-        setPipelineState("done");
         return;
       }
 
@@ -909,9 +899,6 @@ const ResumeEditor = () => {
             primaryColor={primaryColor}
             sectionTitles={sectionTitles}
             pipelineState={pipelineState}
-            isStreaming={isStreaming}
-            streamProgress={streamProgress}
-            onSkipStreaming={skipStreaming}
           />
         </main>
 

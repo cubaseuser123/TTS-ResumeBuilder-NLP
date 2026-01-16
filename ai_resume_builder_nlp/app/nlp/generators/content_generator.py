@@ -36,6 +36,7 @@ def generate_resume_structure(extracted: dict) -> dict:
         "experience": experience,
         "education" : education,
         "skills" : skills,
+        "languages": extracted.get("languages", []),
         "projects" : extracted.get("projects", []),
         "certificates": extracted.get("certificates", []),
         "publications": extracted.get("publications", []),

@@ -27,9 +27,6 @@ const MiddlePanel = ({
   textColor,
   sectionTitles,
   pipelineState,
-  isStreaming = false,
-  streamProgress = 0,
-  onSkipStreaming,
   customId = "resume-to-print",
   enablePrint = true,
 }) => {
@@ -183,7 +180,6 @@ const MiddlePanel = ({
 
   // Check if pipeline is running (show loading)
   const isLoading = pipelineState === "submitting" || pipelineState === "generating";
-  const showSkipButton = isStreaming && onSkipStreaming;
 
   return (
     <div
@@ -195,7 +191,7 @@ const MiddlePanel = ({
         width: "100%",
         height: "100%",
         overflowY: "auto",
-        overflowX: "hidden",
+        overflowX: "auto",
         position: "relative",
       }}
     >
@@ -237,44 +233,6 @@ const MiddlePanel = ({
               }
             `}
           </style>
-        </div>
-      )}
-
-      {/* Streaming Skip Button */}
-      {showSkipButton && (
-        <div
-          style={{
-            position: "absolute",
-            top: "20px",
-            right: "20px",
-            zIndex: 101,
-          }}
-        >
-          <button
-            onClick={onSkipStreaming}
-            style={{
-              padding: "10px 20px",
-              backgroundColor: "#6366f1",
-              color: "white",
-              border: "none",
-              borderRadius: "6px",
-              fontSize: "14px",
-              fontWeight: "500",
-              cursor: "pointer",
-              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-              transition: "all 0.2s",
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = "#4f46e5";
-              e.target.style.transform = "translateY(-1px)";
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = "#6366f1";
-              e.target.style.transform = "translateY(0)";
-            }}
-          >
-            Skip Animation ⏩
-          </button>
         </div>
       )}
       {renderedContent}
