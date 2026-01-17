@@ -36,10 +36,10 @@ Skills:
 
 async def run_test():
     print("=" * 60)
-    print("🚀 STARTING PIPELINE TEST")
+    print("[START] PIPELINE TEST")
     print("=" * 60)
     
-    print(f"\n📄 Input Resume Text:\n{'-' * 20}\n{SAMPLE_RESUME_TEXT.strip()}\n{'-' * 20}\n")
+    print(f"\n[INPUT] Resume Text:\n{'-' * 20}\n{SAMPLE_RESUME_TEXT.strip()}\n{'-' * 20}\n")
     
     # Initial state
     state = {
@@ -47,44 +47,44 @@ async def run_test():
         "test_mode": True
     }
     
-    print("⏳ Running pipeline.run_async(state)...")
+    print("[RUNNING] pipeline.run_async(state)...")
             
     try:
         result = await pipeline.run_async(state)
         
-        print("\n✅ Pipeline Execution Completed")
+        print("\n[OK] Pipeline Execution Completed")
         print("=" * 60)
         
         # Display key results
-        print("\n📊 RESULT SUMMARY:")
+        print("\n[RESULT SUMMARY]:")
         print(f"Status: {result.get('status', 'Unknown')}")
         
         if result.get("needs_more_information"):
-            print("\n❓ Clarification Needed:")
+            print("\n[?] Clarification Needed:")
             questions = result.get("questions", [])
             for i, q in enumerate(questions, 1):
                 print(f"  {i}. {q}")
                 
         elif result.get("qa_passed") is False:
-            print("\n❌ QA Failed:")
+            print("\n[FAIL] QA Failed:")
             issues = result.get("issues", [])
             for issue in issues:
                 print(f"  - {issue}")
                 
         elif "final_resume" in result:
-            print("\n✨ Generated Resume Structure:")
+            print("\n[SUCCESS] Generated Resume Structure:")
             print(json.dumps(result["final_resume"], indent=2, default=str))
 
         if result.get("error"):
-            print("\n⛔ Pipeline Stopped with Error:")
+            print("\n[ERROR] Pipeline Stopped with Error:")
             print(f"  Stage: {result.get('failed_stage')}")
             print(f"  Error: {result.get('error')}")
             
         # Helper to print full state for debugging (optional, can be verbose)
-        # print("\n🔍 Full State Keys:", list(result.keys()))
+        # print("\n[DEBUG] Full State Keys:", list(result.keys()))
 
     except Exception as e:
-        print(f"\n❌ Error during execution: {e}")
+        print(f"\n[ERROR] Error during execution: {e}")
         import traceback
         traceback.print_exc()
 

@@ -13,7 +13,7 @@ def generate_resume(state: dict) -> dict:
     for feild in [
         "summary", "experience", "education",
     "skills", "languages", "projects", "certificates",
-    "publications", "interests", "volunteering", "references"
+    "publications", "awards", "interests", "volunteering", "references"
     ]:
         if feild in state and state[feild]:
             resume[feild] = state[feild]

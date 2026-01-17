@@ -40,6 +40,7 @@ def generate_resume_structure(extracted: dict) -> dict:
         "projects" : extracted.get("projects", []),
         "certificates": extracted.get("certificates", []),
         "publications": extracted.get("publications", []),
+        "awards": extracted.get("awards", []),
         "interests": extracted.get("interests", []),
         "volunteering": extracted.get("volunteering", []),
         "references": extracted.get("references", []),
