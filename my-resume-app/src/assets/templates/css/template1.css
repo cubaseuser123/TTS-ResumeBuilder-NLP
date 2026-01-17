@@ -50,7 +50,8 @@
   padding: 40px 30px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
+  /* Increased from 20px */
   color: white;
 }
 
@@ -67,7 +68,8 @@
   border-radius: 50%;
   overflow: hidden;
   border: 4px solid white;
-  margin: 0 auto 10px auto;
+  margin: 0 auto 15px auto;
+  /* Increased margin */
 }
 
 .t1-photo-wrapper img {
@@ -80,9 +82,10 @@
 .t1-side-title {
   font-size: calc(var(--resume-font-size)*11.2857);
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
+  /* Increased from 12px */
   border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-  padding-bottom: 4px;
+  padding-bottom: 6px;
   color: white;
 }
 
@@ -90,24 +93,27 @@
 .t1-side-block p,
 .t1-profile-item p,
 .t1-edu-item p {
-  margin: 6px 0;
+  margin: 8px 0;
+  /* Increased from 6px */
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .t1-edu-item {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  /* Increased from 15px */
 }
 
 /* SKILL LIST */
 .t1-skill-list {
   list-style: none;
   padding-left: 0;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .t1-skill-item {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  /* Increased from 10px */
 }
 
 .t1-skill-name {
@@ -116,12 +122,20 @@
 }
 
 .t1-language-item {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  /* Increased from 10px */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  /* Logical gap between text and stars */
 }
 
 .stars {
   color: #ffd700 !important;
-  margin-left: 5px;
+  margin-left: 0;
+  /* Removed margin-left as it is now on new line/flex */
+  letter-spacing: 2px;
+  /* Add some breathing room between stars */
 }
 
 /* LANGUAGE LIST */
@@ -150,7 +164,27 @@ main {
 .t1-headline {
   font-size: calc(var(--resume-font-size)*1.2857);
   color: #555;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  /* Reduced to pull contact info closer to name/headline if needed, or keep 20 */
+}
+
+/* CONTACT ROW */
+.t1-contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 25px;
+  /* Space before content starts */
+  font-size: 14px;
+  color: #444;
+  line-height: 1.5;
+}
+
+.t1-separator {
+  margin: 0 10px;
+  /* Generous horizontal spacing */
+  color: #888;
+  font-weight: bold;
 }
 
 /* SECTION TITLE */
@@ -159,18 +193,27 @@ main {
   font-weight: 700;
   border-bottom: 2px solid #ddd;
   padding-bottom: 3px;
+  margin-bottom: 15px;
+  /* Added spacing below title */
 }
 
 /* SUMMARY */
 main p {
-  font-size: calc(var(-resume-font-siz)*1);
+  font-size: calc(var(--resume-font-size)*1);
   line-height: 1.6;
   color: #444;
 }
 
-/* EXPERIENCE BLOCK */
-.t1-exp-item {
-  margin-bottom: 25px;
+/* EXPERIENCE BLOCK & OTHER ITEMS */
+.t1-exp-item,
+.t1-project-item,
+.t1-cert-item,
+.t1-pub-item,
+.t1-vol-item,
+.t1-award-item,
+.t1-ref-item {
+  margin-bottom: 30px;
+  /* Increased from 25px */
 }
 
 /* PROJECTS / CERTIFICATES / PUBLICATIONS etc. */
