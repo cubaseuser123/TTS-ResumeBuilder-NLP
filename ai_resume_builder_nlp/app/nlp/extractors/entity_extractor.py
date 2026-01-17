@@ -34,9 +34,62 @@ Company_REGEX = re.compile(
     r"\b(?:at|with|for)\s+([A-Z][A-Za-z0-9&.\- ]+)",
 )
 
+# Phone number patterns (international formats)
+Phone_Regex = re.compile(
+    r"(?:\+\d{1,3}[-.\s]?)?(?:\(?\d{2,4}\)?[-.\s]?)?\d{3,5}[-.\s]?\d{3,5}[-.\s]?\d{0,5}"
+)
+
+# Name extraction patterns
+Name_Patterns = [
+    re.compile(r"(?:my name is|i am|i'm|this is)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)", re.IGNORECASE),
+    re.compile(r"^([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)(?:\.|,|\n)", re.MULTILINE),  # Name at start of line
+]
+
+# Location patterns
+Location_Patterns = [
+    re.compile(r"(?:based in|located in|from|living in|residing in)\s+([A-Za-z][A-Za-z\s,]+?)(?:\.|,|\n|$)", re.IGNORECASE),
+    re.compile(r"location[:\s]+([A-Za-z][A-Za-z\s,]+?)(?:\.|,|\n|$)", re.IGNORECASE),
+]
+
 def extract_email(text: str):
     match = Email_Regex.search(text)
     return match.group(0) if match else None
+
+
+def extract_phone(text: str):
+    """Extract phone number from text."""
+    match = Phone_Regex.search(text)
+    if match:
+        phone = match.group(0).strip()
+        # Ensure it looks like a phone (at least 7 digits)
+        digits = re.sub(r'\D', '', phone)
+        if len(digits) >= 7:
+            return phone
+    return None
+
+
+def extract_name(text: str):
+    """Extract name from intro text."""
+    for pattern in Name_Patterns:
+        match = pattern.search(text)
+        if match:
+            name = match.group(1).strip()
+            # Validate: should be 2-4 words, each capitalized
+            words = name.split()
+            if 2 <= len(words) <= 4 and all(w[0].isupper() for w in words):
+                return name
+    return None
+
+
+def extract_location(text: str):
+    """Extract location from text."""
+    for pattern in Location_Patterns:
+        match = pattern.search(text)
+        if match:
+            location = match.group(1).strip().rstrip('.,;')
+            if len(location) > 2:  # Skip very short matches
+                return location
+    return None
 
 
 def extract_years_of_experience(text:str):      
@@ -90,7 +143,10 @@ def extract_company(text : str):
 
 def extract_entities(text: str) -> dict:
     return {
+        "name": extract_name(text),
         "email": extract_email(text),
+        "phone": extract_phone(text),
+        "location": extract_location(text),
         "years": extract_years_of_experience(text),
         "role": extract_role(text),
         "company": extract_company(text),

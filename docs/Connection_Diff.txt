@@ -1,0 +1,151 @@
+## HUB ITEM 2 — PROMPT SUBMISSION → PIPELINE WIRING
+
+### OBJECTIVE
+
+Connect the **Prompt Box** to the backend pipeline with **minimal, honest wiring**.
+
+This step introduces:
+
+* submission intent
+* API call
+* loading state
+* clarification handling
+
+Nothing else.
+
+---
+
+## WHAT YOU ARE BUILDING (ONLY THIS)
+
+### 1. Submission Trigger
+
+* One explicit submit action:
+
+  * button click OR existing “Generate” action
+* No auto-submit
+* No submit-on-enter
+
+---
+
+### 2. API Call (Single Endpoint)
+
+On submit, send **one request** containing:
+
+* original prompt (from prompt box)
+* all accumulated answers (top-level object)
+
+No transformation. No validation. No inference.
+
+---
+
+### 3. UI State Transitions
+
+You must introduce and respect these states:
+
+* `idle`
+* `submitting`
+* `generating`
+* `needs_clarification`
+* `error`
+
+Rules:
+
+* `submitting` → request fired
+* `generating` → waiting for response
+* Never show resume during these states
+
+---
+
+### 4. While Pipeline Runs
+
+* Center pane:
+
+  * loading animation OR skeleton resume
+* Prompt box:
+
+  * disabled
+* Other inputs:
+
+  * remain visible (do not wipe)
+
+No interaction affects the pipeline mid-flight.
+
+---
+
+### 5. Handling Backend Responses
+
+#### Case A — Clarification Required
+
+Backend returns:
+
+```
+needs_more_information: true
+questions: [...]
+```
+
+Frontend must:
+
+* switch to `needs_clarification`
+* render questions dynamically
+* preserve all previous answers
+* wait for user input
+
+DO NOT:
+
+* treat this as an error
+* generate resume
+* auto-resubmit
+
+---
+
+#### Case B — Final Resume Returned
+
+Backend returns:
+
+```
+final_resume: { ... }
+```
+
+Frontend must:
+
+* store it as an immutable snapshot
+* transition to `done`
+* DO NOT stream yet (that is Item 3)
+
+---
+
+### 6. Error Handling
+
+If request fails or backend errors:
+
+* switch to `error`
+* show error message **below prompt box (red)**
+* error clears only on:
+
+  * prompt edit
+  * retry
+
+---
+
+## HARD CONSTRAINTS (DO NOT VIOLATE)
+
+* ❌ No streaming
+* ❌ No pause / resume
+* ❌ No partial rendering
+* ❌ No frontend validation
+* ❌ No schema assumptions
+* ❌ No retries without user action
+
+---
+
+## DONE CRITERIA
+
+Item 2 is complete when:
+
+* Prompt submission fires backend pipeline
+* Loading state shows correctly
+* Clarification response is handled
+* Final resume snapshot is stored
+* Errors surface correctly
+
+Then STOP.

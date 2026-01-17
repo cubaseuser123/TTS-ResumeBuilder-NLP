@@ -1,0 +1,43 @@
+TASK: Implement deterministic section mapping to prevent content duplication.
+SCOPE IS STRICT — DO NOT CHANGE ANYTHING ELSE.
+
+CONTEXT
+Resume content is currently duplicated across multiple sections (summary, experience, education, etc.).
+This happens because raw text is being overlaid without strict section attribution.
+
+ROOT CAUSE
+There is normalization, but no deterministic mapping that assigns content to exactly one correct section.
+
+REQUIRED FIX (ONLY IN FORMATTING AGENT)
+
+* Implement strict section attribution:
+
+  * Profile: contact + role fields only
+  * Summary: short professional overview ONLY
+  * Experience: structured entries (role, company, description, metrics)
+  * Education: degree, institution, year ONLY
+  * Skills: list of skills ONLY
+  * Languages: list ONLY
+  * Projects, Certificates, Awards, Publications, Volunteering, Interests:
+    populate ONLY from their respective extracted content
+
+* Prevent any section from inheriting or reusing full prompt text
+
+* Do NOT copy summary text into experience or vice versa
+
+* Each data point must exist in exactly one section
+
+STRICT RULES
+
+* Do NOT loosen QA
+* Do NOT use Gemini or inference
+* Do NOT modify frontend
+* Do NOT change pipeline order
+
+GOAL
+Ensure clean, non-duplicated resume sections with correct attribution so UI renders correctly.
+
+STOP once deterministic mapping is implemented.
+
+
+

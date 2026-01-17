@@ -67,9 +67,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ------------------------------------------------------------------
+
 # SCHEMAS
-# ------------------------------------------------------------------
+
 class ResumeRequest(BaseModel):
     prompt: str = Field(...,) #min_length=10
     answers: Optional[Dict[str, Any]] = None
@@ -83,9 +83,9 @@ class ResumeResponse(BaseModel):
     error: Optional[str] = None
 
 
-# ------------------------------------------------------------------
+
 # GLOBAL ERROR HANDLER
-# ------------------------------------------------------------------
+
 @app.exception_handler(Exception)
 async def global_exception_handler(request, exc):
     logger.error(str(exc), exc_info=True)
@@ -141,7 +141,12 @@ async def generate_resume(request: ResumeRequest):
                 "success": True,
                 "status": "needs_clarification",
                 "data": {
-                    "questions": result.get("questions", [])
+                    "questions": result.get("questions", []),
+                    "extractedData": {
+                        "entities": result.get("entities", {}),
+                        "extracted_skills": result.get("extracted_skills", []),
+                        "extracted_metrics": result.get("extracted_metrics", []),
+                    }
                 },
                 "error": None
             }

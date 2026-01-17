@@ -1,17 +1,9 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import "./PromptBox.css";
 
-/**
- * Props:
- * - value: string - The current textarea value
- * - onChange: function(newValue) - Callback when value changes
- * - onSubmit: function() - Callback when submit button is clicked
- * - showHelperText: boolean - Whether to display helper text
- * - errorMessage: string - Error text to display (empty = no error)
- */
-const PromptBox = ({ value, onChange, onSubmit, showHelperText, errorMessage }) => {
+
+const PromptBox = ({ value, onChange, onSubmit, errorMessage, disabled }) => {
     const textareaRef = useRef(null);
-    const [isSubmitted, setIsSubmitted] = useState(false);
 
     // Auto-grow textarea based on content
     useEffect(() => {
@@ -26,20 +18,19 @@ const PromptBox = ({ value, onChange, onSubmit, showHelperText, errorMessage }) 
     }, [value]);
 
     const handleChange = (e) => {
-        if (onChange) {
+        if (onChange && !disabled) {
             onChange(e.target.value);
         }
     };
 
     const handleSubmitClick = () => {
-        if (onSubmit && !isSubmitted) {
-            setIsSubmitted(true);
+        if (onSubmit && !disabled) {
             onSubmit();
         }
     };
 
-    // Button is disabled if textarea is empty or already submitted
-    const isButtonDisabled = !value || value.trim() === "" || isSubmitted;
+    // Button is disabled if textarea is empty OR pipeline is running
+    const isButtonDisabled = !value || value.trim() === "" || disabled;
 
     return (
         <div className="prompt-box-container">
@@ -53,19 +44,10 @@ const PromptBox = ({ value, onChange, onSubmit, showHelperText, errorMessage }) 
                 className="prompt-box-textarea"
                 value={value || ""}
                 onChange={handleChange}
+                disabled={disabled}
                 placeholder="All fields shown in the center preview must be provided."
-                aria-describedby={
-                    showHelperText || errorMessage
-                        ? "ai-prompt-helper ai-prompt-error"
-                        : undefined
-                }
+                aria-describedby={errorMessage ? "ai-prompt-error" : undefined}
             />
-
-            {showHelperText && (
-                <span id="ai-prompt-helper" className="prompt-box-helper-text">
-                    All fields shown in the center preview must be provided.
-                </span>
-            )}
 
             {/* Reserved error slot - always present to prevent layout shift */}
             <div className="prompt-box-error-slot">
@@ -95,10 +77,11 @@ const PromptBox = ({ value, onChange, onSubmit, showHelperText, errorMessage }) 
                 }}
                 onClick={handleSubmitClick}
             >
-                {isSubmitted ? "Submitted" : "Submit Prompt"}
+                {disabled ? "Generating..." : "Submit Prompt"}
             </button>
         </div>
     );
 };
 
 export default PromptBox;
+

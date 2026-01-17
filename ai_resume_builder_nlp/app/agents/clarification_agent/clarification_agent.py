@@ -41,10 +41,29 @@ def clarification_questions(state : dict) -> dict:
     missing_fields = state.get("missing_fields", [])
     if not isinstance(missing_fields, list):
         missing_fields = list(missing_fields)
+    
+    # Get raw_text to detect if user already provided content
+    raw_text = state.get("raw_text", "").lower()
+    
+    # Keywords to detect if a section exists in raw_text
+    section_keywords = {
+        "profile": ["name", "email", "phone", "linkedin", "contact"],
+        "summary": ["summary", "objective", "about me", "professional summary"],
+        "experience": ["work", "worked", "experience", "job", "company", "role", "position", "employed"],
+        "education": ["university", "college", "degree", "bachelor", "master", "education", "studied", "school"],
+        "skills": ["skill", "proficient", "expertise", "technologies", "tools", "python", "java", "javascript"],
+        "projects": ["project", "built", "developed", "created"],
+        "certificates": ["certificate", "certified", "certification"],
+        "publications": ["published", "publication", "paper", "article"],
+        "interests": ["interest", "hobby", "hobbies", "passionate"],
+        "volunteering": ["volunteer", "volunteered", "nonprofit"],
+        "references": ["reference", "referee"],
+    }
         
     for field in REQUIRED_SECTIONS:
         value = state.get(field)
         
+        # Check if field has value in state (from previous answers)
         is_missing = False
         if value is None:
             is_missing = True
@@ -54,6 +73,12 @@ def clarification_questions(state : dict) -> dict:
             is_missing = True
         elif isinstance(value, dict) and len(value) == 0:
             is_missing = True
+        
+        # Even if missing in state, check if raw_text contains this content
+        if is_missing and field in section_keywords:
+            keywords = section_keywords[field]
+            if any(kw in raw_text for kw in keywords):
+                is_missing = False  # Content exists in prompt, don't ask
             
         if is_missing and field not in missing_fields:
             missing_fields.append(field)

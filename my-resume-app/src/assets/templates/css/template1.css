@@ -205,8 +205,17 @@ main p {
     margin: 0;
   }
 
-  .t1-wrapper,
-  .t1-sidebar,
+  .t1-wrapper {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    overflow: visible !important;
+  }
+
+  .t1-sidebar {
+    height: 100% !important;
+    min-height: 100vh !important;
+  }
+
   main {
     height: auto !important;
     min-height: auto !important;
@@ -226,9 +235,16 @@ main p {
     color: black !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+<<<<<<< HEAD
     margin: 0 !important;
     min-height: auto !important;
     padding: 0 !important;
+=======
+    margin-bottom: 0 !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    padding-bottom: 0 !important;
+>>>>>>> 3ab50eb7442ffdc1e50ac3aaccbdb147674a7cea
   }
 
   /* Sidebar (30%) */
@@ -243,6 +259,7 @@ main p {
     padding: 30px 20px !important;
     box-sizing: border-box !important;
     page-break-after: avoid;
+    min-height: 100vh !important;
   }
 
   /* Main Content (70%) */

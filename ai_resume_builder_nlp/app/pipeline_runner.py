@@ -57,6 +57,23 @@ class ResumePipeline:
         logger.info("Starting resume pipeline execution")
         
         for stage_name, stage_func in self.stages:
+            # Smart stage skipping: skip if output already exists in state
+            if stage_name == "understanding" and state.get("entities"):
+                logger.info("Skipping understanding: already has extracted data")
+                continue
+                
+            if stage_name == "clarification":
+                # Skip clarification ONLY if all required fields have values in state
+                required_fields = [
+                    "profile", "summary", "experience", "education", "skills",
+                    "projects", "certificates", "publications", "interests",
+                    "volunteering", "references"
+                ]
+                all_present = all(state.get(field) for field in required_fields)
+                if all_present:
+                    logger.info("Skipping clarification: all required fields present")
+                    continue
+            
             logger.info(f"Executing stage: {stage_name}")
             
             try:

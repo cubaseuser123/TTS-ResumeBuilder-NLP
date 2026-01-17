@@ -34,7 +34,7 @@ def qa_passthrough(state: dict) -> dict:
 
     # ---- EXPERIENCE SANITY ----
     experience = resume.get("experience", [])
-    if experience:
+    if experience and isinstance(experience, list):
         valid_exp = any(
             exp.get("role") and exp.get("company")
             for exp in experience
@@ -57,10 +57,16 @@ def qa_passthrough(state: dict) -> dict:
         metrics_found = True
 
     # 2️⃣ metrics embedded in achievements
-    if not metrics_found:
+    if not metrics_found and isinstance(experience, list):
         for exp in experience:
-            for ach in exp.get("achievements", []):
-                if any(char.isdigit() for char in ach):
+            # Skip if exp is not a dictionary
+            if not isinstance(exp, dict):
+                continue
+            achievements = exp.get("achievements", [])
+            if not isinstance(achievements, list):
+                continue
+            for ach in achievements:
+                if isinstance(ach, str) and any(char.isdigit() for char in ach):
                     metrics_found = True
                     break
 

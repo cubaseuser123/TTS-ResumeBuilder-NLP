@@ -1,7 +1,8 @@
 import WebFont from "webfontloader";
 import ttsImage from "../fonts/tts.png";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import PromptBox from "./PromptBox/PromptBox";
+import ClarificationPanel from "./ClarificationPanel/ClarificationPanel";
 
 const EditableTitle = ({ value, onChange }) => {
   const [editing, setEditing] = useState(false);
@@ -54,9 +55,31 @@ const LeftPanel = ({
   // PromptBox props
   promptValue,
   onPromptChange,
-  showPromptHelperText,
-  promptErrorMessage,
+  onPromptSubmit,
+  pipelineState,
+  pipelineError,
+  // ClarificationPanel props
+  clarificationQuestions,
+  clarificationAnswers,
+  onClarificationAnswerChange,
+  onClarificationSubmit,
 }) => {
+  // Refs for smooth scrolling
+  const promptBoxRef = useRef(null);
+  const clarificationRef = useRef(null);
+
+  // Scroll to clarification panel when it appears, scroll back when done
+  useEffect(() => {
+    if (pipelineState === "needs_clarification" && clarificationRef.current) {
+      // Small delay to let the panel render
+      setTimeout(() => {
+        clarificationRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 100);
+    } else if (pipelineState === "done" && promptBoxRef.current) {
+      promptBoxRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [pipelineState]);
+
   return (
     <div className="left-panel panel">
       {/* HEADER */}
@@ -1478,12 +1501,28 @@ const LeftPanel = ({
         ))}
 
         {/* AI PROMPT BOX */}
-        <PromptBox
-          value={promptValue}
-          onChange={onPromptChange}
-          showHelperText={showPromptHelperText}
-          errorMessage={promptErrorMessage}
-        />
+        <div ref={promptBoxRef}>
+          <PromptBox
+            value={promptValue}
+            onChange={onPromptChange}
+            onSubmit={onPromptSubmit}
+            errorMessage={pipelineError}
+            disabled={pipelineState === "submitting" || pipelineState === "generating"}
+          />
+        </div>
+
+        {/* Clarification Panel - shown when backend needs more info */}
+        {pipelineState === "needs_clarification" && (
+          <div ref={clarificationRef}>
+            <ClarificationPanel
+              questions={clarificationQuestions}
+              answers={clarificationAnswers}
+              onAnswerChange={onClarificationAnswerChange}
+              onSubmit={onClarificationSubmit}
+              disabled={pipelineState === "submitting" || pipelineState === "generating"}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

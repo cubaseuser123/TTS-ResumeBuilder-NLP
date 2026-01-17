@@ -1,58 +1,87 @@
-/* printPreview.css */
-.pp-overlay {
+.print-overlay {
   position: fixed;
-  inset: 0;
-  z-index: 9999;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 10000;
   display: flex;
-  justify-content: flex-end;
-  background: rgba(0, 0, 0, 0.35);
+  flex-direction: row;
 }
 
-.pp-panel {
-  width: 42%;
-  max-width: 720px;
-  background: #f7f7f7;
-  height: 100%;
+.print-sidebar {
+  width: 300px;
+  background-color: #1e1e1e;
+  color: #fff;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  padding: 12px;
-  box-sizing: border-box;
-  overflow: auto;
+  gap: 20px;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+  z-index: 10001;
 }
 
-.pp-header {
+.print-sidebar h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #444;
+  padding-bottom: 10px;
+}
+
+.print-sidebar label {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
 }
 
-.pp-close {
-  background: transparent;
+.print-sidebar select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background-color: #333;
+  color: #fff;
+}
+
+.print-sidebar button {
+  padding: 10px;
   border: none;
-  font-size: 24px;
+  border-radius: 4px;
   cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
-.pp-controls {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
+.print-btn {
+  background-color: #3b82f6;
+  color: white;
 }
 
-.pp-actions button {
-  margin-left: 8px;
-  padding: 8px 10px;
-  cursor: pointer;
+.print-btn:hover {
+  background-color: #2563eb;
 }
 
-.pp-preview {
+.close-btn {
+  background-color: #ef4444;
+  color: white;
+}
+
+.close-btn:hover {
+  background-color: #dc2626;
+}
+
+.print-preview {
   flex: 1;
   overflow: auto;
+  padding: 40px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-bottom: 40px;
+}
+
+.landscape {
+  transform: rotate(0deg); /* Placeholder for landscape logic if needed */
+  /* Often landscape printing is handled by CSS @media print, 
+     but visual preview might need rotation or width adjustment */
 }
