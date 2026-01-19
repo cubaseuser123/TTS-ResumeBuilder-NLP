@@ -4,10 +4,17 @@ Section Extractor - Parses labeled sections from resume raw_text
 This module extracts structured section content from free-form resume text.
 It looks for section headers (e.g., "Experience:", "Education:") and extracts
 the content between them.
+
+Uses existing JSON-backed extractors for entity/skill/metric extraction.
 """
 
 import re
 from typing import Dict, List, Any
+
+# Import existing JSON-backed extractors
+from app.nlp.extractors.entity_extractor import extract_company, extract_role
+from app.nlp.extractors.skill_matcher import extract_skills
+from app.nlp.extractors.pattern_matcher import extract_metrics
 
 
 # Section header patterns (case-insensitive)
@@ -32,6 +39,20 @@ SECTION_PATTERN = re.compile(
     r"^(" + "|".join(re.escape(h) for h in SECTION_HEADERS) + r")[\s]*[:.]?\s*",
     re.IGNORECASE | re.MULTILINE
 )
+
+# Common degree patterns for education parsing
+DEGREE_PATTERNS = [
+    r"\b(Ph\.?D\.?|Doctor(?:ate)?)\b",
+    r"\b(M\.?S\.?|M\.?Sc\.?|Master(?:'?s)?(?:\s+of\s+\w+)?)\b",
+    r"\b(B\.?S\.?|B\.?Sc\.?|B\.?A\.?|B\.?Tech\.?|Bachelor(?:'?s)?(?:\s+of\s+\w+)?)\b",
+    r"\b(MBA|M\.?B\.?A\.?)\b",
+    r"\b(Associate(?:'?s)?(?:\s+Degree)?)\b",
+    r"\b(Diploma|Certificate)\b",
+]
+DEGREE_REGEX = re.compile("|".join(DEGREE_PATTERNS), re.IGNORECASE)
+
+# Year extraction pattern
+YEAR_REGEX = re.compile(r'\b(19|20)\d{2}\b')
 
 
 def normalize_header(header: str) -> str:
@@ -81,8 +102,83 @@ def split_into_list_items(content: str) -> List[str]:
     return result if result else [content.strip()] if content.strip() else []
 
 
+def extract_degree(text: str) -> str:
+    """
+    Extract degree from education text using pattern matching.
+    Tries to capture the full degree including field of study.
+    """
+    # First try to extract full degree with field of study
+    # Pattern: "Bachelor's degree in Information Technology" (stops before "from/at" or institution name)
+    full_degree_patterns = [
+        # "Bachelor's degree in Information Technology" - stops at "from/at" or end
+        r"((?:Bachelor'?s?|Master'?s?|Ph\.?D\.?|Doctor(?:ate)?|Associate'?s?|MBA|B\.?S\.?|M\.?S\.?|B\.?A\.?|M\.?A\.?|B\.?Tech\.?|M\.?Tech\.?)(?:\s+degree)?(?:\s+in\s+[A-Za-z\s&]+?)?)(?:\s+(?:from|at)\s+|\s+[A-Z][a-z]+\s+(?:University|College|Institute)|$)",
+    ]
+    
+    for pattern in full_degree_patterns:
+        match = re.search(pattern, text, re.IGNORECASE)
+        if match:
+            degree = match.group(1).strip()
+            # Clean up trailing prepositions/articles
+            degree = re.sub(r'\s+(from|at)\s*$', '', degree, flags=re.IGNORECASE)
+            if len(degree) > 3:
+                return degree
+    
+    # Try simpler pattern: "Degree in Field"
+    simple_pattern = r"((?:Bachelor'?s?|Master'?s?|B\.?S\.?|M\.?S\.?|B\.?A\.?|M\.?A\.?|B\.?Tech\.?|M\.?Tech\.?)(?:'?s)?(?:\s+degree)?(?:\s+in\s+[A-Za-z\s&]+)?)"
+    match = re.search(simple_pattern, text, re.IGNORECASE)
+    if match:
+        degree = match.group(1).strip()
+        # Stop at "from" or "at" or institution names
+        degree = re.split(r'\s+(?:from|at)\s+', degree, flags=re.IGNORECASE)[0].strip()
+        if len(degree) > 3:
+            return degree
+    
+    # Fallback to just degree type
+    match = DEGREE_REGEX.search(text)
+    if match:
+        return match.group(0).strip()
+    return ""
+
+
+def extract_institution(text: str) -> str:
+    """
+    Extract institution from education text.
+    Uses the company extractor (universities share similar name patterns with companies)
+    and additional education-specific patterns.
+    """
+    # Try using company extractor first (works for known institutions in DB)
+    institution = extract_company(text)
+    if institution:
+        return institution
+    
+    # Fallback: Look for common institution patterns
+    patterns = [
+        r"(?:from|at|@)\s+([A-Z][A-Za-z\s&]+(?:University|College|Institute|School|Academy))",
+        r"([A-Z][A-Za-z\s&]+(?:University|College|Institute|School|Academy))",
+        r"(?:from|at|@)\s+([A-Z][A-Za-z\s]+)\b",
+    ]
+    
+    for pattern in patterns:
+        match = re.search(pattern, text)
+        if match:
+            inst = match.group(1).strip()
+            if len(inst) > 2:
+                return inst
+    
+    return ""
+
+
+def extract_year(text: str) -> str:
+    """Extract year from text."""
+    match = YEAR_REGEX.search(text)
+    return match.group(0) if match else ""
+
+
 def parse_experience_entry(text: str) -> Dict[str, Any]:
-    """Parse an experience entry into structured format."""
+    """
+    Parse an experience entry into structured format.
+    Uses JSON-backed extractors for company and metrics, with fallback patterns.
+    """
     entry = {
         "role": "",
         "company": "",
@@ -90,23 +186,54 @@ def parse_experience_entry(text: str) -> Dict[str, Any]:
         "achievements": []
     }
     
-    # Try to extract role and company patterns
-    # Pattern: "Role at Company (Date)" or "Role, Company" or "Company - Role"
-    patterns = [
-        r"^(.+?)\s+at\s+(.+?)(?:\s*\(|\s*,|\s*$)",  # "Role at Company"
-        r"^(.+?)\s*[-–—]\s*(.+?)(?:\s*\(|\s*,|\s*$)",  # "Role - Company" or "Company - Role"
-        r"^(.+?),\s*(.+?)(?:\s*\(|\s*$)",  # "Role, Company"
-    ]
+    # Use JSON-backed company extractor first
+    company = extract_company(text)
+    if company:
+        entry["company"] = company
     
-    for pattern in patterns:
-        match = re.match(pattern, text, re.IGNORECASE)
-        if match:
-            entry["role"] = match.group(1).strip()
-            entry["company"] = match.group(2).strip()
-            break
+    # Use JSON-backed role extractor first
+    role = extract_role(text)
+    if role:
+        entry["role"] = role
     
-    # Extract metrics/achievements (percentages, numbers)
-    metrics = re.findall(r'\d+(?:\.\d+)?%|\$\d+[KMB]?|\d+\s*(?:users?|projects?|clients?|team members?)', text, re.IGNORECASE)
+    # Fallback: Extract role and company using patterns if not found via JSON
+    if not entry["role"] or not entry["company"]:
+        # Pattern: "Role at Company (Date)"
+        role_at_company = re.search(
+            r"^([A-Za-z\s]+?)\s+at\s+([A-Za-z0-9\s&.,]+?)(?:\s*\(|\s*,|\s*-|\s*$)",
+            text, re.IGNORECASE
+        )
+        if role_at_company:
+            if not entry["role"]:
+                entry["role"] = role_at_company.group(1).strip()
+            if not entry["company"]:
+                entry["company"] = role_at_company.group(2).strip()
+        
+        # Pattern: "Company - Role" or "Company | Role"
+        if not entry["company"] or not entry["role"]:
+            company_role = re.search(
+                r"^([A-Za-z0-9\s&.,]+?)\s*[-|]\s*([A-Za-z\s]+?)(?:\s*\(|\s*,|\s*$)",
+                text, re.IGNORECASE
+            )
+            if company_role:
+                if not entry["company"]:
+                    entry["company"] = company_role.group(1).strip()
+                if not entry["role"]:
+                    entry["role"] = company_role.group(2).strip()
+    
+    # If still no role, try extracting common role titles
+    if not entry["role"]:
+        patterns = [
+            r"\b([A-Za-z\s]*(?:Engineer|Developer|Manager|Lead|Analyst|Designer|Architect|Director|Specialist|Consultant|Coordinator|Intern|Associate))\b",
+        ]
+        for pattern in patterns:
+            match = re.search(pattern, text, re.IGNORECASE)
+            if match:
+                entry["role"] = match.group(1).strip()
+                break
+    
+    # Use JSON-backed metrics extractor for achievements
+    metrics = extract_metrics(text)
     if metrics:
         entry["achievements"] = metrics
     
@@ -114,7 +241,10 @@ def parse_experience_entry(text: str) -> Dict[str, Any]:
 
 
 def parse_education_entry(text: str) -> Dict[str, Any]:
-    """Parse an education entry into structured format."""
+    """
+    Parse an education entry into structured format.
+    Uses pattern-based degree extraction and institution detection.
+    """
     entry = {
         "degree": "",
         "institution": "",
@@ -122,24 +252,14 @@ def parse_education_entry(text: str) -> Dict[str, Any]:
         "summary": text
     }
     
-    # Try to extract degree and institution
-    # Pattern: "Degree from/at Institution" or "Degree, Institution"
-    patterns = [
-        r"(.+?)\s+(?:from|at)\s+(.+?)(?:\s+in\s+|\s*,|\s*$)",
-        r"(.+?),\s*(.+?)(?:\s+in\s+|\s*$)",
-    ]
+    # Extract degree using pattern matching
+    entry["degree"] = extract_degree(text)
     
-    for pattern in patterns:
-        match = re.match(pattern, text, re.IGNORECASE)
-        if match:
-            entry["degree"] = match.group(1).strip()
-            entry["institution"] = match.group(2).strip()
-            break
+    # Extract institution (tries company DB first, then patterns)
+    entry["institution"] = extract_institution(text)
     
     # Extract year
-    year_match = re.search(r'\b(19|20)\d{2}\b', text)
-    if year_match:
-        entry["year"] = year_match.group(0)
+    entry["year"] = extract_year(text)
     
     return entry
 
@@ -150,6 +270,8 @@ def extract_sections(text: str) -> Dict[str, Any]:
     
     Returns dict with keys: summary, experience, education, skills, projects,
     certificates, publications, awards, volunteering, interests, references, languages
+    
+    Uses JSON-backed extractors for entity/skill/metric extraction.
     """
     if not text or not isinstance(text, str):
         return {}
@@ -194,19 +316,31 @@ def extract_sections(text: str) -> Dict[str, Any]:
             sections["education"] = [parse_education_entry(item) for item in items]
             
         elif section_name == "skills":
-            # Skills are usually comma-separated or bullet list
-            if "," in content:
-                skills = [s.strip() for s in content.split(",") if s.strip()]
+            # Use JSON-backed skill matcher for proper skill extraction
+            skills_from_db = extract_skills(content)
+            if skills_from_db:
+                sections["skills"] = skills_from_db
             else:
-                skills = split_into_list_items(content)
-            sections["skills"] = skills
+                # Fallback to simple parsing if no DB matches
+                if "," in content:
+                    skills = [s.strip() for s in content.split(",") if s.strip()]
+                else:
+                    skills = split_into_list_items(content)
+                sections["skills"] = skills
             
         elif section_name == "languages":
-            # Languages are usually comma-separated
+            # Languages are usually comma-separated, clean up "and" from items
             if "," in content:
-                langs = [l.strip() for l in content.split(",") if l.strip()]
+                langs = []
+                for l in content.split(","):
+                    cleaned = l.strip().rstrip(".")
+                    # Remove leading "and " from items like "and Marathi"
+                    if cleaned.lower().startswith("and "):
+                        cleaned = cleaned[4:].strip()
+                    if cleaned:
+                        langs.append(cleaned)
             else:
-                langs = split_into_list_items(content)
+                langs = [l.rstrip(".") for l in split_into_list_items(content)]
             sections["languages"] = langs
             
         elif section_name in ["projects", "certificates", "publications", "awards", "volunteering", "interests", "references"]:

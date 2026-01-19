@@ -1,5 +1,9 @@
 import re
 
+# Import JSON-backed extractors
+from app.nlp.extractors.entity_extractor import extract_role, extract_company
+from app.nlp.extractors.pattern_matcher import extract_metrics
+
 
 def normalize_to_list(value, split_by_comma=False):
     """
@@ -24,57 +28,60 @@ def normalize_to_list(value, split_by_comma=False):
 def extract_metrics_from_text(text: str) -> list:
     """
     Extract numeric achievements (%, numbers, counts) from text.
-    Returns a list of extracted metric strings.
+    Uses JSON-backed pattern_matcher.extract_metrics as primary source.
     """
     if not isinstance(text, str):
         return []
     
-    metrics = []
+    # Use JSON-backed extractor first
+    metrics = extract_metrics(text)
+    if metrics:
+        return metrics
+    
+    # Fallback: additional patterns not covered by pattern_matcher
+    fallback_metrics = []
     
     # Pattern for percentages like "30%", "increased by 50%"
     percent_pattern = r'\d+(?:\.\d+)?%'
     percent_matches = re.findall(percent_pattern, text)
-    metrics.extend(percent_matches)
+    fallback_metrics.extend(percent_matches)
     
     # Pattern for numbers with context (e.g., "5 projects", "100 users", "$50K")
     number_context_pattern = r'\$?\d+(?:,\d{3})*(?:\.\d+)?[KkMmBb]?\s*(?:projects?|users?|clients?|employees?|team members?|people|years?|months?)?'
     number_matches = re.findall(number_context_pattern, text, re.IGNORECASE)
     for match in number_matches:
-        if match.strip() and match.strip() not in metrics:
-            metrics.append(match.strip())
+        if match.strip() and match.strip() not in fallback_metrics:
+            fallback_metrics.append(match.strip())
     
-    return metrics
+    return fallback_metrics
 
 
 def extract_role_company_from_text(text: str) -> tuple:
     """
     Extract role and company from a string experience description.
-    Patterns like: "work as a Software Engineer at TechCorp"
+    Uses JSON-backed extractors from entity_extractor as primary source.
     Returns (role, company) tuple.
     """
-    role = ""
-    company = ""
+    # Use JSON-backed extractors first (uses companies.json and role_keywords.json)
+    role = extract_role(text) or ""
+    company = extract_company(text) or ""
     
-    # Pattern: "as a/an [ROLE] at [COMPANY]"
-    match = re.search(r'(?:work(?:ed|ing)?|am|was|serve[ds]?)\s+(?:as\s+)?(?:a\s+|an\s+)?([A-Z][a-zA-Z\s]+?)\s+at\s+([A-Z][a-zA-Z0-9\s]+?)(?:\s*\(|\s*\.|\s*,|$)', text, re.IGNORECASE)
-    if match:
-        role = match.group(1).strip()
-        company = match.group(2).strip()
+    # If both found via JSON, return immediately
+    if role and company:
         return (role, company)
     
-    # Pattern: "[ROLE] at [COMPANY]"
-    match = re.search(r'\b([A-Z][a-zA-Z\s]+?(?:Engineer|Developer|Manager|Analyst|Designer|Lead|Director|Consultant|Specialist|Intern|Associate))\s+at\s+([A-Z][a-zA-Z0-9\s]+?)(?:\s*\(|\s*\.|\s*,|$)', text, re.IGNORECASE)
-    if match:
-        role = match.group(1).strip()
-        company = match.group(2).strip()
-        return (role, company)
+    # Fallback regex patterns for cases not in JSON database
+    if not role:
+        # Try to extract role via pattern
+        match = re.search(r'\b([A-Z][a-zA-Z\s]+?(?:Engineer|Developer|Manager|Analyst|Designer|Lead|Director|Consultant|Specialist|Intern|Associate))', text, re.IGNORECASE)
+        if match:
+            role = match.group(1).strip()
     
-    # Pattern: "at [COMPANY] as [ROLE]"
-    match = re.search(r'at\s+([A-Z][a-zA-Z0-9\s]+?)\s+as\s+(?:a\s+|an\s+)?([A-Z][a-zA-Z\s]+?)(?:\s*\(|\s*\.|\s*,|$)', text, re.IGNORECASE)
-    if match:
-        company = match.group(1).strip()
-        role = match.group(2).strip()
-        return (role, company)
+    if not company:
+        # Try to extract company via pattern
+        match = re.search(r'\s+at\s+([A-Z][a-zA-Z0-9\s]+?)(?:\s*\(|\s*\.|\s*,|$)', text, re.IGNORECASE)
+        if match:
+            company = match.group(1).strip()
     
     return (role, company)
 
@@ -195,7 +202,9 @@ def normalize_resume_schema(resume_draft: dict) -> dict:
         "projects": normalize_to_list(resume_draft.get("projects", [])),
         "certificates": normalize_to_list(resume_draft.get("certificates", [])),
         "publications": normalize_to_list(resume_draft.get("publications", [])),
+        "awards": normalize_to_list(resume_draft.get("awards", [])),
         "interests": normalize_to_list(resume_draft.get("interests", []), split_by_comma=True),
         "volunteering": normalize_to_list(resume_draft.get("volunteering", [])),
         "references": normalize_to_list(resume_draft.get("references", [])),
     }
+

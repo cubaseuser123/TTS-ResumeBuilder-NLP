@@ -64,7 +64,7 @@ const renderSection = (
             {sectionTitles.Experience || "Experience"}
           </h3>
           {data.experience?.map((exp, i) => (
-            <div key={i}>
+            <div key={i} className="t1-exp-item">
               <strong>{exp.expPosition}</strong>
               <p>
                 {exp.expCompany} | {exp.expDate}
@@ -83,7 +83,7 @@ const renderSection = (
             {sectionTitles.Education || "Education"}
           </h3>
           {data.education?.map((edu, i) => (
-            <div key={i}>
+            <div key={i} className="t1-edu-item">
               {edu.eduInstitute} - {edu.eduType}
               <p>
                 {edu.eduScore} - {edu.eduDate}
@@ -118,7 +118,7 @@ const renderSection = (
             {sectionTitles.Languages || "Languages"}
           </h3>
           {data.languages?.map((lang, i) => (
-            <div key={i}>
+            <div key={i} className="t1-language-item">
               {lang.langName} - {lang.langDescription}
               <p>
                 <span className="stars">{renderStars(lang.langLevel)}</span>
@@ -135,7 +135,7 @@ const renderSection = (
             {sectionTitles.Interests || "Interests"}
           </h3>
           {data.interests?.map((it, i) => (
-            <div key={i}>{it.interestName}</div>
+            <div key={i} className="t1-interest-item">{it.interestName}</div>
           ))}
         </>
       );
@@ -147,7 +147,7 @@ const renderSection = (
             {sectionTitles.Certificates || "Certificates"}
           </h3>
           {data.certificates?.map((c, i) => (
-            <div key={i}>
+            <div key={i} className="t1-cert-item">
               {c.certName} - {c.certIssuer} ({c.certDate})
             </div>
           ))}
@@ -161,7 +161,7 @@ const renderSection = (
             {sectionTitles.Awards || "Awards"}
           </h3>
           {data.awards?.map((a, i) => (
-            <div key={i}>
+            <div key={i} className="t1-award-item">
               {a.awardTitle} {a.awardDate}
               <p>{a.awardSummary}</p>
             </div>
@@ -176,7 +176,7 @@ const renderSection = (
             {sectionTitles.Projects || "Projects"}
           </h3>
           {data.projects?.map((p, i) => (
-            <div key={i}>
+            <div key={i} className="t1-project-item">
               {p.projectName}. {p.projectWebsite}
               <p>{p.projectDescription}</p>
               <p>{p.projectSummary}</p>
@@ -192,8 +192,8 @@ const renderSection = (
             {sectionTitles.Publications || "Publications"}
           </h3>
           {data.publications?.map((pub, i) => (
-            <div key={i}>
-              <strong>{pub.publicationName}</strong> -{" "}
+            <div key={i} className="t1-pub-item">
+              {pub.publicationName} -{" "}
               {pub.publicationPublisher}. {pub.publicationDate}
               <p>{pub.publicationWebsite}</p>
               <p>{pub.publicationSummary}</p>
@@ -209,8 +209,10 @@ const renderSection = (
             {sectionTitles.Volunteering || "Volunteering"}
           </h3>
           {data.volunteering?.map((v, i) => (
-            <div key={i}>
-              <strong>{v.volOrg}</strong> – {v.volPosition} - {v.volDate}
+            <div key={i} className="t1-vol-item">
+              {[v.volOrg, v.volPosition, v.volDate]
+                .filter(item => item && item.trim())
+                .join(" - ")}
               <p>{v.volLocation}</p>
               <p>{v.volSummary}</p>
             </div>
@@ -225,8 +227,8 @@ const renderSection = (
             {sectionTitles.References || "References"}
           </h3>
           {data.references?.map((r, i) => (
-            <div key={i}>
-              <strong>{r.refName}</strong>
+            <div key={i} className="t1-ref-item">
+              {r.refName}
               <p>{r.refDescription}</p>
             </div>
           ))}
@@ -286,13 +288,14 @@ const Template1 = ({
           <p className="t1-role">{data.headline}</p>
 
           <div className="t1-contact-row">
-            <span>{data.phone}</span>
-            <span>•</span>
-            <span>{data.email}</span>
-            <span>•</span>
-            <span>{data.website}</span>
-            <span>•</span>
-            <span>{data.location}</span>
+            {[data.phone, data.email, data.website, data.location]
+              .filter((item) => item && item.trim())
+              .map((item, index, arr) => (
+                <React.Fragment key={index}>
+                  <span>{item}</span>
+                  {index < arr.length - 1 && <span className="t1-separator">•</span>}
+                </React.Fragment>
+              ))}
           </div>
         </header>
 
