@@ -10,7 +10,6 @@ const PrintPreviewPanel = ({
   onClose,
   onPrint,
   children,
-  visible,
 }) => {
   if (!visible) return null;
 

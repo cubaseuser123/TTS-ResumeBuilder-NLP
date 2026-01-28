@@ -80,7 +80,7 @@
 
 /* SIDEBAR TITLES */
 .t1-side-title {
-  font-size: calc(var(--resume-font-size)*11.2857);
+  font-size: calc(var(--resume-font-size)*1.2857);
   font-weight: 700;
   margin-bottom: 15px;
   /* Increased from 12px */
@@ -249,7 +249,7 @@ main p {
   }
 
   .t1-wrapper {
-    height: 100vh !important;
+    height: auto !important;
     min-height: 100vh !important;
     overflow: visible !important;
   }
@@ -267,7 +267,6 @@ main p {
 
   /* CRITICAL: allow page flow */
   /* Ensure templates print as two columns, not stacked */
-  #resume-to-print [class$="-wrapper"],
   .t1-wrapper {
     display: flex !important;
     flex-direction: row !important;
@@ -278,16 +277,13 @@ main p {
     color: black !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
-<<<<<<< HEAD
     margin: 0 !important;
     min-height: auto !important;
     padding: 0 !important;
-=======
     margin-bottom: 0 !important;
-    height: 100vh !important;
+    height: auto !important;
     min-height: 100vh !important;
     padding-bottom: 0 !important;
->>>>>>> 3ab50eb7442ffdc1e50ac3aaccbdb147674a7cea
   }
 
   /* Sidebar (30%) */
