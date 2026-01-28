@@ -5,14 +5,20 @@ sys.path.append(abspath(join(dirname(__file__), "..", "..")))
 from utils.file_loader import load_instructions_file
 from nlp.enhancers.text_enhancer import enhance_resume_content
 from google.adk.agents import LlmAgent
-from google import genai
-from google.genai import types
+from google.adk.models.lite_llm import LiteLlm
+import litellm
 import os
 
+# Configure LiteLLM for Vercel AI Gateway
+os.environ.setdefault("OPENAI_API_BASE", "https://ai-gateway.vercel.sh/v1")
+api_key = os.getenv("AI_GATEWAY_API_KEY")
+if api_key:
+    os.environ.setdefault("OPENAI_API_KEY", api_key)
 
-def enhance_with_gemini(pre_enhanced_content: dict) -> dict:
+
+def enhance_with_devstral(pre_enhanced_content: dict) -> dict:
     """
-    Use Gemini to further enhance the resume content.
+    Use Devstral 2 (via Vercel AI Gateway) to further enhance the resume content.
     Takes the pre-enhanced content and polishes it for clarity and impact.
     """
     # Get the final_resume from the pre-enhanced content
@@ -21,7 +27,7 @@ def enhance_with_gemini(pre_enhanced_content: dict) -> dict:
     if not resume or not isinstance(resume, dict):
         return pre_enhanced_content
     
-    # Prepare prompt for Gemini
+    # Prepare prompt for Devstral
     prompt = f"""You are enhancing a resume for clarity and impact.
 
 Rules:
@@ -39,23 +45,23 @@ Return ONLY the enhanced JSON, no explanations."""
 
     try:
         # Get API key from environment
-        api_key = os.getenv("GOOGLE_API_KEY")
-        if not api_key:
-            print("Gemini enhancement skipped: GOOGLE_API_KEY not set")
+        gateway_key = os.getenv("AI_GATEWAY_API_KEY") or os.getenv("OPENAI_API_KEY")
+        if not gateway_key:
+            print("Devstral enhancement skipped: AI_GATEWAY_API_KEY not set")
             return pre_enhanced_content
         
-        # Use google.genai with API key
-        client = genai.Client(api_key=api_key)
-        response = client.models.generate_content(
-            model='gemini-2.0-flash',
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                temperature=0.25,
-            )
+        # Use LiteLLM to call Devstral 2 via Vercel AI Gateway
+        response = litellm.completion(
+            model="openai/mistral/devstral-2",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.25,
+            max_tokens=4096,  # Ensure complete resume output
+            api_base=os.environ.get("OPENAI_API_BASE", "https://ai-gateway.vercel.sh/v1"),
+            api_key=gateway_key
         )
         
         # Parse the response
-        response_text = response.text.strip()
+        response_text = response.choices[0].message.content.strip()
         
         # Remove markdown code blocks if present
         if response_text.startswith("```json"):
@@ -66,12 +72,12 @@ Return ONLY the enhanced JSON, no explanations."""
             response_text = response_text[:-3]
         
         enhanced_resume = json.loads(response_text.strip())
-        print("Gemini enhancement successful!")
-        return {"final_resume": enhanced_resume, "gemini_enhanced": True}
+        print("Devstral enhancement successful!")
+        return {"final_resume": enhanced_resume, "devstral_enhanced": True}
         
     except Exception as e:
-        # If Gemini fails, return the pre-enhanced content
-        print(f"Gemini enhancement failed: {e}")
+        # If Devstral fails, return the pre-enhanced content
+        print(f"Devstral enhancement failed: {e}")
         return pre_enhanced_content
 
 
@@ -79,27 +85,27 @@ def enhance_resume(state: dict) -> dict:
     """
     Full enhancement pipeline:
     1. Manual enhancement (weak verbs → strong verbs)
-    2. Gemini enhancement (polish for clarity and impact)
+    2. Devstral enhancement (polish for clarity and impact)
     """
     # Step 1: Manual enhancement
     pre_enhanced = enhance_resume_content(state)
     
-    # Step 2: Gemini enhancement (skip in test mode to save API calls)
+    # Step 2: Devstral enhancement (skip in test mode to save API calls)
     if state.get("test_mode"):
-        # In test mode, skip Gemini to avoid API costs
+        # In test mode, skip Devstral to avoid API costs
         return {"pre_enhanced_content": pre_enhanced}
     
-    # Call Gemini for further enhancement
-    gemini_result = enhance_with_gemini(state)
+    # Call Devstral for further enhancement
+    devstral_result = enhance_with_devstral(state)
     
     # Merge results
     result = {
         "pre_enhanced_content": pre_enhanced,
     }
     
-    # If Gemini enhanced successfully, update final_resume
-    if gemini_result.get("gemini_enhanced"):
-        result["final_resume"] = gemini_result["final_resume"]
+    # If Devstral enhanced successfully, update final_resume
+    if devstral_result.get("devstral_enhanced"):
+        result["final_resume"] = devstral_result["final_resume"]
     
     return result
 
@@ -110,14 +116,11 @@ def pre_enhance(state: dict) -> dict:
     return enhance_resume(state)
 
 
-# LlmAgent for root coordinator compatibility
+# LlmAgent for root coordinator compatibility - using Devstral 2 via LiteLLM
 enhancement_agent = LlmAgent(
     name="enhancement_agent", 
-    model='gemini-2.0-flash',
+    model=LiteLlm(model="openai/mistral/devstral-2"),
     instruction=load_instructions_file("agents/enhancer_agent/instructions.txt"),
     description=load_instructions_file("agents/enhancer_agent/description.txt"),
-    generate_content_config=types.GenerateContentConfig(
-        temperature=0.25
-    ),
     tools=[pre_enhance] 
 )
