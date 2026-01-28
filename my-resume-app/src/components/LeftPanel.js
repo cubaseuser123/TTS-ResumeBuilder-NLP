@@ -63,7 +63,52 @@ const LeftPanel = ({
   clarificationAnswers,
   onClarificationAnswerChange,
   onClarificationSubmit,
+  handleItemUpdate, // Passed from parent
 }) => {
+  const [enhancingState, setEnhancingState] = useState(null);
+
+  const onEnhance = async (section, index, data) => {
+    try {
+      setEnhancingState({ section, index });
+      const result = await require("../ai/actions").enhanceContent(section, data);
+
+      const payload = (section === 'summary' && result.content) ? result.content : result;
+      handleItemUpdate(section, index, payload);
+
+    } catch (error) {
+      alert("AI Enhancement Failed: " + error.message);
+    } finally {
+      setEnhancingState(null);
+    }
+  };
+
+  const EnhanceButton = ({ section, index, data }) => (
+    <button
+      type="button"
+      disabled={enhancingState?.section === section && enhancingState?.index === index}
+      style={{
+        backgroundColor: "#4f46e5",
+        color: "white",
+        marginBottom: "8px",
+        width: "100%",
+        border: "none",
+        borderRadius: "6px",
+        padding: "6px",
+        cursor: "pointer",
+        fontSize: "0.85rem",
+        fontWeight: "500",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "5px"
+      }}
+      onClick={() => onEnhance(section, index, data)}
+    >
+      {enhancingState?.section === section && enhancingState?.index === index
+        ? '✨ Enhancing...'
+        : '✨ Enhance with AI'}
+    </button>
+  );
   // Refs for smooth scrolling
   const promptBoxRef = useRef(null);
   const clarificationRef = useRef(null);
@@ -210,6 +255,7 @@ const LeftPanel = ({
             placeholder="Write a short professional summary..."
           />
         </label>
+        <EnhanceButton section="summary" index={0} data={{ content: resumeData.summary }} />
 
         {/* PROFILE (object) */}
         <h3 className="section-title">
@@ -358,6 +404,7 @@ const LeftPanel = ({
                 placeholder="Describe your role and achievements..."
               />
             </label>
+            <EnhanceButton section="experience" index={idx} data={exp} />
             <button
               className="remove-section"
               type="button"
@@ -474,6 +521,7 @@ const LeftPanel = ({
                 placeholder="Jan 2020 - Dec 2023"
               />
             </label>
+            <EnhanceButton section="education" index={idx} data={edu} />
             <button
               className="remove-section"
               type="button"
@@ -597,6 +645,7 @@ const LeftPanel = ({
                 <span>{skill.skillLevel}</span>
               </div>
             </label>
+            <EnhanceButton section="skills" index={idx} data={skill} />
             <button
               className="remove-section"
               type="button"
@@ -816,6 +865,7 @@ const LeftPanel = ({
                 placeholder="Brief description..."
               />
             </label>
+            <EnhanceButton section="awards" index={idx} data={a} />
             <button
               className="remove-section"
               type="button"
@@ -1006,6 +1056,7 @@ const LeftPanel = ({
                 placeholder="e.g., Traveling"
               />
             </label>
+            <EnhanceButton section="interests" index={idx} data={it} />
             <button
               className="remove-section"
               type="button"
@@ -1122,6 +1173,7 @@ const LeftPanel = ({
                 placeholder="Describe the project..."
               />
             </label>
+            <EnhanceButton section="projects" index={idx} data={p} />
             <button
               className="remove-section"
               type="button"
@@ -1246,6 +1298,7 @@ const LeftPanel = ({
                 placeholder="Brief description..."
               />
             </label>
+            <EnhanceButton section="publications" index={idx} data={pub} />
             <button
               className="remove-section"
               type="button"
@@ -1370,6 +1423,7 @@ const LeftPanel = ({
                 placeholder="Brief description..."
               />
             </label>
+            <EnhanceButton section="volunteering" index={idx} data={vol} />
             <button
               className="remove-section"
               type="button"

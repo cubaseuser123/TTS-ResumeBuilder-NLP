@@ -1,0 +1,46 @@
+
+services:
+  # ============================================
+  # Frontend - React Resume App
+  # ============================================
+  frontend:
+    build:
+      context: ./my-resume-app
+      dockerfile: dockerfile
+    container_name: resume-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - resume-network
+    restart: unless-stopped
+
+  # ============================================
+  # Backend - FastAPI NLP Engine
+  # ============================================
+  backend:
+    build:
+      context: ./ai_resume_builder_nlp
+      dockerfile: dockerfile
+    container_name: resume-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./ai_resume_builder_nlp/.env
+    environment:
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - resume-network
+    restart: unless-stopped
+
+networks:
+  resume-network:
+    driver: bridge

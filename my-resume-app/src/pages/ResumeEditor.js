@@ -206,6 +206,36 @@ const ResumeEditor = () => {
     return section.charAt(0).toUpperCase() + section.slice(1);
   };
 
+  const handleItemUpdate = (section, index, newData) => {
+    console.group(`[ResumeEditor] handleItemUpdate: ${section} [${index}]`);
+    console.log("New Data Received:", newData);
+
+    // 1. Handle Array Sections
+    if (Array.isArray(resumeData[section])) {
+      setResumeData((prev) => {
+        const updatedList = [...prev[section]];
+        console.log("Previous Item State:", updatedList[index]);
+        // Merge existing data with new data
+        updatedList[index] = { ...updatedList[index], ...newData };
+        console.log("New Item State:", updatedList[index]);
+        console.groupEnd();
+        return { ...prev, [section]: updatedList };
+      });
+      return;
+    }
+
+    // 2. Handle Object Sections or Single Strings (Summary)
+    if (section === "summary") {
+      const textValue = newData.content || newData;
+      console.log("Updating Summary to:", textValue);
+      console.groupEnd();
+      setResumeData((prev) => ({ ...prev, summary: textValue }));
+      return;
+    }
+    console.warn("Unhandled section type in handleItemUpdate");
+    console.groupEnd();
+  };
+
   const addItem = (section) => {
     // 1️⃣ If section is hidden → just show it, don't add item yet
     if (!visibleSections[section] === false) {
@@ -876,6 +906,7 @@ const ResumeEditor = () => {
             clarificationAnswers={clarificationAnswers}
             onClarificationAnswerChange={handleClarificationAnswerChange}
             onClarificationSubmit={handleClarificationSubmit}
+            handleItemUpdate={handleItemUpdate}
           />
         </div>
 
