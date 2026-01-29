@@ -884,7 +884,7 @@ const ResumeEditor = () => {
       </header>
 
       <div className="app-container" style={{ display: "flex", width: "100%" }}>
-        <div style={{ width: "23%" }}>
+        <div className="editor-left-panel">
           <LeftPanel
             resumeData={resumeData}
             handleChange={handleChange}
@@ -910,7 +910,7 @@ const ResumeEditor = () => {
           />
         </div>
 
-        <main style={{ width: "54%" }}>
+        <main className="editor-middle-panel">
           <MiddlePanel
             data={resumeData}
             template={selectedTemplate}
@@ -933,7 +933,7 @@ const ResumeEditor = () => {
           />
         </main>
 
-        <div style={{ width: "23%" }}>
+        <div className="editor-right-panel">
           <RightPanel
             selectedTemplate={selectedTemplate}
             setSelectedTemplate={setSelectedTemplate}

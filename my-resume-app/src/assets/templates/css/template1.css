@@ -21,9 +21,13 @@
 @media print {
   .t1-wrapper {
     min-height: auto !important;
+    max-height: 297mm !important;
+    /* Force A4 height limit */
     box-shadow: none !important;
     margin: 0 !important;
     width: 100% !important;
+    overflow: hidden !important;
+    /* Prevent spillover */
   }
 }
 
@@ -249,14 +253,17 @@ main p {
   }
 
   .t1-wrapper {
-    height: auto !important;
-    min-height: 100vh !important;
-    overflow: visible !important;
+    height: 100% !important;
+    min-height: auto !important;
+    max-height: 297mm !important;
+    overflow: hidden !important;
   }
 
   .t1-sidebar {
     height: 100% !important;
-    min-height: 100vh !important;
+    min-height: auto !important;
+    padding: 20px 15px !important;
+    /* Reduced padding for print */
   }
 
   main {
@@ -281,8 +288,8 @@ main p {
     min-height: auto !important;
     padding: 0 !important;
     margin-bottom: 0 !important;
-    height: auto !important;
-    min-height: 100vh !important;
+    height: 100% !important;
+    max-height: 297mm !important;
     padding-bottom: 0 !important;
   }
 
@@ -295,15 +302,15 @@ main p {
     background: #2c3440 !important;
     /* Ensure background prints */
     color: white !important;
-    padding: 30px 20px !important;
+    padding: 20px 15px !important;
     box-sizing: border-box !important;
     page-break-after: avoid;
-    min-height: 100vh !important;
+    min-height: auto !important;
+    height: 100% !important;
   }
 
   /* Main Content (70%) */
-  #resume-to-print main,
-  main {
+  .t1-wrapper main {
     width: 70% !important;
     max-width: 70% !important;
     padding: 20px !important;
@@ -320,8 +327,11 @@ main p {
   .t1-edu-item,
   .t1-project-item,
   .t1-section {
-    break-inside: auto;
-    page-break-inside: auto;
+    break-inside: avoid;
+    /* Prevent breaking across pages if possible */
+    page-break-inside: avoid;
+    margin-bottom: 15px !important;
+    /* Reduced margin for print */
   }
 }
 

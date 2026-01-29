@@ -142,6 +142,15 @@ body {
   border-left: 1px solid #374151;
 }
 
+.editor-left-panel,
+.editor-right-panel {
+  width: 23%;
+}
+
+.editor-middle-panel {
+  width: 54%;
+}
+
 .panel-header {
   width: 100%;
   display: flex;
@@ -735,8 +744,12 @@ body,
     background-color: white !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-    height: auto !important;
-    overflow: visible !important;
+    height: 100% !important;
+    width: 100% !important;
+    max-height: 297mm !important;
+    /* Force A4 height */
+    overflow: hidden !important;
+    /* Prevent extra pages */
   }
 
   @page {
@@ -746,12 +759,10 @@ body,
   /* 2. Hide Interface Elements (Collapse space) */
   .left-panel,
   .right-panel,
+  .editor-left-panel,
+  .editor-right-panel,
   .mobile-header,
   .App-header,
-  .control-bar,
-  .toolbar,
-  .add-field-button,
-  .summary-section,
   .control-bar,
   .toolbar,
   .add-field-button,
@@ -766,14 +777,16 @@ body,
   .app-container,
   .middle-panel,
   .middle-panel-wrapper,
+  .editor-middle-panel,
   #root,
   .App {
     display: block !important;
     width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
+    max-height: 297mm !important;
     margin: 0 !important;
     padding: 0 !important;
-    overflow: visible !important;
+    overflow: hidden !important;
     position: static !important;
   }
 
@@ -783,9 +796,10 @@ body,
     box-shadow: none !important;
     border: none !important;
     width: 100% !important;
-    max-width: none !important;
+    max-height: 297mm !important;
     transform: none !important;
     display: block !important;
+    overflow: hidden !important;
   }
 
   #resume-to-print {
