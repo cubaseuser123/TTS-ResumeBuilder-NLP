@@ -3,6 +3,8 @@ import ttsImage from "../fonts/tts.png";
 import React, { useState, useRef, useEffect } from "react";
 import PromptBox from "./PromptBox/PromptBox";
 import ClarificationPanel from "./ClarificationPanel/ClarificationPanel";
+import LoadingProgress from "./LoadingProgress/LoadingProgress";
+
 
 const EditableTitle = ({ value, onChange }) => {
   const [editing, setEditing] = useState(false);
@@ -87,9 +89,10 @@ const LeftPanel = ({
       type="button"
       disabled={enhancingState?.section === section && enhancingState?.index === index}
       style={{
-        backgroundColor: "#4f46e5",
+        backgroundColor: "#5b93ef",
         color: "white",
-        marginBottom: "8px",
+        marginBottom: "12px",
+        marginTop: "12px",
         width: "100%",
         border: "none",
         borderRadius: "6px",
@@ -1565,7 +1568,13 @@ const LeftPanel = ({
           />
         </div>
 
-        {/* Clarification Panel - shown when backend needs more info */}
+        {/* Loading Progress Bar - shown during generation */}
+        {(pipelineState === "submitting" || pipelineState === "generating") && (
+          <LoadingProgress
+            isActive={true}
+            duration={10000}
+          />
+        )}
         {pipelineState === "needs_clarification" && (
           <div ref={clarificationRef}>
             <ClarificationPanel

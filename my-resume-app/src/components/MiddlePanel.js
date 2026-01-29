@@ -7,6 +7,7 @@ import Template5 from "../assets/templates/template5";
 import Template6 from "../assets/templates/template6";
 import Template7 from "../assets/templates/template7";
 import Template8 from "../assets/templates/template8";
+import LoadingProgress from "./LoadingProgress/LoadingProgress";
 
 const MiddlePanel = ({
   data,
@@ -195,44 +196,42 @@ const MiddlePanel = ({
         position: "relative",
       }}
     >
-      {/* Loading Overlay */}
+      {/* Loading Overlay with Progress Bar */}
       {isLoading && (
         <div
           style={{
-            position: "absolute",
+            position: "fixed",
             top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "rgba(31, 41, 55, 0.85)",
+            left: "23%",
+            width: "54%",
+            height: "100vh",
+            backgroundColor: "rgba(31, 41, 55, 0.95)",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             zIndex: 100,
+            padding: "40px",
           }}
         >
-          <div
-            style={{
-              width: "50px",
-              height: "50px",
-              border: "4px solid #4b5563",
-              borderTop: "4px solid #6366f1",
-              borderRadius: "50%",
-              animation: "spin 1s linear infinite",
-            }}
-          />
-          <p style={{ color: "#f3f4f6", marginTop: "16px", fontSize: "1rem" }}>
-            Generating your resume...
-          </p>
-          <style>
-            {`
-              @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-              }
-            `}
-          </style>
+          <div style={{
+            width: "100%",
+            maxWidth: "400px",
+          }}>
+            <h3 style={{
+              color: "#f3f4f6",
+              marginBottom: "24px",
+              fontSize: "1.25rem",
+              textAlign: "center",
+              fontWeight: "600"
+            }}>
+              ✨ Creating Your Resume
+            </h3>
+            <LoadingProgress
+              isActive={true}
+              duration={10000}
+            />
+          </div>
         </div>
       )}
       {renderedContent}

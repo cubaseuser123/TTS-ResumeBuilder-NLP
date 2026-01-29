@@ -1,0 +1,136 @@
+/* LoadingProgress.css - Premium animated progress bar */
+
+.loading-progress-container {
+    width: 100%;
+    padding: 24px 20px;
+    background: linear-gradient(135deg, rgba(31, 41, 55, 0.4) 0%, rgba(17, 24, 39, 0.6) 100%);
+    border: 1px solid rgba(91, 147, 239, 0.2);
+    /* faint blue border */
+    border-radius: 12px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.loading-progress-bar-wrapper {
+    position: relative;
+    width: 100%;
+    height: 12px;
+    background: rgba(31, 41, 55, 1);
+    border: 1px solid rgba(75, 85, 99, 0.4);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.loading-progress-bar {
+    height: 100%;
+    background: #5b93ef;
+    /* Solid Blue from project .link */
+    border-radius: 6px;
+    transition: width 0.1s ease-out;
+    position: relative;
+}
+
+/* Animated shimmer effect */
+.loading-progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.2) 50%,
+            transparent 100%);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Glow effect behind the bar */
+.loading-progress-glow {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    height: 16px;
+    background: #5b93ef;
+    border-radius: 8px;
+    filter: blur(8px);
+    opacity: 0.4;
+    transition: width 0.1s ease-out;
+    pointer-events: none;
+}
+
+.loading-progress-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    gap: 16px;
+}
+
+.loading-progress-percent {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #5b93ef;
+    font-family: 'Inter', 'SF Mono', monospace;
+    min-width: 50px;
+}
+
+.loading-progress-status {
+    font-size: 0.875rem;
+    color: #d1d5db;
+    /* Gray 300 */
+    font-weight: 500;
+    text-align: right;
+    flex: 1;
+    animation: fadeInText 0.3s ease-out;
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pulsing dot animation for status */
+.loading-progress-status::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #5b93ef;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 1s ease-in-out infinite;
+    box-shadow: 0 0 4px rgba(91, 147, 239, 0.6);
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+}
